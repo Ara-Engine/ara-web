@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Agents } from "#/components/home/agents";
 import { Benchmarks } from "#/components/home/benchmarks";
+import { Finale } from "#/components/home/finale";
 import { GetStarted } from "#/components/home/get-started";
 import { Hero } from "#/components/home/hero";
 import { ProofStrip } from "#/components/home/proof-strip";
@@ -21,6 +22,7 @@ function Home() {
 				<Scripting />
 				<Benchmarks />
 				<GetStarted />
+				<Finale />
 			</main>
 			<SiteFooter />
 		</>

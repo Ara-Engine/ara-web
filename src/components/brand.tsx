@@ -24,8 +24,11 @@ const TONES = {
 
 type CrystalProps = ComponentProps<"svg"> & { tone?: keyof typeof TONES };
 
-/** The crystal mark on its own. */
-export function AraCrystal({ tone = "mono", ...props }: CrystalProps) {
+/**
+ * The crystal mark on its own. With `lit`, only that facet (0–3: top left, top right,
+ * bottom left, bottom right) catches the light and the rest fall into shadow.
+ */
+export function AraCrystal({ tone = "mono", lit, ...props }: CrystalProps & { lit?: number }) {
 	const mask = useId();
 	return (
 		<svg viewBox="0 0 64 64" aria-hidden="true" {...props}>
@@ -35,7 +38,11 @@ export function AraCrystal({ tone = "mono", ...props }: CrystalProps) {
 			</mask>
 			<g mask={`url(#${mask})`}>
 				{FACETS.map((points, i) => (
-					<polygon key={points} points={points} className={TONES[tone][i]} />
+					<polygon
+						key={points}
+						points={points}
+						className={lit === undefined ? TONES[tone][i] : i === lit ? "fill-foreground" : "fill-foreground/12"}
+					/>
 				))}
 			</g>
 		</svg>

@@ -1,7 +1,7 @@
-import { Gauge, TriangleAlert, Zap } from "lucide-react";
-import { Panel } from "#/components/panel";
+import { TriangleAlert } from "lucide-react";
+import { useRef } from "react";
 import { Section, SourceLink } from "#/components/section";
-import { Tooltip, TooltipContent, TooltipTrigger } from "#/components/ui/tooltip";
+import { useInView } from "#/lib/hooks";
 import { evidence, links } from "#/lib/site";
 import { cn } from "#/lib/utils";
 
@@ -39,91 +39,131 @@ const D26_EXTRA = [
 	{ label: "Player warm first scene", value: "1.24–1.91 s", target: "3 s" },
 ] as const;
 
+const LABEL = "font-mono text-[0.6875rem] tracking-[0.18em] text-muted-foreground uppercase";
+
 export function Benchmarks() {
+	const ref = useRef<HTMLDivElement>(null);
+	const seen = useInView(ref, { once: true, margin: "0px 0px -15% 0px" });
+
 	return (
 		<Section
 			id="benchmarks"
+			index="03"
 			kicker="Benchmarks"
-			title="Measured, with the misses published."
+			title={
+				<>
+					Measured, <span className="text-foreground/35">with the misses published.</span>
+				</>
+			}
 			lede="Every frame-time claim has a budget and every comparison runs on the same machine. Where Ara falls short, it says so."
 		>
-			<div className="grid gap-4 lg:grid-cols-2">
-				<Panel title="Performance bar · D26" icon={Gauge} bodyClassName="flex flex-col">
-					<p className="px-4 pt-3.5 text-[0.8125rem] leading-relaxed text-muted-foreground">
-						GPU time (p50) at 2560 × 1440 against UE5-class budgets. Every row is inside its budget.
-					</p>
-					<table className="mt-2 w-full text-[0.78125rem]">
-						<thead>
-							<tr className="text-muted-foreground">
-								<th className="px-4 py-2 text-left font-normal">Scene</th>
-								{PRESETS.map((p) => (
-									<th key={p.name} className="px-2 py-2 text-left font-normal">
-										{p.name} <span className="text-muted-foreground/70">{p.budget}</span>
-									</th>
-								))}
-							</tr>
-						</thead>
-						<tbody>
-							{D26.map((row) => (
-								<tr key={row.scene} className="border-t">
-									<td className="px-4 py-3 text-foreground/90">{row.scene}</td>
-									{row.p50.map((ms, i) => (
-										<td key={PRESETS[i].name} className="px-2 py-3">
-											<BudgetMeter ms={ms} budget={PRESETS[i].budget} />
-										</td>
+			<div ref={ref}>
+				<div className="flex flex-wrap items-center gap-x-6 gap-y-3 border-b border-white/12 pb-4">
+					<h3 className={cn(LABEL, "mr-auto")}>Head to head · same machine</h3>
+					<span className="flex items-center gap-2 text-[0.8125rem] text-foreground/80">
+						<span className="h-1.5 w-5 bg-white shadow-[0_0_10px_rgb(255_255_255/0.6)]" /> Ara
+					</span>
+					<span className="flex items-center gap-2 text-[0.8125rem] text-muted-foreground">
+						<span className="h-1.5 w-5 bg-[repeating-linear-gradient(135deg,rgb(255_255_255/0.35)_0_1.5px,transparent_1.5px_4px)]" />{" "}
+						Comparison
+					</span>
+					<span className="text-[0.8125rem] text-muted-foreground">ms · lower is better</span>
+				</div>
+
+				<ul>
+					{HEAD_TO_HEAD.map((row, i) => (
+						<li
+							key={row.task}
+							className="grid items-center gap-x-10 gap-y-4 border-b border-white/8 py-7 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_9rem]"
+						>
+							<div>
+								<p className="text-[1.125rem] font-medium tracking-[-0.015em]">{row.task}</p>
+								<p className="mt-1 font-mono text-[0.71875rem] text-muted-foreground">vs {row.rival}</p>
+							</div>
+							<div className="space-y-2">
+								<Beam ms={row.ara} share={row.ara / row.other} shown={seen} delay={i * 120} lit />
+								<Beam ms={row.other} share={1} shown={seen} delay={i * 120} />
+							</div>
+							<p className="flex items-baseline gap-2 md:flex-col md:items-end md:gap-0">
+								<span className="text-[2.75rem] leading-none font-extralight tracking-[-0.05em] tabular-nums">
+									{row.faster}%
+								</span>
+								<span className="font-mono text-[0.71875rem] text-muted-foreground">faster</span>
+							</p>
+						</li>
+					))}
+					{/* The miss, published alongside. */}
+					<li className="grid items-center gap-x-10 gap-y-2 border-b border-white/8 py-7 text-muted-foreground md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_9rem]">
+						<div>
+							<p className="flex items-center gap-2 text-[1.125rem] font-medium tracking-[-0.015em] text-foreground/80">
+								<TriangleAlert className="size-4 text-warning-foreground" />
+								Boids
+							</p>
+							<p className="mt-1 font-mono text-[0.71875rem]">vs Unity DOTS</p>
+						</div>
+						<p className="text-[0.9375rem]">Ara is behind here, and the gap is published with the rest.</p>
+						<p className="flex items-baseline gap-2 md:flex-col md:items-end md:gap-0">
+							<span className="text-[1.75rem] leading-none font-extralight tracking-[-0.04em]">3.5–28%</span>
+							<span className="font-mono text-[0.71875rem]">slower</span>
+						</p>
+					</li>
+				</ul>
+				<p className="mt-4 text-[0.8125rem] text-muted-foreground">
+					Unity 6 IL2CPP + Burst and ozz-animation, on the same machine, with bit-exact results.
+				</p>
+
+				<div className="mt-24 grid grid-cols-[minmax(0,1fr)] gap-12 md:mt-32 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
+					<div>
+						<h3 className={LABEL}>Performance bar · D26</h3>
+						<p className="mt-5 text-[1.75rem] leading-tight font-semibold tracking-[-0.03em] text-balance">
+							Every scene inside its budget.
+						</p>
+						<p className="mt-3 text-[0.9375rem] leading-relaxed text-muted-foreground">
+							GPU time (p50) at 2560 × 1440 on an RTX 4070 SUPER, against UE5-class budgets per quality preset.
+						</p>
+						<dl className="mt-8 border-t border-white/12 text-[0.875rem]">
+							{D26_EXTRA.map((row) => (
+								<div key={row.label} className="flex items-baseline gap-3 border-b border-white/8 py-3">
+									<dt className="mr-auto text-foreground/85">{row.label}</dt>
+									<dd className="font-mono tabular-nums">{row.value}</dd>
+									<dd className="w-16 text-right text-[0.75rem] text-muted-foreground">of {row.target}</dd>
+								</div>
+							))}
+						</dl>
+					</div>
+
+					<div className="overflow-x-auto">
+						<table className="w-full min-w-[34rem] border-collapse">
+							<thead>
+								<tr>
+									<th className={cn(LABEL, "pb-4 text-left font-normal")}>Scene</th>
+									{PRESETS.map((p) => (
+										<th key={p.name} className="pb-4 pl-6 text-left font-normal">
+											<span className="block text-[0.9375rem] text-foreground/90">{p.name}</span>
+											<span className="font-mono text-[0.6875rem] text-muted-foreground">budget {p.budget} ms</span>
+										</th>
 									))}
 								</tr>
-							))}
-						</tbody>
-					</table>
-					<dl className="mt-auto border-t text-[0.78125rem]">
-						{D26_EXTRA.map((row) => (
-							<div key={row.label} className="flex items-baseline gap-3 border-t px-4 py-2.5 first:border-t-0">
-								<dt className="mr-auto text-foreground/90">{row.label}</dt>
-								<dd className="font-mono tabular-nums">{row.value}</dd>
-								<dd className="w-14 text-right text-[0.71875rem] text-muted-foreground">of {row.target}</dd>
-							</div>
-						))}
-					</dl>
-				</Panel>
-
-				<Panel title="Head to head" icon={Zap} bodyClassName="flex flex-col">
-					<div className="flex items-center gap-4 px-4 pt-3.5 text-[0.75rem] text-muted-foreground">
-						<span className="flex items-center gap-1.5">
-							<span className="h-2 w-3 rounded-[2px] bg-primary" /> Ara
-						</span>
-						<span className="flex items-center gap-1.5">
-							<span className="h-2 w-3 rounded-[2px] bg-muted-foreground/45" /> Comparison
-						</span>
-						<span className="ml-auto">ms · lower is better</span>
+							</thead>
+							<tbody>
+								{D26.map((row, r) => (
+									<tr key={row.scene} className="border-t border-white/10">
+										<td className="py-6 pr-4 text-[1.0625rem] font-medium">{row.scene}</td>
+										{row.p50.map((ms, i) => (
+											<td key={PRESETS[i].name} className="py-6 pl-6">
+												<Meter ms={ms} budget={PRESETS[i].budget} shown={seen} delay={(r * 4 + i) * 60} />
+											</td>
+										))}
+									</tr>
+								))}
+							</tbody>
+						</table>
 					</div>
-					<ul className="mt-2">
-						{HEAD_TO_HEAD.map((row) => (
-							<li key={row.task} className="border-t px-4 py-3">
-								<div className="mb-2 flex items-baseline justify-between text-[0.78125rem]">
-									<span className="text-foreground/90">{row.task}</span>
-									<span className="text-muted-foreground">
-										{row.faster}% faster than {row.rival}
-									</span>
-								</div>
-								<Bar label="Ara" ms={row.ara} max={row.other} className="bg-primary" />
-								<Bar label={row.rival} ms={row.other} max={row.other} className="mt-1 bg-muted-foreground/45" />
-							</li>
-						))}
-						<li className="flex items-center gap-2 border-t px-4 py-3 text-[0.78125rem]">
-							<TriangleAlert className="size-3.5 shrink-0 text-warning-foreground" />
-							<span className="text-foreground/90">Boids</span>
-							<span className="text-muted-foreground">3.5–28% slower than Unity DOTS</span>
-						</li>
-					</ul>
-					<p className="mt-auto border-t px-4 py-3 text-[0.75rem] text-muted-foreground">
-						Unity 6 IL2CPP + Burst and ozz-animation, on the same machine
-					</p>
-				</Panel>
+				</div>
 			</div>
 
-			<div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
-				<p className="mr-auto text-[0.84375rem] text-muted-foreground">
+			<div className="mt-14 flex flex-wrap items-center gap-x-5 gap-y-3">
+				<p className="mr-auto text-[0.875rem] text-muted-foreground">
 					Not there yet: Jolt physics, boids, the 4 ms virtual-geometry target and the D27 record budgets.
 				</p>
 				<SourceLink href={evidence.performanceBar}>D26 reading</SourceLink>
@@ -135,39 +175,63 @@ export function Benchmarks() {
 	);
 }
 
-/** A value against its budget: a meter whose track is a lighter step of the same hue. */
-function BudgetMeter({ ms, budget }: { ms: number; budget: number }) {
-	const share = Math.min(1, ms / budget);
+/**
+ * One timing as a bar that grows in once `shown`: Ara's is a beam of light, the
+ * comparison's a hatched shadow. `share` is its length against the slower of the pair.
+ */
+function Beam({
+	ms,
+	share,
+	shown,
+	delay,
+	lit = false,
+}: {
+	ms: number;
+	share: number;
+	shown: boolean;
+	delay: number;
+	lit?: boolean;
+}) {
 	return (
-		<Tooltip>
-			<TooltipTrigger asChild>
-				<div className="cursor-default">
-					<div className="font-mono text-[0.75rem] tabular-nums">{ms.toFixed(2)}</div>
-					<div className="mt-1.5 h-1 w-full max-w-16 rounded-full bg-primary/20">
-						<div className="h-full rounded-full bg-primary" style={{ width: `${share * 100}%` }} />
-					</div>
-				</div>
-			</TooltipTrigger>
-			<TooltipContent>
-				{ms.toFixed(2)} ms of a {budget} ms budget ({Math.round(share * 100)}%)
-			</TooltipContent>
-		</Tooltip>
+		<div className="flex items-center gap-3">
+			<div className="h-2 flex-1">
+				<div
+					className={cn(
+						"h-full transition-[width] duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+						lit
+							? "bg-gradient-to-r from-white/60 to-white shadow-[0_0_18px_rgb(255_255_255/0.45)]"
+							: "bg-[repeating-linear-gradient(135deg,rgb(255_255_255/0.3)_0_1.5px,transparent_1.5px_4px)]",
+					)}
+					style={{ width: shown ? `${share * 100}%` : "0%", transitionDelay: `${delay}ms` }}
+				/>
+			</div>
+			<span
+				className={cn(
+					"w-11 text-right font-mono text-[0.75rem] tabular-nums",
+					lit ? "text-foreground" : "text-muted-foreground",
+				)}
+			>
+				{ms.toFixed(2)}
+			</span>
+		</div>
 	);
 }
 
-/** One emphasis bar, square at the baseline with a rounded data end; value at the tip. */
-function Bar({ label, ms, max, className }: { label: string; ms: number; max: number; className: string }) {
+/** A reading against its budget: the number, and a lit meter filling its share of the budget. */
+function Meter({ ms, budget, shown, delay }: { ms: number; budget: number; shown: boolean; delay: number }) {
+	const share = Math.min(1, ms / budget);
 	return (
-		<Tooltip>
-			<TooltipTrigger asChild>
-				<div className="flex cursor-default items-center gap-2">
-					<div className={cn("h-2 rounded-r-[4px]", className)} style={{ width: `${(ms / max) * 82}%` }} />
-					<span className="font-mono text-[0.71875rem] text-muted-foreground tabular-nums">{ms.toFixed(2)}</span>
-				</div>
-			</TooltipTrigger>
-			<TooltipContent>
-				{label}: {ms.toFixed(2)} ms
-			</TooltipContent>
-		</Tooltip>
+		<div title={`${ms.toFixed(2)} ms of a ${budget} ms budget (${Math.round(share * 100)}%)`}>
+			<p className="flex items-baseline gap-1">
+				<span className="text-[1.5rem] leading-none font-light tracking-[-0.03em] tabular-nums">{ms.toFixed(2)}</span>
+				<span className="font-mono text-[0.6875rem] text-muted-foreground">ms</span>
+			</p>
+			<div className="relative mt-3 h-[3px] max-w-28 bg-white/10">
+				<div
+					className="h-full bg-white shadow-[0_0_10px_rgb(255_255_255/0.5)] transition-[width] duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+					style={{ width: shown ? `${share * 100}%` : "0%", transitionDelay: `${delay}ms` }}
+				/>
+			</div>
+		</div>
 	);
 }

@@ -1,7 +1,7 @@
-import { CircleCheck, DoorOpen, FileCode, Gauge, SlidersHorizontal } from "lucide-react";
+import { CircleCheck, DoorOpen, FileCode, SlidersHorizontal } from "lucide-react";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { Panel } from "#/components/panel";
-import { Section, SourceLink } from "#/components/section";
+import { FloorLight, Section, SourceLink } from "#/components/section";
 import { type TokenKind, tokenizeCSharp } from "#/lib/csharp";
 import { useInView, useReducedMotion } from "#/lib/hooks";
 import { evidence } from "#/lib/site";
@@ -45,8 +45,8 @@ const TOKEN_CLASS: Record<TokenKind, string> = {
 	comment: "text-muted-foreground",
 };
 
+/** The rest of the reload timings; the method-body edit (19 ms) is the headline readout. */
 const RELOAD_TIMINGS = [
-	{ label: "Method-body edit", value: "19 ms", hint: "p50" },
 	{ label: "Additive edit", value: "35–41 ms", hint: "new members" },
 	{ label: "Module swap", value: "≈285 ms", hint: "whole assembly" },
 	{ label: "Rust ↔ C# call", value: "3.5 ns", hint: "NativeAOT" },
@@ -85,36 +85,47 @@ export function Scripting() {
 	return (
 		<Section
 			id="scripting"
-			light="left"
+			index="02"
 			kicker="Scripting"
-			title="C# 14, reloaded before you look up."
-			lede="Gameplay is plain C# on .NET 10, hosted inside the engine process. Edit a method and it's live in about 19 ms with every entity's state intact; ship it with NativeAOT."
+			title={
+				<>
+					C# 14, reloaded <span className="text-foreground/35">before you look up.</span>
+				</>
+			}
+			lede="Gameplay is plain C# on .NET 10, hosted inside the engine process. Edit a method and it's live with every entity's state intact; ship it with NativeAOT."
 		>
-			<div className="grid gap-4 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+			<div className="grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
 				<div ref={ref} className="relative">
+					<FloorLight className="-inset-x-[15%] -bottom-[18%] h-[50%]" />
 					<Panel title="Door.cs" icon={FileCode} actions={<span className="text-[0.6875rem]">Outpost.Sample</span>}>
-						<pre className="overflow-x-auto py-3 font-mono text-[0.75rem] leading-[1.65] [font-variant-ligatures:none]">
-							{lines.map((line, i) => (
-								<div
-									// biome-ignore lint/suspicious/noArrayIndexKey: lines are positional
-									key={i}
-									className={cn(
-										"flex pr-4 transition-colors duration-500",
-										i === editedLine && edited && "bg-white/[0.06] shadow-[inset_2px_0_0_var(--foreground)]",
-									)}
-								>
-									<span className="w-11 shrink-0 pr-4 text-right text-muted-foreground/60 select-none">{i + 1}</span>
-									<code>
-										{tokenizeCSharp(line).map((t, j) => (
-											// biome-ignore lint/suspicious/noArrayIndexKey: tokens are positional
-											<span key={j} className={TOKEN_CLASS[t.kind]}>
-												{t.text}
-											</span>
-										))}
-									</code>
-								</div>
-							))}
-						</pre>
+						<div className="relative">
+							<pre className="overflow-x-auto py-3 font-mono text-[0.75rem] leading-[1.65] [font-variant-ligatures:none]">
+								{lines.map((line, i) => (
+									<div
+										// biome-ignore lint/suspicious/noArrayIndexKey: lines are positional
+										key={i}
+										className={cn(
+											"flex pr-4 transition-colors duration-500",
+											i === editedLine && edited && "bg-white/[0.06] shadow-[inset_2px_0_0_var(--foreground)]",
+										)}
+									>
+										<span className="w-11 shrink-0 pr-4 text-right text-muted-foreground/60 select-none">{i + 1}</span>
+										<code>
+											{tokenizeCSharp(line).map((t, j) => (
+												// biome-ignore lint/suspicious/noArrayIndexKey: tokens are positional
+												<span key={j} className={TOKEN_CLASS[t.kind]}>
+													{t.text}
+												</span>
+											))}
+										</code>
+									</div>
+								))}
+							</pre>
+							{/* Sunlight through the lattice, falling across the code in a slow drift. */}
+							<div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+								<div className="bg-lattice-lit absolute -inset-1/2 -rotate-[24deg] opacity-[0.06] [mask-image:linear-gradient(90deg,transparent_30%,black_48%,black_56%,transparent_72%)] motion-safe:animate-[lattice-drift_14s_linear_infinite]" />
+							</div>
+						</div>
 					</Panel>
 					<div
 						className={cn(
@@ -128,8 +139,36 @@ export function Scripting() {
 					</div>
 				</div>
 
-				<div className="flex flex-col gap-4">
-					<Panel title="Inspector" icon={SlidersHorizontal}>
+				<div className="flex flex-col">
+					<p className="font-mono text-[0.6875rem] tracking-[0.18em] text-muted-foreground uppercase">
+						Hot reload · method-body edit
+					</p>
+					{/* Flares when the edit on the left reloads. */}
+					<p className="mt-5 flex items-baseline gap-3">
+						<span
+							className={cn(
+								"bg-gradient-to-b from-white to-white/45 bg-clip-text text-[7rem] leading-none font-extralight tracking-[-0.06em] text-transparent md:text-[9rem]",
+								step === "reloaded" && "motion-safe:animate-[reload-flare_1.4s_ease-out]",
+							)}
+						>
+							19
+						</span>
+						<span className="font-mono text-[1rem] text-muted-foreground">ms</span>
+					</p>
+					<p className="mt-4 max-w-[24rem] text-[1rem] leading-relaxed text-muted-foreground">
+						p50, with every entity's state kept. The edit in Door.cs just happened; nothing restarted.
+					</p>
+					<dl className="mt-10 border-t border-white/12 text-[0.9375rem]">
+						{RELOAD_TIMINGS.map((r) => (
+							<div key={r.label} className="flex items-baseline gap-3 border-b border-white/8 py-3.5">
+								<dt className="mr-auto text-foreground/90">
+									{r.label} <span className="ml-1 text-[0.78125rem] text-muted-foreground">{r.hint}</span>
+								</dt>
+								<dd className="font-mono text-[0.9375rem] tabular-nums">{r.value}</dd>
+							</div>
+						))}
+					</dl>
+					<Panel title="Inspector" icon={SlidersHorizontal} className="mt-10">
 						<div className="px-3 py-2.5 text-[0.78125rem]">
 							<div className="mb-2 flex items-center gap-1.5 text-foreground">
 								<DoorOpen className="size-3.5 text-muted-foreground" />
@@ -152,20 +191,7 @@ export function Scripting() {
 							</InspectorField>
 						</div>
 					</Panel>
-
-					<Panel title="Hot reload" icon={Gauge}>
-						<dl className="divide-y text-[0.8125rem]">
-							{RELOAD_TIMINGS.map((r) => (
-								<div key={r.label} className="flex items-baseline justify-between px-3.5 py-2.5">
-									<dt className="text-foreground/90">
-										{r.label} <span className="ml-1 text-[0.71875rem] text-muted-foreground">{r.hint}</span>
-									</dt>
-									<dd className="font-mono text-[0.84375rem] tabular-nums">{r.value}</dd>
-								</div>
-							))}
-						</dl>
-					</Panel>
-					<div className="flex gap-4">
+					<div className="mt-6 flex gap-4">
 						<SourceLink href={evidence.hotReload}>Timings</SourceLink>
 						<SourceLink href={evidence.doorSample}>Door.cs</SourceLink>
 					</div>

@@ -1,13 +1,13 @@
-import { Download, Github } from "lucide-react";
+import { Download } from "lucide-react";
+import { Tabs } from "radix-ui";
 import type { ReactNode } from "react";
-import { AraEmblem } from "#/components/brand";
 import { CopyButton } from "#/components/copy-button";
 import { FacetButton } from "#/components/facet-button";
 import { Section } from "#/components/section";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "#/components/ui/tabs";
 import { ENGINE_VERSION, links } from "#/lib/site";
+import { cn } from "#/lib/utils";
 
-/** One numbered card: text, then an optional copyable command and/or action button. */
+/** One step on the path: text, then an optional copyable command and/or action button. */
 type Step = {
 	title: string;
 	body: ReactNode;
@@ -90,83 +90,84 @@ const DEVELOPER: Step[] = [
 
 export function GetStarted() {
 	return (
-		<Section id="get-started" kicker="Get started" light="left" title="From download to your first agent turn.">
-			<Tabs defaultValue="tester">
-				<TabsList className="mb-6 h-9 border border-separator-strong bg-muted">
-					<TabsTrigger
-						value="tester"
-						className="px-4 data-[state=active]:border-transparent data-[state=active]:bg-selection-surface data-[state=active]:text-selection-foreground"
-					>
-						Make a game
-					</TabsTrigger>
-					<TabsTrigger
-						value="developer"
-						className="px-4 data-[state=active]:border-transparent data-[state=active]:bg-selection-surface data-[state=active]:text-selection-foreground"
-					>
-						Build from source
-					</TabsTrigger>
-				</TabsList>
-				<TabsContent value="tester">
-					<Steps steps={TESTER} />
-				</TabsContent>
-				<TabsContent value="developer">
-					<Steps steps={DEVELOPER} />
-				</TabsContent>
-			</Tabs>
-			<p className="mt-6 text-[0.78125rem] text-muted-foreground">
+		<Section
+			id="get-started"
+			index="04"
+			kicker="Get started"
+			title={
+				<>
+					From download <span className="text-foreground/35">to your first agent turn.</span>
+				</>
+			}
+		>
+			<Tabs.Root defaultValue="tester">
+				<Tabs.List aria-label="Ways to start" className="mb-14 flex gap-8 border-b border-white/12">
+					{TRACKS.map((t) => (
+						<Tabs.Trigger
+							key={t.value}
+							value={t.value}
+							className={cn(
+								"relative -mb-px pb-4 text-[1rem] text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground data-[state=active]:text-foreground",
+								// The tab's light: a lit line under it, full when active, faint on hover or focus.
+								"after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white after:opacity-0 after:shadow-[0_0_12px_rgb(255_255_255/0.8)] after:transition-opacity",
+								"hover:after:opacity-30 focus-visible:after:opacity-60 data-[state=active]:after:opacity-100",
+							)}
+						>
+							{t.label}
+						</Tabs.Trigger>
+					))}
+				</Tabs.List>
+				{TRACKS.map((t) => (
+					<Tabs.Content key={t.value} value={t.value} className="outline-none">
+						<Steps steps={t.steps} />
+					</Tabs.Content>
+				))}
+			</Tabs.Root>
+			<p className="mt-14 text-[0.8125rem] text-muted-foreground">
 				Needs Windows 10/11 x64, a Vulkan 1.3 GPU with a current driver, 16 GB RAM and the .NET 10 runtime. macOS (Metal
 				4) is next.
 			</p>
-
-			<div className="relative mt-24 overflow-hidden rounded-xl border bg-card px-6 py-16 text-center md:py-20">
-				<div
-					aria-hidden
-					className="bg-viewport-grid absolute inset-0 [mask-image:radial-gradient(ellipse_60%_80%_at_50%_100%,black,transparent)]"
-				/>
-				<AraEmblem className="relative mx-auto size-16 text-foreground" />
-				<h2 className="relative mt-6 text-[1.875rem] font-semibold tracking-[-0.03em] md:text-[2.5rem]">
-					Make something with Ara.
-				</h2>
-				<p className="relative mx-auto mt-3 max-w-[28.75rem] text-[0.96875rem] text-muted-foreground">
-					It's an early alpha for testers and agents. Tell us what breaks.
-				</p>
-				<div className="relative mt-8 flex flex-wrap justify-center gap-3">
-					<FacetButton asChild size="lg">
-						<a href={links.hubInstaller}>
-							<Download />
-							Download Ara Hub
-						</a>
-					</FacetButton>
-					<FacetButton asChild size="lg" variant="glass">
-						<a href={`${links.repo}/issues`} target="_blank" rel="noreferrer">
-							<Github />
-							Report an issue
-						</a>
-					</FacetButton>
-				</div>
-			</div>
 		</Section>
 	);
 }
 
+const TRACKS = [
+	{ value: "tester", label: "Make a game", steps: TESTER },
+	{ value: "developer", label: "Build from source", steps: DEVELOPER },
+] as const;
+
+/** The steps as a path: one lit line through a node per step, the first one glowing. */
 function Steps({ steps }: { steps: Step[] }) {
 	return (
-		<ol className="grid gap-4 md:grid-cols-3">
+		<ol className="relative grid gap-14 md:grid-cols-3 md:gap-10">
+			<span
+				aria-hidden
+				className="absolute top-[0.4375rem] right-0 left-0 hidden h-px bg-gradient-to-r from-white/70 via-white/15 to-white/5 md:block"
+			/>
 			{steps.map((step, i) => (
-				<li key={step.title} className="flex flex-col rounded-lg border bg-card p-5">
-					<span className="grid size-6 place-items-center rounded-full border border-separator-strong bg-raised font-mono text-[0.6875rem] text-muted-foreground">
-						{i + 1}
+				<li key={step.title} className="relative flex flex-col">
+					<span
+						aria-hidden
+						className={cn(
+							"relative grid size-3.5 rotate-45 place-items-center border bg-background",
+							i === 0 ? "border-white shadow-[0_0_16px_rgb(255_255_255/0.6)]" : "border-white/35",
+						)}
+					>
+						{i === 0 && <span className="size-1 bg-white" />}
 					</span>
-					<h3 className="mt-4 text-[0.9375rem] font-medium">{step.title}</h3>
-					<p className="mt-1.5 text-[0.875rem] leading-relaxed text-muted-foreground">{step.body}</p>
+					<p className="mt-8 font-mono text-[0.6875rem] tracking-[0.18em] text-muted-foreground uppercase">
+						Step {String(i + 1).padStart(2, "0")}
+					</p>
+					<h3 className="mt-3 text-[1.5rem] font-semibold tracking-[-0.03em]">{step.title}</h3>
+					<p className="mt-3 text-[0.9375rem] leading-relaxed text-pretty text-muted-foreground">{step.body}</p>
 					{(step.code || step.action) && (
-						<div className="mt-auto pt-5">
+						<div className="mt-auto pt-7">
 							{step.code && (
-								<div className="flex items-start gap-2 rounded-md border bg-background pl-3">
-									<pre className="min-w-0 flex-1 py-2.5 font-mono whitespace-pre-wrap [overflow-wrap:anywhere] text-[0.71875rem] leading-relaxed text-foreground/90">
+								<div className="flex items-start gap-2 border border-white/10 bg-white/[0.03] pl-3.5">
+									<pre className="min-w-0 flex-1 py-3 font-mono text-[0.75rem] leading-relaxed whitespace-pre-wrap text-foreground/90 [overflow-wrap:anywhere]">
 										{step.code}
 									</pre>
-									<CopyButton text={step.code} className="mt-1 mr-1" />
+									<CopyButton text={step.code} className="mt-1.5 mr-1.5" />
 								</div>
 							)}
 							{step.action}

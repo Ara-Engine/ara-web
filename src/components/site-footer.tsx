@@ -21,11 +21,14 @@ const COLUMNS = [
 	},
 ] as const;
 
-/** Link columns over a strip styled as the editor's status bar. */
+/**
+ * Link columns, then the name cut huge, as if from the lattice the light comes
+ * through, sinking into the editor's status bar.
+ */
 export function SiteFooter() {
 	return (
-		<footer className="mt-10 border-t">
-			<div className="mx-auto flex max-w-content flex-col gap-10 px-5 py-12 md:flex-row md:px-8">
+		<footer className="relative overflow-hidden border-t border-white/10">
+			<div className="mx-auto flex max-w-content flex-col gap-10 px-5 pt-16 md:flex-row md:px-8">
 				<div className="max-w-[18.75rem]">
 					<AraLogo className="text-[1.375rem]" />
 					<p className="mt-4 text-[0.84375rem] leading-relaxed text-muted-foreground">
@@ -49,7 +52,13 @@ export function SiteFooter() {
 					))}
 				</div>
 			</div>
-			<div className="border-t border-separator-strong bg-chrome">
+			<p
+				aria-hidden
+				className="bg-lattice-lit pointer-events-none mt-8 -mb-[0.12em] bg-clip-text text-center text-[clamp(9rem,30vw,28rem)] leading-[0.8] font-semibold tracking-[-0.07em] text-transparent opacity-60 select-none [mask-image:linear-gradient(to_bottom,black_45%,transparent)]"
+			>
+				Ara
+			</p>
+			<div className="relative border-t border-separator-strong bg-chrome">
 				<div className="mx-auto flex max-w-content flex-wrap items-center gap-x-4 gap-y-1 px-5 py-2 text-[0.71875rem] text-muted-foreground md:px-8">
 					<span className="flex items-center gap-1.5">
 						<span className="size-1.5 rounded-full bg-success" /> ara {ENGINE_VERSION}

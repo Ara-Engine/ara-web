@@ -294,11 +294,113 @@ body::after {
 	background-size: 28px 48px;
 }
 
-/* Crystal-cut corners: top left and bottom right chamfered, like a facet. */
+/* The light the mashrabiya casts: a bright rhombus per cell, its nuqta left in shadow.
+   The hero's floor pattern, flat; see FloorLight for it laid on the floor. */
+@utility bg-lattice-lit {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48'%3E%3Cpath fill='white' fill-rule='evenodd' d='M14 5.3L24.9 24L14 42.7L3.1 24ZM14 20.4L16.1 24L14 27.6L11.9 24ZM0 -18.7L10.9 0L0 18.7L-10.9 0ZM0 -3.6L2.1 0L0 3.6L-2.1 0ZM28 -18.7L38.9 0L28 18.7L17.1 0ZM28 -3.6L30.1 0L28 3.6L25.9 0ZM0 29.3L10.9 48L0 66.7L-10.9 48ZM0 44.4L2.1 48L0 51.6L-2.1 48ZM28 29.3L38.9 48L28 66.7L17.1 48ZM28 44.4L30.1 48L28 51.6L25.9 48Z'/%3E%3C/svg%3E");
+	background-size: 28px 48px;
+}
+
+/* A light sweeping along a section's chapter rule as the chapter comes into view. */
+@keyframes rule-sweep {
+	from {
+		translate: -100% 0;
+	}
+	to {
+		translate: 400% 0;
+	}
+}
+
+/* The lattice's light drifting by one tile, so it loops seamlessly. */
+@keyframes lattice-drift {
+	to {
+		background-position: 28px 48px;
+	}
+}
+
+/* A readout catching the light for a moment. */
+@keyframes reload-flare {
+	0% {
+		filter: drop-shadow(0 0 0 rgb(255 255 255 / 0));
+	}
+	18% {
+		filter: drop-shadow(0 0 28px rgb(255 255 255 / 0.65));
+	}
+	100% {
+		filter: drop-shadow(0 0 0 rgb(255 255 255 / 0));
+	}
+}
+
+/* The finale's window: each opening ignites, flares and settles at its `--glow`. */
+@keyframes cell-ignite {
+	0% {
+		opacity: 0;
+	}
+	35% {
+		opacity: 1;
+	}
+	100% {
+		opacity: var(--glow);
+	}
+}
+
+/* A showpiece standing up off the lit floor as it scrolls into view (where scroll
+   timelines exist; elsewhere it's simply there). */
+@keyframes stage-rise {
+	from {
+		transform: perspective(1800px) rotateX(16deg) translateY(3rem) scale(0.95);
+	}
+	to {
+		transform: none;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	@supports (animation-timeline: view()) {
+		.stage-rise {
+			transform-origin: 50% 100%;
+			animation: stage-rise linear both;
+			animation-timeline: view();
+			animation-range: entry 0% cover 42%;
+		}
+	}
+}
+
+/* Crystal-cut corners: top left and bottom right chamfered, like a facet. `--facet` is the cut. */
 @utility clip-facet {
-	clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+	--facet: 10px;
+	clip-path: polygon(
+		var(--facet) 0,
+		100% 0,
+		100% calc(100% - var(--facet)),
+		calc(100% - var(--facet)) 100%,
+		0 100%,
+		0 var(--facet)
+	);
 }
 
 @utility clip-facet-sm {
-	clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
+	--facet: 7px;
+	clip-path: polygon(
+		var(--facet) 0,
+		100% 0,
+		100% calc(100% - var(--facet)),
+		calc(100% - var(--facet)) 100%,
+		0 100%,
+		0 var(--facet)
+	);
+}
+
+/* The same cut for a layer 1 px inside a facet, so a border drawn between them follows
+   the chamfers: moving a 45° cut 1 px inwards shortens it by 2 − √2 px. */
+@utility clip-facet-inner {
+	--inner: calc(var(--facet) - 0.586px);
+	clip-path: polygon(
+		var(--inner) 0,
+		100% 0,
+		100% calc(100% - var(--inner)),
+		calc(100% - var(--inner)) 100%,
+		0 100%,
+		0 var(--inner)
+	);
 }

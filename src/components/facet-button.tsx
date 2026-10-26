@@ -4,9 +4,9 @@ import type { ComponentProps } from "react";
 import { cn } from "#/lib/utils";
 
 /**
- * The site's call-to-action button, cut like a crystal facet: chamfered corners, a lit
- * top edge, and a band of light that sweeps across on hover. `solid` is the primary
- * action (light on dark, like the black-and-white mark); `glass` sits beside it.
+ * The site's call-to-action button, cut like a crystal facet: chamfered corners and a
+ * band of light that sweeps across on hover. `solid` is the primary action (light on
+ * dark, like the black-and-white mark); `glass` sits beside it.
  */
 const facetButton = cva(
 	[
@@ -21,14 +21,16 @@ const facetButton = cva(
 	{
 		variants: {
 			variant: {
-				solid: [
-					"bg-foreground text-background hover:bg-white",
-					"shadow-[inset_0_1px_0_rgb(255_255_255/0.9),inset_0_-1px_0_rgb(0_0_0/0.25)]",
-					"after:via-white/80",
-				],
+				solid: ["bg-foreground text-background hover:bg-white", "after:via-white/80"],
+				// A dark pane in a lit, faceted frame: the button's own fill is the frame, seen
+				// 1 px wide around the inner pane (`before:`), so the edge follows both cuts and
+				// catches the light hardest on the top-left one.
 				glass: [
-					"bg-white/[0.06] text-foreground backdrop-blur-md hover:bg-white/[0.1]",
-					"shadow-[inset_0_1px_0_rgb(255_255_255/0.14),inset_0_0_0_1px_rgb(255_255_255/0.07)]",
+					"text-foreground",
+					"bg-[linear-gradient(150deg,rgb(255_255_255/0.55),rgb(255_255_255/0.12)_35%,rgb(255_255_255/0.07)_65%,rgb(255_255_255/0.28))]",
+					"hover:bg-[linear-gradient(150deg,rgb(255_255_255/0.8),rgb(255_255_255/0.2)_35%,rgb(255_255_255/0.1)_65%,rgb(255_255_255/0.4))]",
+					"before:absolute before:inset-px before:-z-10 before:clip-facet-inner before:bg-[rgb(12_12_12/0.78)] before:backdrop-blur-md",
+					"before:transition-colors before:duration-300 hover:before:bg-[rgb(24_24_24/0.78)]",
 					"after:via-white/15",
 				],
 			},

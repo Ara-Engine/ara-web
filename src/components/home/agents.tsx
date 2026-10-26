@@ -1,11 +1,12 @@
 import { Terminal } from "lucide-react";
 import type { ReactNode } from "react";
-import { Nuqta } from "#/components/brand";
+import { AraCrystal } from "#/components/brand";
 import { Panel } from "#/components/panel";
-import { Section, SourceLink } from "#/components/section";
+import { FloorLight, Section, SourceLink } from "#/components/section";
 import { evidence } from "#/lib/site";
 import { EditorDemo } from "./editor-demo";
 
+/** Four pillars, one per facet of the mark (top left, top right, bottom left, bottom right). */
 const POINTS = [
 	{
 		title: "One command registry",
@@ -29,41 +30,46 @@ export function Agents() {
 	return (
 		<Section
 			id="agents"
+			index="01"
 			kicker="AI-native"
-			title="Agents are first-class users, not an add-on."
+			title={
+				<>
+					Agents are first-class users, <span className="text-foreground/35">not an add-on.</span>
+				</>
+			}
 			lede="Agent edits apply like a teammate's: live in the editor's activity feed, attributed, and undoable one turn at a time. Here is one turn."
 		>
-			<div className="mb-16 md:mb-24">
-				<EditorDemo />
-			</div>
-			<div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12">
-				<div className="flex flex-col">
-					<ul className="space-y-7">
-						{POINTS.map((p) => (
-							<li key={p.title} className="flex gap-3.5">
-								<Nuqta className="mt-[0.4375rem]" />
-								<div>
-									<h3 className="text-[0.9375rem] font-medium">{p.title}</h3>
-									<p className="mt-1 text-[0.90625rem] leading-relaxed text-muted-foreground">{p.body}</p>
-								</div>
-							</li>
-						))}
-					</ul>
-					<div className="mt-10 flex items-end justify-between gap-4 border-t pt-6">
-						<p className="text-[0.875rem] text-muted-foreground">
-							<span className="mr-2 text-[1.75rem] font-semibold tracking-[-0.03em] text-foreground">5–6</span>
-							median turns per arabench task, down from 9
-						</p>
-						<SourceLink href={evidence.arabench} />
-					</div>
+			{/* The editor stands in the light: a pool of lattice light on the floor and a glow behind. */}
+			<div className="relative">
+				<FloorLight className="-inset-x-[20%] -bottom-[22%] h-[70%]" />
+				<div
+					aria-hidden
+					className="absolute inset-x-[5%] top-[5%] bottom-[-10%] -z-10 bg-[radial-gradient(closest-side,rgb(255_255_255/0.09),transparent)]"
+				/>
+				<div className="stage-rise">
+					<EditorDemo />
 				</div>
+			</div>
 
-				<Panel
-					title="Terminal"
-					icon={Terminal}
-					className="lg:self-start"
-					actions={<span className="text-[0.6875rem]">levels/main.scene</span>}
-				>
+			<ul className="mt-24 grid gap-x-10 gap-y-12 sm:grid-cols-2 md:mt-32 lg:grid-cols-4">
+				{POINTS.map((p, i) => (
+					<li key={p.title} className="group relative border-t border-white/12 pt-7">
+						<span
+							aria-hidden
+							className="absolute -top-px left-0 h-px w-10 bg-white transition-[width] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-full"
+						/>
+						<AraCrystal
+							lit={i}
+							className="size-10 transition-[filter] duration-500 group-hover:drop-shadow-[0_0_10px_rgb(255_255_255/0.5)]"
+						/>
+						<h3 className="mt-6 text-[1.1875rem] font-medium tracking-[-0.02em]">{p.title}</h3>
+						<p className="mt-2.5 text-[0.9375rem] leading-relaxed text-pretty text-muted-foreground">{p.body}</p>
+					</li>
+				))}
+			</ul>
+
+			<div className="mt-24 grid grid-cols-[minmax(0,1fr)] gap-12 md:mt-32 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-center lg:gap-16">
+				<Panel title="Terminal" icon={Terminal} actions={<span className="text-[0.6875rem]">levels/main.scene</span>}>
 					<pre className="overflow-x-auto p-4 font-mono text-[0.75rem] leading-[1.7] whitespace-pre-wrap text-muted-foreground md:p-5">
 						<Cmd>ara do entity.create -p name=Lamp --why "Light the crate"</Cmd>
 						{"applied tx_rgxnv0fs to levels/main.scene (revision 1)\n"}
@@ -88,6 +94,19 @@ export function Agents() {
 						{" add an entity with a `Camera` component (`entity.create`)\n"}
 					</pre>
 				</Panel>
+
+				<div>
+					<p className="font-mono text-[0.6875rem] tracking-[0.18em] text-muted-foreground uppercase">Turns per task</p>
+					<p className="mt-5 bg-gradient-to-b from-white to-white/45 bg-clip-text text-[6rem] leading-none font-extralight tracking-[-0.06em] text-transparent md:text-[8rem]">
+						5–6
+					</p>
+					<p className="mt-5 max-w-[22rem] text-[1rem] leading-relaxed text-muted-foreground">
+						Median turns an agent takes per arabench task, down from 9.
+					</p>
+					<div className="mt-6">
+						<SourceLink href={evidence.arabench} />
+					</div>
+				</div>
 			</div>
 		</Section>
 	);
