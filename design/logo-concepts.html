@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ara logo concepts</title>
+<style>
+  :root { --blue: #346bf1; --blue-deep: #1b4ed8; --ink: #0a0a0a; --paper: #f5f5f5; }
+  body { margin: 0; font: 13px/1.5 var(--font-sans, system-ui, sans-serif); }
+  .sheet { display: grid; gap: 14px; }
+  .card { display: grid; grid-template-columns: 168px 1fr; gap: 18px; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); }
+  .hero { display: grid; place-items: center; aspect-ratio: 1; border-radius: 10px; background: var(--ink); border: 1px solid #1e1e1e; }
+  .hero svg { width: 104px; height: 104px; }
+  h3 { margin: 0; font-size: 15px; font-weight: 600; color: var(--foreground); }
+  h3 small { margin-left: 8px; font-weight: 400; color: var(--muted-foreground); font-size: 12px; }
+  p { margin: 4px 0 12px; color: var(--muted-foreground); max-width: 470px; }
+  .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .chip { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; }
+  .dark { background: var(--ink); border: 1px solid #1e1e1e; }
+  .light { background: var(--paper); }
+  .tile { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: linear-gradient(135deg, #4a7cf5, var(--blue-deep)); }
+  .tile svg { width: 24px; height: 24px; }
+  .lockup { display: flex; align-items: center; gap: 9px; padding: 10px 14px; border-radius: 8px; background: var(--ink); border: 1px solid #1e1e1e; }
+  .lockup svg { height: 26px; width: auto; }
+  .word { font: 600 25px/1 var(--font-sans, system-ui); letter-spacing: -0.04em; color: var(--paper); }
+  .ar { font-family: "Noto Naskh Arabic", "Segoe UI", serif; font-size: 13px; color: var(--foreground); }
+  .tag { font-size: 11px; color: var(--muted-foreground); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- 1. Nib: strokes are the Minkowski sum of each path with a broad nib held at 45°,
+         so the thin/thick contrast and the 45° chisel cuts come from the pen itself. -->
+    <g id="nib">
+      <path d="M5 63 L15 53 L37 1 L27 11 Z"/>
+      <path d="M27 11 L37 1 L59 53 L49 63 Z"/>
+      <path class="dot" d="M30 39.5 L35.5 45 L30 50.5 L24.5 45 Z"/>
+    </g>
+    <!-- 2. Alif: Latin A and Arabic أ (alif + hamza) in one glyph. أرى (arā) is "I see":
+         the nuqta is the eye, the qalam-weighted Λ below is its view. -->
+    <g id="alif">
+      <path d="M6 60 L32 22 L58 60 L45 60 L28.5 35.9 L12 60 Z"/>
+      <path class="dot" d="M32 4 L38 10 L32 16 L26 10 Z"/>
+    </g>
+    <!-- 3. Lattice: the A measured in nuqtas, the calligrapher's unit; one dot is the crossbar. -->
+    <g id="lattice">
+      <path d="M32 5.5 L36.1 12.5 L32 19.5 L27.9 12.5Z M27 14 L31.1 21 L27 28 L22.9 21Z M37 14 L41.1 21 L37 28 L32.9 21Z M22 22.5 L26.1 29.5 L22 36.5 L17.9 29.5Z M42 22.5 L46.1 29.5 L42 36.5 L37.9 29.5Z M17 31 L21.1 38 L17 45 L12.9 38Z M47 31 L51.1 38 L47 45 L42.9 38Z M12 39.5 L16.1 46.5 L12 53.5 L7.9 46.5Z M52 39.5 L56.1 46.5 L52 53.5 L47.9 46.5Z M7 48 L11.1 55 L7 62 L2.9 55Z M57 48 L61.1 55 L57 62 L52.9 55Z"/>
+      <path class="dot" d="M32 39.5 L36.1 46.5 L32 53.5 L27.9 46.5Z"/>
+    </g>
+    <!-- 4. Monolith: one solid form; the counter is an arch and the crossbar a window. -->
+    <g id="mono">
+      <path fill-rule="evenodd" d="M32 3 L61 61 H3 Z M32 40 L40 61 H24 Z M32 23 L37 29 L32 35 L27 29 Z"/>
+    </g>
+    <!-- 0. Today's mark, for reference. -->
+    <g id="today">
+      <path d="M32 4 L60 60 H44 L28 28 L12 60 H4 Z"/>
+      <path class="dot" d="M28 44 L34 50 L28 56 L22 50 Z"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="sheet" id="sheet"></div>
+
+<script>
+// Each concept: base fill and accent (the nuqta) on dark, light and the blue app tile.
+const concepts = [
+  { id: "alif", name: "Alif", sub: "أ and A in one glyph · أرى, “I see”", dark: ["#f5f5f5", "#346bf1"], light: ["#0a0a0a", "#1b4ed8"], tile: ["#fff", "#fff"],
+    text: "Ara is Arabic for “I see”. The Arabic letter أ is an alif with a mark floating above; this Λ with a floating nuqta reads as both Latin A and أ. Qalam-weighted legs, the dot's point aligned over the apex." },
+  { id: "nib", name: "Nib", sub: "the qalam, done properly", dark: ["#346bf1", "#f5f5f5"], light: ["#1b4ed8", "#0a0a0a"], tile: ["#fff", "#0b1f5c"],
+    text: "Each stroke is the shape a broad nib at 45° actually makes: hairline up, heavy down, chisel cuts at the apex and feet. Calligraphy you can verify, not imitate." },
+  { id: "lattice", name: "Lattice", sub: "better as a pattern than a mark", dark: ["#f5f5f5", "#346bf1"], light: ["#0a0a0a", "#1b4ed8"], tile: ["#fff", "#0b1f5c"],
+    text: "Calligraphers size every letter in nuqtas. Here the A is built only from them, like a mashrabiya screen; one blue dot is the crossbar. Doubles as a pattern system." },
+  { id: "mono", name: "Monolith", sub: "one solid form", dark: ["#346bf1", "#346bf1"], light: ["#1b4ed8", "#1b4ed8"], tile: ["#fff", "#fff"],
+    text: "The boldest and simplest: a single form with an arched counter and a nuqta window. Reads at 16 px, carves well in 3D, owns an app icon." },
+  { id: "today", name: "Today", sub: "for reference", dark: ["#346bf1", "#f5f5f5"], light: ["#1b4ed8", "#0a0a0a"], tile: ["#fff", "#0b1f5c"],
+    text: "The current mark: reed-pen A with a nuqta crossbar. Flat feet and a slab apex make it read heavier and more generic than the idea behind it." },
+];
+
+/** The mark in two colours: the whole glyph in `base`, then its nuqta redrawn in `accent`. */
+function mark(id, [base, accent], size) {
+  const dot = document.querySelector(`#${id} .dot`);
+  const wh = size ? ` width="${size}" height="${size}"` : "";
+  return `<svg viewBox="0 0 64 64"${wh}><g fill="${base}"><use href="#${id}"/></g>${dot ? `<path d="${dot.getAttribute("d")}" fill="${accent}"/>` : ""}</svg>`;
+}
+
+const sizes = (c, bg) =>
+  `<div class="chip ${bg}">${[16, 24, 32, 48].map((s) => mark(c.id, c[bg], s)).join("")}</div>`;
+
+document.getElementById("sheet").innerHTML = concepts.map((c) => `
+  <div class="card">
+    <div class="hero">${mark(c.id, c.dark)}</div>
+    <div>
+      <h3>${c.name}<small>${c.sub}</small></h3>
+      <p>${c.text}</p>
+      <div class="row">
+        ${sizes(c, "dark")}
+        ${sizes(c, "light")}
+        <div class="tile">${mark(c.id, c.tile)}</div>
+        <div class="lockup">${mark(c.id, c.dark, 26)}<span class="word">Ara</span></div>
+      </div>
+    </div>
+  </div>`).join("");
+</script>
+</body>
+</html>
