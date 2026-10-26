@@ -6,6 +6,8 @@ precision highp float;
 uniform vec2 uRes;
 uniform float uTime;
 uniform vec2 uMouse;
+// 0 → 1 over the first seconds: the light comes up and the camera settles in.
+uniform float uIntro;
 
 const float SCREEN_X = 3.2;
 const vec3 LIGHT_COL = vec3(0.62, 0.75, 1.0);
@@ -30,9 +32,10 @@ float window(vec2 p, float blur) {
   return lo.x * lo.y * hi.x * hi.y;
 }
 
-// The sun drifts slowly, so the pattern crawls across the room.
+// The sun drifts slowly, so the pattern crawls across the room; during the intro
+// it sweeps into place.
 vec3 lightDir() {
-  float t = uTime * 0.035;
+  float t = uTime * 0.035 - (1.0 - uIntro) * 1.4;
   return normalize(vec3(1.0, 1.4 + 0.1 * sin(t), 0.30 + 0.25 * sin(t * 0.7)));
 }
 
@@ -51,7 +54,11 @@ vec3 aces(vec3 x) {
 
 void main() {
   vec2 uv = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y;
-  vec3 ro = vec3(-1.45 + uMouse.x * 0.25, 1.5 - uMouse.y * 0.12, -3.8);
+  // Anchor the composition to the right edge: screens wider than 16:9 gain dark room
+  // on the left (behind the copy) instead of pushing the light under it.
+  uv.x -= max(0.0, uRes.x / uRes.y - 1.75) * 0.5;
+  float settle = 1.0 - uIntro;
+  vec3 ro = vec3(-1.45 + uMouse.x * 0.25, 1.5 - uMouse.y * 0.12 + settle * 0.35, -3.8 - settle * 1.1);
   vec3 target = vec3(1.8, 0.85, 4.0);
   vec3 fw = normalize(target - ro);
   vec3 rt = normalize(cross(vec3(0.0, 1.0, 0.0), fw));
@@ -100,6 +107,7 @@ void main() {
   }
   col += LIGHT_COL * scatter * dt * phase * 0.44 + vec3(0.10, 0.22, 0.75) * scatter * dt * 0.0022;
 
+  col *= uIntro * uIntro;
   col = aces(col * 0.95);
   col = pow(col, vec3(1.0 / 2.2));
   float vig = smoothstep(1.25, 0.35, length(uv * vec2(0.9, 1.1)));

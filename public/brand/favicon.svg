@@ -1,10 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <title>Ara</title>
+  <circle cx="32" cy="32" r="32" fill="#0a0a0a"/>
   <mask id="w"><rect width="64" height="64" fill="#fff"/><polygon points="27 26 34 35 27 44 20 35" fill="#000"/></mask>
-  <g mask="url(#w)">
-    <polygon points="30.58 3.37 5.01 28.02 26.01 33.5" fill="#b4caff"/>
-    <polygon points="33.06 3.02 28.44 33.52 58.94 27.97" fill="#6f99ff"/>
-    <polygon points="5.35 30.59 30.44 60.16 25.96 35.97" fill="#346bf1"/>
-    <polygon points="28.4 35.97 33 60.82 58.78 30.44" fill="#1a43b8"/>
-  </g>
+  <g mask="url(#w)" transform="translate(11.5 11.5) scale(0.64)"><polygon points="30.58 3.37 5.01 28.02 26.01 33.5" fill="#fff"/><polygon points="33.06 3.02 28.44 33.52 58.94 27.97" fill="#e3e5ea"/><polygon points="5.35 30.59 30.44 60.16 25.96 35.97" fill="#a3a8b4"/><polygon points="28.4 35.97 33 60.82 58.78 30.44" fill="#7d8391"/></g>
 </svg>

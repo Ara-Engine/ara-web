@@ -165,8 +165,8 @@ export function EditorDemo() {
 function TitleBar() {
 	return (
 		<div className="flex h-9 items-center gap-1 border-b border-separator-strong px-2 text-[12.5px]">
-			<span className="grid size-5 place-items-center rounded-[5px] bg-primary">
-				<AraCrystal tone="white" className="size-3.5" />
+			<span className="grid size-5 place-items-center rounded-[5px] bg-raised">
+				<AraCrystal className="size-3.5" />
 			</span>
 			<nav className="ml-1 hidden items-center md:flex">
 				{["File", "Edit", "View", "Create", "Assets", "Play", "Tools", "Window", "Help"].map((m) => (

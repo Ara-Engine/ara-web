@@ -8,6 +8,9 @@ const VERTEX = "attribute vec2 p; void main() { gl_Position = vec4(p, 0.0, 1.0);
 /** Render scale against CSS pixels; the shader is soft enough to upscale. */
 const MAX_DPR = 1.25;
 
+/** Length of the light-up intro, in ms. */
+const INTRO_MS = 2800;
+
 function compile(gl: WebGLRenderingContext, type: number, source: string) {
 	const shader = gl.createShader(type);
 	if (!shader) return null;
@@ -33,7 +36,7 @@ function createProgram(gl: WebGLRenderingContext) {
 /**
  * The hero backdrop: light through a mashrabiya, ray-marched live in WebGL.
  * Pauses off screen and in background tabs; draws one still frame under
- * reduced motion; fades in after its first frame so there is no black flash.
+ * reduced motion. On load the light comes up and the camera settles in (INTRO_MS).
  */
 export function MashrabiyaLight({ className }: { className?: string }) {
 	const ref = useRef<HTMLCanvasElement>(null);
@@ -56,6 +59,7 @@ export function MashrabiyaLight({ className }: { className?: string }) {
 		const uRes = gl.getUniformLocation(program, "uRes");
 		const uTime = gl.getUniformLocation(program, "uTime");
 		const uMouse = gl.getUniformLocation(program, "uMouse");
+		const uIntro = gl.getUniformLocation(program, "uIntro");
 
 		// The camera eases towards the pointer for a little parallax.
 		const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
@@ -79,6 +83,8 @@ export function MashrabiyaLight({ className }: { className?: string }) {
 			gl.uniform2f(uRes, w, h);
 			gl.uniform1f(uTime, 40 + (now - start) / 1000);
 			gl.uniform2f(uMouse, mouse.x, mouse.y);
+			const t = reduced ? 1 : Math.min(1, (now - start) / INTRO_MS);
+			gl.uniform1f(uIntro, 1 - (1 - t) ** 3);
 			gl.drawArrays(gl.TRIANGLES, 0, 3);
 		};
 

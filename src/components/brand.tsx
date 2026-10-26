@@ -15,8 +15,12 @@ const FACETS = [
 
 const WINDOW = "27 26 34 35 27 44 20 35";
 
-/** Facet fills, lit to shaded: brand blue on dark, white tints on the blue app tile. */
+/**
+ * Facet fills, lit to shaded. `mono` (black and white, following the text colour) is
+ * the primary mark; `color` is the brand-blue crystal; `white` sits on the blue tile.
+ */
 const TONES = {
+	mono: ["fill-foreground", "fill-foreground/88", "fill-foreground/62", "fill-foreground/48"],
 	color: ["fill-nuqta-lit", "fill-nuqta-light", "fill-nuqta-mid", "fill-nuqta-deep"],
 	white: ["fill-white", "fill-white/90", "fill-white/75", "fill-white/60"],
 } as const;
@@ -24,7 +28,7 @@ const TONES = {
 type CrystalProps = ComponentProps<"svg"> & { tone?: keyof typeof TONES };
 
 /** The crystal mark on its own. */
-export function AraCrystal({ tone = "color", ...props }: CrystalProps) {
+export function AraCrystal({ tone = "mono", ...props }: CrystalProps) {
 	const mask = useId();
 	return (
 		<svg viewBox="0 0 64 64" aria-hidden="true" {...props}>
@@ -33,6 +37,28 @@ export function AraCrystal({ tone = "color", ...props }: CrystalProps) {
 				<polygon points={WINDOW} fill="black" />
 			</mask>
 			<g mask={`url(#${mask})`}>
+				{FACETS.map((points, i) => (
+					<polygon key={points} points={points} className={TONES[tone][i]} />
+				))}
+			</g>
+		</svg>
+	);
+}
+
+/**
+ * The emblem: the crystal set in a ring, Unreal-style. For moments (footer, closing
+ * call to action, icons); the bare crystal is the everyday mark.
+ */
+export function AraEmblem({ tone = "mono", ...props }: CrystalProps) {
+	const mask = useId();
+	return (
+		<svg viewBox="0 0 64 64" aria-hidden="true" {...props}>
+			<circle cx="32" cy="32" r="30" fill="none" strokeWidth="2.5" className="stroke-current" />
+			<mask id={mask}>
+				<rect width="64" height="64" fill="white" />
+				<polygon points={WINDOW} fill="black" />
+			</mask>
+			<g mask={`url(#${mask})`} transform="translate(13.4 13.6) scale(0.58)">
 				{FACETS.map((points, i) => (
 					<polygon key={points} points={points} className={TONES[tone][i]} />
 				))}
