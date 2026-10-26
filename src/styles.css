@@ -7,6 +7,8 @@
  * Ara Dark: the editor's default theme, copied from the engine's
  * assets/themes/ara-dark.json (T3 Code's dark palette). Token names match the
  * engine's, which are also shadcn's, so shadcn components inherit the editor look.
+ * One deliberate difference: the site's primary is white, not the editor's blue,
+ * matching the black-and-white mark. No blue anywhere.
  * Rule from docs/design/theme.md: markup uses semantic tokens, never raw hex.
  */
 :root {
@@ -24,11 +26,11 @@
 	--secondary-foreground: #f5f5f5;
 	--border: #191919;
 	--input: #1e1e1e;
-	--ring: #346bf1;
-	--primary: #346bf1;
-	--primary-foreground: #ffffff;
-	--accent: #346bf1;
-	--accent-foreground: #ffffff;
+	--ring: #8a8a8a;
+	--primary: #f5f5f5;
+	--primary-foreground: #0a0a0a;
+	--accent: #f5f5f5;
+	--accent-foreground: #0a0a0a;
 	--accent-surface: #141414;
 	--accent-surface-foreground: #f5f5f5;
 
@@ -37,7 +39,7 @@
 	--raised: #1c1c1c;
 	--panel-header: #141414;
 	--separator-strong: #2e2e2e;
-	--selection-surface: #2f62dc;
+	--selection-surface: #333333;
 	--selection-foreground: #ffffff;
 	--selection-muted-foreground: #ffffffb8;
 	--selection-surface-inactive: #262626;
@@ -60,18 +62,12 @@
 	--code-background: #111111;
 	--code-foreground: #f5f5f5;
 
-	--chart-1: #346bf1;
+	--chart-1: #f5f5f5;
 	--chart-2: #2dd4bf;
 	--chart-3: #fbbf24;
 	--chart-4: #c084fc;
 	--chart-5: #fb7185;
 	--chart-6: #a3e635;
-
-	/* The crystal mark's facets, lit to shaded (mid is the primary blue). */
-	--nuqta-lit: #b4caff;
-	--nuqta-light: #6f99ff;
-	--nuqta-mid: #346bf1;
-	--nuqta-deep: #1a43b8;
 
 	--radius: 10px;
 }
@@ -128,10 +124,6 @@
 	--color-chart-4: var(--chart-4);
 	--color-chart-5: var(--chart-5);
 	--color-chart-6: var(--chart-6);
-	--color-nuqta-lit: var(--nuqta-lit);
-	--color-nuqta-light: var(--nuqta-light);
-	--color-nuqta-mid: var(--nuqta-mid);
-	--color-nuqta-deep: var(--nuqta-deep);
 
 	/* The editor's radii: base 10, md 8, sm 6, xs 4. */
 	--radius-xs: 4px;
@@ -215,4 +207,92 @@
 		linear-gradient(90deg, var(--border) 1px, transparent 1px);
 	background-size: 48px 48px;
 	mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 20%, transparent 75%);
+}
+
+/* ---------- Intro: the crystal assembles, its window ignites, it lands in the header ---------- */
+
+@keyframes facet-in {
+	from {
+		opacity: 0;
+		transform: translate(var(--dx), var(--dy)) scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* The light in the crystal's window: it flares, holds through the flight, and dims as it lands. */
+@keyframes window-ignite {
+	0% {
+		opacity: 0;
+		scale: 0.2;
+	}
+	25% {
+		opacity: 1;
+		scale: 1.35;
+	}
+	45% {
+		opacity: 1;
+		scale: 1;
+	}
+	80% {
+		opacity: 0.9;
+	}
+	100% {
+		opacity: 0;
+		scale: 0.8;
+	}
+}
+
+/* If scripts never run (or run late), the overlay still clears itself. */
+@keyframes intro-failsafe {
+	to {
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+
+.intro-overlay {
+	animation: intro-failsafe 400ms ease-out 5s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.intro-overlay {
+		display: none;
+	}
+}
+
+/* While the intro's crystal flies to the header, the header's own crystal waits. */
+[data-intro="on"] [data-header-crystal] {
+	opacity: 0;
+}
+
+/* ---------- Atmosphere ---------- */
+
+/* Film grain over the whole site: barely there, it keeps flat blacks from feeling digital. */
+body::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: 60;
+	pointer-events: none;
+	opacity: 0.045;
+	mix-blend-mode: overlay;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* The mashrabiya as a flat pattern: rhombus lattice with a nuqta in every cell. */
+@utility bg-lattice {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48'%3E%3Cpath d='M0 24L14 0L28 24L14 48Z' fill='none' stroke='white' stroke-width='0.7'/%3E%3Cpath d='M14 20L16.2 24L14 28L11.8 24Z' fill='white'/%3E%3C/svg%3E");
+	background-size: 28px 48px;
+}
+
+/* Crystal-cut corners: top left and bottom right chamfered, like a facet. */
+@utility clip-facet {
+	clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+@utility clip-facet-sm {
+	clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
 }

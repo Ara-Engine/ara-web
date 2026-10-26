@@ -108,7 +108,7 @@ function Em({ children }: { children: ReactNode }) {
 }
 
 function Code({ children }: { children: ReactNode }) {
-	return <span className="text-info-foreground">{children}</span>;
+	return <span className="text-foreground underline decoration-separator-strong underline-offset-2">{children}</span>;
 }
 
 function Fix({ children }: { children: ReactNode }) {

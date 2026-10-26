@@ -2,8 +2,8 @@ import { Download, Github } from "lucide-react";
 import type { ReactNode } from "react";
 import { AraEmblem } from "#/components/brand";
 import { CopyButton } from "#/components/copy-button";
+import { FacetButton } from "#/components/facet-button";
 import { Section } from "#/components/section";
-import { Button } from "#/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "#/components/ui/tabs";
 import { ENGINE_VERSION, links } from "#/lib/site";
 
@@ -25,12 +25,12 @@ const TESTER: Step[] = [
 			</>
 		),
 		action: (
-			<Button asChild className="w-fit">
+			<FacetButton asChild className="w-fit">
 				<a href={links.hubInstaller}>
 					<Download />
 					Download for Windows
 				</a>
-			</Button>
+			</FacetButton>
 		),
 	},
 	{
@@ -90,7 +90,7 @@ const DEVELOPER: Step[] = [
 
 export function GetStarted() {
 	return (
-		<Section id="get-started" kicker="Get started" title="From download to your first agent turn.">
+		<Section id="get-started" kicker="Get started" light="left" title="From download to your first agent turn.">
 			<Tabs defaultValue="tester">
 				<TabsList className="mb-6 h-9 border border-separator-strong bg-muted">
 					<TabsTrigger
@@ -131,18 +131,18 @@ export function GetStarted() {
 					It's an early alpha for testers and agents. Tell us what breaks.
 				</p>
 				<div className="relative mt-8 flex flex-wrap justify-center gap-3">
-					<Button asChild size="lg" className="h-11 px-5 text-[14px]">
+					<FacetButton asChild size="lg">
 						<a href={links.hubInstaller}>
 							<Download />
 							Download Ara Hub
 						</a>
-					</Button>
-					<Button asChild size="lg" variant="outline" className="h-11 px-5 text-[14px]">
+					</FacetButton>
+					<FacetButton asChild size="lg" variant="glass">
 						<a href={`${links.repo}/issues`} target="_blank" rel="noreferrer">
 							<Github />
 							Report an issue
 						</a>
-					</Button>
+					</FacetButton>
 				</div>
 			</div>
 		</Section>

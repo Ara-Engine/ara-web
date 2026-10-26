@@ -3,6 +3,7 @@ import { Download, Github, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AraLogo } from "#/components/brand";
 import { CommandMenu } from "#/components/command-menu";
+import { FacetButton } from "#/components/facet-button";
 import { Button } from "#/components/ui/button";
 import { Kbd, KbdGroup } from "#/components/ui/kbd";
 import { links, sections } from "#/lib/site";
@@ -37,7 +38,7 @@ export function SiteHeader() {
 		>
 			<div className="mx-auto flex h-14 max-w-[1200px] items-center gap-6 px-5 md:px-8">
 				<Link to="/" aria-label="Ara home" className="shrink-0">
-					<AraLogo />
+					<AraLogo landing />
 				</Link>
 				<nav className="hidden items-center gap-1 text-[13.5px] md:flex">
 					{sections
@@ -79,12 +80,12 @@ export function SiteHeader() {
 							<Github />
 						</a>
 					</Button>
-					<Button asChild size="sm">
+					<FacetButton asChild size="sm">
 						<a href={links.hubInstaller}>
 							<Download />
 							Download
 						</a>
-					</Button>
+					</FacetButton>
 				</div>
 			</div>
 			<CommandMenu open={paletteOpen} onOpenChange={setPaletteOpen} />

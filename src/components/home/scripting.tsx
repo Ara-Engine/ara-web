@@ -39,7 +39,7 @@ const TOKEN_CLASS: Record<TokenKind, string> = {
 	plain: "text-code-foreground/90",
 	keyword: "text-chart-4",
 	type: "text-chart-2",
-	method: "text-info-foreground",
+	method: "text-foreground",
 	string: "text-chart-3",
 	number: "text-chart-3",
 	comment: "text-muted-foreground",
@@ -85,6 +85,7 @@ export function Scripting() {
 	return (
 		<Section
 			id="scripting"
+			light="left"
 			kicker="Scripting"
 			title="C# 14, reloaded before you look up."
 			lede="Gameplay is plain C# on .NET 10, hosted inside the engine process. Edit a method and it's live in about 19 ms with every entity's state intact; ship it with NativeAOT."
@@ -99,7 +100,7 @@ export function Scripting() {
 									key={i}
 									className={cn(
 										"flex pr-4 transition-colors duration-500",
-										i === editedLine && edited && "bg-primary/12 shadow-[inset_2px_0_0_var(--primary)]",
+										i === editedLine && edited && "bg-white/[0.06] shadow-[inset_2px_0_0_var(--foreground)]",
 									)}
 								>
 									<span className="w-11 shrink-0 pr-4 text-right text-muted-foreground/60 select-none">{i + 1}</span>

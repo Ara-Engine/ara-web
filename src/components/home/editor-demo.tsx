@@ -144,7 +144,7 @@ export function EditorDemo() {
 			<div
 				ref={ref}
 				aria-hidden
-				className="overflow-hidden rounded-xl border border-separator-strong bg-chrome text-[12px] shadow-2xl shadow-primary/10"
+				className="overflow-hidden rounded-xl border border-separator-strong bg-chrome text-[12px] shadow-2xl shadow-black/60"
 			>
 				<TitleBar />
 				<div className="grid gap-px bg-border lg:grid-cols-[208px_minmax(0,1fr)_248px]">
