@@ -143,7 +143,7 @@ export function Scripting() {
 					<p className="font-mono text-[0.6875rem] tracking-[0.18em] text-muted-foreground uppercase">
 						Hot reload · method-body edit
 					</p>
-					{/* Flares when the edit on the left reloads. */}
+					{/* Flares when the Door.cs edit reloads. */}
 					<p className="mt-5 flex items-baseline gap-3">
 						<span
 							className={cn(
