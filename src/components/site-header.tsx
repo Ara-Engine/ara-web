@@ -36,11 +36,11 @@ export function SiteHeader() {
 				scrolled ? "border-border bg-chrome/80 backdrop-blur-md" : "border-transparent bg-transparent",
 			)}
 		>
-			<div className="mx-auto flex h-14 max-w-[1200px] items-center gap-6 px-5 md:px-8">
+			<div className="mx-auto flex h-14 max-w-content items-center gap-6 px-5 md:px-8">
 				<Link to="/" aria-label="Ara home" className="shrink-0">
 					<AraLogo landing />
 				</Link>
-				<nav className="hidden items-center gap-1 text-[13.5px] md:flex">
+				<nav className="hidden items-center gap-1 text-[0.84375rem] md:flex">
 					{sections
 						.filter((s) => s.id !== "get-started")
 						.map((s) => (
@@ -57,7 +57,7 @@ export function SiteHeader() {
 					<button
 						type="button"
 						onClick={() => setPaletteOpen(true)}
-						className="hidden h-8 w-64 items-center whitespace-nowrap gap-2 rounded-md border border-separator-strong bg-muted px-2.5 text-[12.5px] text-muted-foreground transition-colors hover:border-muted-foreground/40 lg:flex"
+						className="hidden h-8 w-64 items-center whitespace-nowrap gap-2 rounded-md border border-separator-strong bg-muted px-2.5 text-[0.78125rem] text-muted-foreground transition-colors hover:border-muted-foreground/40 lg:flex"
 					>
 						<Search className="size-3.5" />
 						<span className="flex-1 truncate text-left">Search or run a command…</span>

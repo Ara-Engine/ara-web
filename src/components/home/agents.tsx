@@ -41,17 +41,17 @@ export function Agents() {
 					<ul className="space-y-7">
 						{POINTS.map((p) => (
 							<li key={p.title} className="flex gap-3.5">
-								<Nuqta className="mt-[7px]" />
+								<Nuqta className="mt-[0.4375rem]" />
 								<div>
-									<h3 className="text-[15px] font-medium">{p.title}</h3>
-									<p className="mt-1 text-[14.5px] leading-relaxed text-muted-foreground">{p.body}</p>
+									<h3 className="text-[0.9375rem] font-medium">{p.title}</h3>
+									<p className="mt-1 text-[0.90625rem] leading-relaxed text-muted-foreground">{p.body}</p>
 								</div>
 							</li>
 						))}
 					</ul>
 					<div className="mt-10 flex items-end justify-between gap-4 border-t pt-6">
-						<p className="text-[14px] text-muted-foreground">
-							<span className="mr-2 text-[28px] font-semibold tracking-[-0.03em] text-foreground">5–6</span>
+						<p className="text-[0.875rem] text-muted-foreground">
+							<span className="mr-2 text-[1.75rem] font-semibold tracking-[-0.03em] text-foreground">5–6</span>
 							median turns per arabench task, down from 9
 						</p>
 						<SourceLink href={evidence.arabench} />
@@ -62,9 +62,9 @@ export function Agents() {
 					title="Terminal"
 					icon={Terminal}
 					className="lg:self-start"
-					actions={<span className="text-[11px]">levels/main.scene</span>}
+					actions={<span className="text-[0.6875rem]">levels/main.scene</span>}
 				>
-					<pre className="overflow-x-auto p-4 font-mono text-[12px] leading-[1.7] whitespace-pre-wrap text-muted-foreground md:p-5">
+					<pre className="overflow-x-auto p-4 font-mono text-[0.75rem] leading-[1.7] whitespace-pre-wrap text-muted-foreground md:p-5">
 						<Cmd>ara do entity.create -p name=Lamp --why "Light the crate"</Cmd>
 						{"applied tx_rgxnv0fs to levels/main.scene (revision 1)\n"}
 						{"  created: "}

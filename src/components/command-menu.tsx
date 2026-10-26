@@ -76,10 +76,10 @@ export function CommandMenu({ open, onOpenChange }: { open: boolean; onOpenChang
 			title="Search or run a command"
 			description="Jump to a section or open an Ara link."
 			showCloseButton={false}
-			className="top-[22%] translate-y-0 sm:max-w-[560px]"
+			className="top-[22%] translate-y-0 sm:max-w-[35rem]"
 		>
 			<CommandInput placeholder="Search or run a command…" />
-			<CommandList className="max-h-[360px]">
+			<CommandList className="max-h-[22.5rem]">
 				<CommandEmpty>No matching command.</CommandEmpty>
 				<CommandGroup heading="Go to">
 					{sections.map((s) => (

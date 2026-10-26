@@ -27,7 +27,7 @@ export function Section({ id, kicker, title, lede, light = "right", className, c
 	return (
 		<section
 			id={id}
-			className={cn("relative isolate mx-auto w-full max-w-[1200px] px-5 py-20 md:px-8 md:py-32", className)}
+			className={cn("relative isolate mx-auto w-full max-w-content px-5 py-20 md:px-8 md:py-32", className)}
 		>
 			<SectionLight side={light} />
 			<div
@@ -37,15 +37,15 @@ export function Section({ id, kicker, title, lede, light = "right", className, c
 					seen ? "opacity-100" : "motion-safe:translate-y-8 motion-safe:opacity-0",
 				)}
 			>
-				<header className="mb-10 max-w-[640px] md:mb-14">
-					<p className="mb-5 flex items-center gap-3 font-mono text-[12px] tracking-[0.14em] text-muted-foreground uppercase">
+				<header className="mb-10 max-w-[40rem] md:mb-14">
+					<p className="mb-5 flex items-center gap-3 font-mono text-[0.75rem] tracking-[0.14em] text-muted-foreground uppercase">
 						<Nuqta />
 						{kicker}
 					</p>
-					<h2 className="text-[34px] leading-[1.05] font-semibold tracking-[-0.035em] text-balance md:text-[48px]">
+					<h2 className="text-[2.125rem] leading-[1.05] font-semibold tracking-[-0.035em] text-balance md:text-[3rem]">
 						{title}
 					</h2>
-					{lede && <p className="mt-5 text-[17px] leading-relaxed text-pretty text-muted-foreground">{lede}</p>}
+					{lede && <p className="mt-5 text-[1.0625rem] leading-relaxed text-pretty text-muted-foreground">{lede}</p>}
 				</header>
 				{children}
 			</div>
@@ -60,19 +60,19 @@ function SectionLight({ side }: { side: "left" | "right" }) {
 		<div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
 			<div
 				className={cn(
-					"bg-lattice absolute -top-24 h-[620px] w-[820px] opacity-[0.06] [mask-image:radial-gradient(closest-side,black,transparent)]",
+					"bg-lattice absolute -top-24 h-[38.75rem] w-[51.25rem] opacity-[0.06] [mask-image:radial-gradient(closest-side,black,transparent)]",
 					right ? "-right-64" : "-left-64",
 				)}
 			/>
 			<div
 				className={cn(
-					"absolute -top-40 h-[560px] w-[680px] bg-[radial-gradient(closest-side,rgb(255_255_255/0.045),transparent)]",
+					"absolute -top-40 h-[35rem] w-[42.5rem] bg-[radial-gradient(closest-side,rgb(255_255_255/0.045),transparent)]",
 					right ? "-right-40" : "-left-40",
 				)}
 			/>
 			<div
 				className={cn(
-					"absolute inset-x-0 top-0 h-[720px] [mask-image:linear-gradient(to_bottom,black,transparent)]",
+					"absolute inset-x-0 top-0 h-[45rem] [mask-image:linear-gradient(to_bottom,black,transparent)]",
 					right
 						? "bg-[linear-gradient(118deg,transparent_52%,rgb(255_255_255/0.03)_58%,transparent_66%)]"
 						: "bg-[linear-gradient(62deg,transparent_34%,rgb(255_255_255/0.03)_42%,transparent_48%)]",
@@ -89,7 +89,7 @@ export function SourceLink({ href, children = "Source" }: { href: string; childr
 			href={href}
 			target="_blank"
 			rel="noreferrer"
-			className="font-mono text-[11px] text-muted-foreground underline decoration-separator-strong underline-offset-4 transition-colors hover:text-foreground hover:decoration-muted-foreground"
+			className="font-mono text-[0.6875rem] text-muted-foreground underline decoration-separator-strong underline-offset-4 transition-colors hover:text-foreground hover:decoration-muted-foreground"
 		>
 			{children} ↗
 		</a>

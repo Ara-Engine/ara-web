@@ -25,18 +25,18 @@ const COLUMNS = [
 export function SiteFooter() {
 	return (
 		<footer className="mt-10 border-t">
-			<div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-5 py-12 md:flex-row md:px-8">
-				<div className="max-w-[300px]">
-					<AraLogo className="text-[22px]" />
-					<p className="mt-4 text-[13.5px] leading-relaxed text-muted-foreground">
+			<div className="mx-auto flex max-w-content flex-col gap-10 px-5 py-12 md:flex-row md:px-8">
+				<div className="max-w-[18.75rem]">
+					<AraLogo className="text-[1.375rem]" />
+					<p className="mt-4 text-[0.84375rem] leading-relaxed text-muted-foreground">
 						An AI-native game engine in Rust. AI agents build it; agents and humans make games with it.
 					</p>
 				</div>
 				<div className="flex gap-16 md:ml-auto">
 					{COLUMNS.map((col) => (
 						<div key={col.title}>
-							<h3 className="text-[13px] font-medium">{col.title}</h3>
-							<ul className="mt-3 space-y-2 text-[13.5px]">
+							<h3 className="text-[0.8125rem] font-medium">{col.title}</h3>
+							<ul className="mt-3 space-y-2 text-[0.84375rem]">
 								{col.links.map((l) => (
 									<li key={l.label}>
 										<a href={l.href} className="text-muted-foreground transition-colors hover:text-foreground">
@@ -50,7 +50,7 @@ export function SiteFooter() {
 				</div>
 			</div>
 			<div className="border-t border-separator-strong bg-chrome">
-				<div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-x-4 gap-y-1 px-5 py-2 text-[11.5px] text-muted-foreground md:px-8">
+				<div className="mx-auto flex max-w-content flex-wrap items-center gap-x-4 gap-y-1 px-5 py-2 text-[0.71875rem] text-muted-foreground md:px-8">
 					<span className="flex items-center gap-1.5">
 						<span className="size-1.5 rounded-full bg-success" /> ara {ENGINE_VERSION}
 					</span>

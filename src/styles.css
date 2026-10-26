@@ -73,6 +73,9 @@
 }
 
 @theme inline {
+	/* The page's content column (header, sections, footer). */
+	--container-content: 80rem;
+
 	--font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 	--font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
@@ -162,14 +165,17 @@
 		@apply border-border outline-ring/50;
 	}
 
+	/* Everything is sized in rem, so the whole page scales with this: 100% up to 1280 px
+	   wide, growing to ~117% at 2560 px, where a 100% layout reads small. */
 	html {
+		font-size: clamp(1rem, 0.828rem + 0.2148vw, 1.172rem);
 		scroll-behavior: smooth;
 		scroll-padding-top: 4.5rem;
 	}
 
 	body {
 		@apply bg-background font-sans text-foreground antialiased;
-		font-size: 15px;
+		font-size: 0.9375rem;
 		overflow-x: hidden;
 	}
 

@@ -70,7 +70,7 @@ export function AraEmblem({ tone = "mono", ...props }: CrystalProps) {
  */
 export function AraLogo({ className, landing = false }: { className?: string; landing?: boolean }) {
 	return (
-		<span className={cn("flex items-center gap-2 text-[19px] font-semibold tracking-[-0.04em]", className)}>
+		<span className={cn("flex items-center gap-2 text-[1.1875rem] font-semibold tracking-[-0.04em]", className)}>
 			<AraCrystal className="size-[1.3em] transition-opacity duration-150" data-header-crystal={landing || undefined} />
 			Ara
 		</span>
@@ -84,7 +84,7 @@ export function Nuqta({ className }: { className?: string }) {
 	return (
 		<span
 			aria-hidden
-			className={cn("inline-block size-[7px] shrink-0 rotate-45 rounded-[1px] bg-primary", className)}
+			className={cn("inline-block size-[0.4375rem] shrink-0 rotate-45 rounded-[1px] bg-primary", className)}
 		/>
 	);
 }

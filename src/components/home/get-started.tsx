@@ -79,8 +79,8 @@ const DEVELOPER: Step[] = [
 		title: "Let agents in",
 		body: (
 			<>
-				<code className="font-mono text-[13px] text-foreground">ara init</code> writes a per-project{" "}
-				<code className="font-mono text-[13px] text-foreground">.mcp.json</code>, so an agent started in the folder
+				<code className="font-mono text-[0.8125rem] text-foreground">ara init</code> writes a per-project{" "}
+				<code className="font-mono text-[0.8125rem] text-foreground">.mcp.json</code>, so an agent started in the folder
 				connects on its own. The CLI works too.
 			</>
 		),
@@ -113,7 +113,7 @@ export function GetStarted() {
 					<Steps steps={DEVELOPER} />
 				</TabsContent>
 			</Tabs>
-			<p className="mt-6 text-[12.5px] text-muted-foreground">
+			<p className="mt-6 text-[0.78125rem] text-muted-foreground">
 				Needs Windows 10/11 x64, a Vulkan 1.3 GPU with a current driver, 16 GB RAM and the .NET 10 runtime. macOS (Metal
 				4) is next.
 			</p>
@@ -124,10 +124,10 @@ export function GetStarted() {
 					className="bg-viewport-grid absolute inset-0 [mask-image:radial-gradient(ellipse_60%_80%_at_50%_100%,black,transparent)]"
 				/>
 				<AraEmblem className="relative mx-auto size-16 text-foreground" />
-				<h2 className="relative mt-6 text-[30px] font-semibold tracking-[-0.03em] md:text-[40px]">
+				<h2 className="relative mt-6 text-[1.875rem] font-semibold tracking-[-0.03em] md:text-[2.5rem]">
 					Make something with Ara.
 				</h2>
-				<p className="relative mx-auto mt-3 max-w-[460px] text-[15.5px] text-muted-foreground">
+				<p className="relative mx-auto mt-3 max-w-[28.75rem] text-[0.96875rem] text-muted-foreground">
 					It's an early alpha for testers and agents. Tell us what breaks.
 				</p>
 				<div className="relative mt-8 flex flex-wrap justify-center gap-3">
@@ -154,16 +154,16 @@ function Steps({ steps }: { steps: Step[] }) {
 		<ol className="grid gap-4 md:grid-cols-3">
 			{steps.map((step, i) => (
 				<li key={step.title} className="flex flex-col rounded-lg border bg-card p-5">
-					<span className="grid size-6 place-items-center rounded-full border border-separator-strong bg-raised font-mono text-[11px] text-muted-foreground">
+					<span className="grid size-6 place-items-center rounded-full border border-separator-strong bg-raised font-mono text-[0.6875rem] text-muted-foreground">
 						{i + 1}
 					</span>
-					<h3 className="mt-4 text-[15px] font-medium">{step.title}</h3>
-					<p className="mt-1.5 text-[14px] leading-relaxed text-muted-foreground">{step.body}</p>
+					<h3 className="mt-4 text-[0.9375rem] font-medium">{step.title}</h3>
+					<p className="mt-1.5 text-[0.875rem] leading-relaxed text-muted-foreground">{step.body}</p>
 					{(step.code || step.action) && (
 						<div className="mt-auto pt-5">
 							{step.code && (
 								<div className="flex items-start gap-2 rounded-md border bg-background pl-3">
-									<pre className="min-w-0 flex-1 py-2.5 font-mono whitespace-pre-wrap [overflow-wrap:anywhere] text-[11.5px] leading-relaxed text-foreground/90">
+									<pre className="min-w-0 flex-1 py-2.5 font-mono whitespace-pre-wrap [overflow-wrap:anywhere] text-[0.71875rem] leading-relaxed text-foreground/90">
 										{step.code}
 									</pre>
 									<CopyButton text={step.code} className="mt-1 mr-1" />

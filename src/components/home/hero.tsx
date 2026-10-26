@@ -15,7 +15,7 @@ export function Hero() {
 	const rise = (step: number) => ({ animationDelay: `${INTRO_BEATS.land + 350 + step * 120}ms` });
 
 	return (
-		<section className="relative -mt-14 flex min-h-[640px] items-center overflow-hidden bg-background md:h-svh md:min-h-[720px]">
+		<section className="relative -mt-14 flex min-h-[40rem] items-center overflow-hidden bg-background md:h-svh md:min-h-[45rem]">
 			<MashrabiyaLight className="absolute inset-0 size-full" />
 			<HeroIntro />
 			{/* Keep the copy legible where the light pattern reaches it, and blend into the page. */}
@@ -27,15 +27,15 @@ export function Hero() {
 			<div aria-hidden className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background/80 to-transparent" />
 			<div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
 
-			<div className="relative mx-auto w-full max-w-[1200px] px-5 pt-28 pb-20 md:px-8">
+			<div className="relative mx-auto w-full max-w-content px-5 pt-28 pb-20 md:px-8">
 				<a
 					href={links.releaseNotes}
 					target="_blank"
 					rel="noreferrer"
 					style={rise(0)}
-					className="group inline-flex animate-rise items-center gap-3 text-[13px] whitespace-nowrap text-foreground/60 transition-colors hover:text-foreground"
+					className="group inline-flex animate-rise items-center gap-3 text-[0.8125rem] whitespace-nowrap text-foreground/60 transition-colors hover:text-foreground"
 				>
-					<span className="font-mono text-[12px] tracking-[0.14em] text-foreground uppercase">
+					<span className="font-mono text-[0.75rem] tracking-[0.14em] text-foreground uppercase">
 						Ara {ENGINE_VERSION}
 					</span>
 					<span className="h-px w-8 bg-foreground/30 max-sm:hidden transition-all duration-300 group-hover:w-12 group-hover:bg-foreground/60" />
@@ -44,7 +44,7 @@ export function Hero() {
 				</a>
 				<h1
 					style={rise(1)}
-					className="mt-7 animate-rise text-[48px] leading-[0.96] font-semibold tracking-[-0.045em] text-balance [text-shadow:0_2px_40px_rgb(0_0_0/0.6)] sm:text-[68px] lg:text-[88px]"
+					className="mt-7 animate-rise text-[3rem] leading-[0.96] font-semibold tracking-[-0.045em] text-balance [text-shadow:0_2px_40px_rgb(0_0_0/0.6)] sm:text-[4.25rem] lg:text-[5.5rem]"
 				>
 					An AI-native
 					<br />
@@ -52,7 +52,7 @@ export function Hero() {
 				</h1>
 				<p
 					style={rise(2)}
-					className="mt-7 max-w-[520px] animate-rise text-[17px] leading-relaxed text-pretty text-foreground/70 [text-shadow:0_1px_16px_rgb(0_0_0/0.9)] md:text-[19px]"
+					className="mt-7 max-w-[32.5rem] animate-rise text-[1.0625rem] leading-relaxed text-pretty text-foreground/70 [text-shadow:0_1px_16px_rgb(0_0_0/0.9)] md:text-[1.1875rem]"
 				>
 					Unreal-level fidelity with Unity-level ease. Every edit, from you, a C# script or an AI agent, is a typed
 					command you can undo, so agents work in your project like a teammate.
@@ -70,7 +70,7 @@ export function Hero() {
 							View on GitHub
 						</a>
 					</FacetButton>
-					<span className="w-full text-[12.5px] text-foreground/60 [text-shadow:0_1px_10px_rgb(0_0_0)] sm:ml-2 sm:w-auto">
+					<span className="w-full text-[0.78125rem] text-foreground/60 [text-shadow:0_1px_10px_rgb(0_0_0)] sm:ml-2 sm:w-auto">
 						Windows 10/11 x64 · Vulkan 1.3 GPU
 					</span>
 				</div>

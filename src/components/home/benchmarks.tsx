@@ -49,10 +49,10 @@ export function Benchmarks() {
 		>
 			<div className="grid gap-4 lg:grid-cols-2">
 				<Panel title="Performance bar · D26" icon={Gauge} bodyClassName="flex flex-col">
-					<p className="px-4 pt-3.5 text-[13px] leading-relaxed text-muted-foreground">
+					<p className="px-4 pt-3.5 text-[0.8125rem] leading-relaxed text-muted-foreground">
 						GPU time (p50) at 2560 × 1440 against UE5-class budgets. Every row is inside its budget.
 					</p>
-					<table className="mt-2 w-full text-[12.5px]">
+					<table className="mt-2 w-full text-[0.78125rem]">
 						<thead>
 							<tr className="text-muted-foreground">
 								<th className="px-4 py-2 text-left font-normal">Scene</th>
@@ -76,19 +76,19 @@ export function Benchmarks() {
 							))}
 						</tbody>
 					</table>
-					<dl className="mt-auto border-t text-[12.5px]">
+					<dl className="mt-auto border-t text-[0.78125rem]">
 						{D26_EXTRA.map((row) => (
 							<div key={row.label} className="flex items-baseline gap-3 border-t px-4 py-2.5 first:border-t-0">
 								<dt className="mr-auto text-foreground/90">{row.label}</dt>
 								<dd className="font-mono tabular-nums">{row.value}</dd>
-								<dd className="w-14 text-right text-[11.5px] text-muted-foreground">of {row.target}</dd>
+								<dd className="w-14 text-right text-[0.71875rem] text-muted-foreground">of {row.target}</dd>
 							</div>
 						))}
 					</dl>
 				</Panel>
 
 				<Panel title="Head to head" icon={Zap} bodyClassName="flex flex-col">
-					<div className="flex items-center gap-4 px-4 pt-3.5 text-[12px] text-muted-foreground">
+					<div className="flex items-center gap-4 px-4 pt-3.5 text-[0.75rem] text-muted-foreground">
 						<span className="flex items-center gap-1.5">
 							<span className="h-2 w-3 rounded-[2px] bg-primary" /> Ara
 						</span>
@@ -100,7 +100,7 @@ export function Benchmarks() {
 					<ul className="mt-2">
 						{HEAD_TO_HEAD.map((row) => (
 							<li key={row.task} className="border-t px-4 py-3">
-								<div className="mb-2 flex items-baseline justify-between text-[12.5px]">
+								<div className="mb-2 flex items-baseline justify-between text-[0.78125rem]">
 									<span className="text-foreground/90">{row.task}</span>
 									<span className="text-muted-foreground">
 										{row.faster}% faster than {row.rival}
@@ -110,20 +110,20 @@ export function Benchmarks() {
 								<Bar label={row.rival} ms={row.other} max={row.other} className="mt-1 bg-muted-foreground/45" />
 							</li>
 						))}
-						<li className="flex items-center gap-2 border-t px-4 py-3 text-[12.5px]">
+						<li className="flex items-center gap-2 border-t px-4 py-3 text-[0.78125rem]">
 							<TriangleAlert className="size-3.5 shrink-0 text-warning-foreground" />
 							<span className="text-foreground/90">Boids</span>
 							<span className="text-muted-foreground">3.5–28% slower than Unity DOTS</span>
 						</li>
 					</ul>
-					<p className="mt-auto border-t px-4 py-3 text-[12px] text-muted-foreground">
+					<p className="mt-auto border-t px-4 py-3 text-[0.75rem] text-muted-foreground">
 						Unity 6 IL2CPP + Burst and ozz-animation, on the same machine
 					</p>
 				</Panel>
 			</div>
 
 			<div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
-				<p className="mr-auto text-[13.5px] text-muted-foreground">
+				<p className="mr-auto text-[0.84375rem] text-muted-foreground">
 					Not there yet: Jolt physics, boids, the 4 ms virtual-geometry target and the D27 record budgets.
 				</p>
 				<SourceLink href={evidence.performanceBar}>D26 reading</SourceLink>
@@ -142,7 +142,7 @@ function BudgetMeter({ ms, budget }: { ms: number; budget: number }) {
 		<Tooltip>
 			<TooltipTrigger asChild>
 				<div className="cursor-default">
-					<div className="font-mono text-[12px] tabular-nums">{ms.toFixed(2)}</div>
+					<div className="font-mono text-[0.75rem] tabular-nums">{ms.toFixed(2)}</div>
 					<div className="mt-1.5 h-1 w-full max-w-16 rounded-full bg-primary/20">
 						<div className="h-full rounded-full bg-primary" style={{ width: `${share * 100}%` }} />
 					</div>
@@ -162,7 +162,7 @@ function Bar({ label, ms, max, className }: { label: string; ms: number; max: nu
 			<TooltipTrigger asChild>
 				<div className="flex cursor-default items-center gap-2">
 					<div className={cn("h-2 rounded-r-[4px]", className)} style={{ width: `${(ms / max) * 82}%` }} />
-					<span className="font-mono text-[11.5px] text-muted-foreground tabular-nums">{ms.toFixed(2)}</span>
+					<span className="font-mono text-[0.71875rem] text-muted-foreground tabular-nums">{ms.toFixed(2)}</span>
 				</div>
 			</TooltipTrigger>
 			<TooltipContent>

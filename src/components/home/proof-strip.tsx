@@ -31,22 +31,22 @@ const STATS = [
 /** Four headline numbers under the hero, each linked to where it was measured. */
 export function ProofStrip() {
 	return (
-		<section aria-label="Measured results" className="mx-auto max-w-[1200px] px-5 pt-20 md:px-8 md:pt-28">
+		<section aria-label="Measured results" className="mx-auto max-w-content px-5 pt-20 md:px-8 md:pt-28">
 			<div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-2 lg:grid-cols-4">
 				{STATS.map((s) => (
 					<div key={s.value} className="flex flex-col bg-background p-6">
 						<p className="flex items-baseline gap-1.5">
-							<span className="text-[40px] leading-none font-semibold tracking-[-0.03em]">{s.value}</span>
-							<span className="text-[15px] text-muted-foreground">{s.unit}</span>
+							<span className="text-[2.5rem] leading-none font-semibold tracking-[-0.03em]">{s.value}</span>
+							<span className="text-[0.9375rem] text-muted-foreground">{s.unit}</span>
 						</p>
-						<p className="mt-3 mb-5 text-[14px] leading-snug text-pretty text-muted-foreground">{s.label}</p>
+						<p className="mt-3 mb-5 text-[0.875rem] leading-snug text-pretty text-muted-foreground">{s.label}</p>
 						<div className="mt-auto">
 							<SourceLink href={s.href} />
 						</div>
 					</div>
 				))}
 			</div>
-			<p className="mt-4 text-[12.5px] text-muted-foreground">
+			<p className="mt-4 text-[0.78125rem] text-muted-foreground">
 				Measured on a Ryzen 7 7800X3D and RTX 4070 SUPER under Windows 11, on a machine shared with other builds. Treat
 				every number as an upper bound.
 			</p>

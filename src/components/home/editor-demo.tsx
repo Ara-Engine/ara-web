@@ -144,10 +144,10 @@ export function EditorDemo() {
 			<div
 				ref={ref}
 				aria-hidden
-				className="overflow-hidden rounded-xl border border-separator-strong bg-chrome text-[12px] shadow-2xl shadow-black/60"
+				className="overflow-hidden rounded-xl border border-separator-strong bg-chrome text-[0.75rem] shadow-2xl shadow-black/60"
 			>
 				<TitleBar />
-				<div className="grid gap-px bg-border lg:grid-cols-[208px_minmax(0,1fr)_248px]">
+				<div className="grid gap-px bg-border lg:grid-cols-[13rem_minmax(0,1fr)_15.5rem]">
 					<div className="hidden min-h-0 flex-col gap-px lg:flex">
 						<Hierarchy created={created} hasLight={hasLight} />
 						<AgentsFeed turn={turn} className="min-h-0 flex-1" />
@@ -164,7 +164,7 @@ export function EditorDemo() {
 
 function TitleBar() {
 	return (
-		<div className="flex h-9 items-center gap-1 border-b border-separator-strong px-2 text-[12.5px]">
+		<div className="flex h-9 items-center gap-1 border-b border-separator-strong px-2 text-[0.78125rem]">
 			<span className="grid size-5 place-items-center rounded-[5px] bg-raised">
 				<AraCrystal className="size-3.5" />
 			</span>
@@ -185,7 +185,7 @@ function TitleBar() {
 				<Pause className="mx-1 size-3 text-muted-foreground" />
 				<StepForward className="mx-1 size-3 text-muted-foreground" />
 				<Square className="mx-1 size-3 text-muted-foreground" />
-				<span className="ml-1 flex items-center gap-1 border-l border-separator-strong pl-2 text-[11px] text-muted-foreground">
+				<span className="ml-1 flex items-center gap-1 border-l border-separator-strong pl-2 text-[0.6875rem] text-muted-foreground">
 					Local <ChevronDown className="size-3" />
 				</span>
 			</div>
@@ -201,7 +201,7 @@ function TitleBar() {
 
 function Keycap({ children }: { children: ReactNode }) {
 	return (
-		<span className="rounded-xs border border-separator-strong bg-keycap px-1 text-[10px] leading-4 text-muted-foreground">
+		<span className="rounded-xs border border-separator-strong bg-keycap px-1 text-[0.625rem] leading-4 text-muted-foreground">
 			{children}
 		</span>
 	);
@@ -260,7 +260,7 @@ function HierarchyRow({ row, selected, className }: { row: Row; selected?: boole
 		>
 			<Icon className={cn("size-3", selected ? "text-selection-foreground" : "text-muted-foreground")} />
 			<span className="truncate">{row.name}</span>
-			{selected && <span className="ml-auto text-[10px] text-selection-muted-foreground">agent</span>}
+			{selected && <span className="ml-auto text-[0.625rem] text-selection-muted-foreground">agent</span>}
 		</li>
 	);
 }
@@ -275,16 +275,16 @@ function AgentsFeed({ turn, className }: { turn: Turn; className?: string }) {
 		<PanelChrome title="Agents" icon={Sparkles} className={className}>
 			<div className="flex flex-col gap-2.5 p-2.5">
 				<div className="rounded-md bg-raised px-2.5 py-2">
-					<div className="mb-0.5 text-[10.5px] text-muted-foreground">you</div>
+					<div className="mb-0.5 text-[0.65625rem] text-muted-foreground">you</div>
 					<div className="text-foreground">Add a warm light to the left brazier.</div>
 				</div>
 				<div>
-					<div className="mb-1 flex items-center gap-1.5 text-[10.5px] text-muted-foreground">
+					<div className="mb-1 flex items-center gap-1.5 text-[0.65625rem] text-muted-foreground">
 						<span className="size-1.5 rounded-full bg-primary" />
 						agent:claude
 						<span className="ml-auto">turn 3</span>
 					</div>
-					<ul className="space-y-0.5 font-mono text-[11px]">
+					<ul className="space-y-0.5 font-mono text-[0.6875rem]">
 						{OPS.map((op) => {
 							const landed = turn.reached(op.at) || undone;
 							if (!landed) return null;
@@ -313,7 +313,7 @@ function AgentsFeed({ turn, className }: { turn: Turn; className?: string }) {
 					</ul>
 				</div>
 				{(turn.phase === "done" || undone) && (
-					<div className="flex items-center gap-2 border-t pt-2 text-[11px] animate-in fade-in-0 duration-300">
+					<div className="flex items-center gap-2 border-t pt-2 text-[0.6875rem] animate-in fade-in-0 duration-300">
 						<span className="text-muted-foreground">{undone ? "4 ops reverted" : "4 ops applied"}</span>
 						<button
 							type="button"
@@ -348,7 +348,7 @@ function Viewport({ created, hasLight, warm, bright }: LightState) {
 						className={cn(
 							"relative px-2 py-1 text-muted-foreground",
 							i === 0 &&
-								"text-foreground after:absolute after:inset-x-1.5 after:-bottom-[5px] after:h-px after:bg-primary",
+								"text-foreground after:absolute after:inset-x-1.5 after:-bottom-[0.3125rem] after:h-px after:bg-primary",
 							i > 2 && "hidden sm:inline",
 						)}
 					>
@@ -456,7 +456,7 @@ function Inspector({ created, hasLight, warm, bright, intensity }: LightState & 
 				<div className="flex h-full flex-col items-center justify-center gap-1.5 px-6 pb-8 text-center">
 					<SlidersHorizontal className="size-4 text-muted-foreground" />
 					<div className="text-foreground">Nothing selected</div>
-					<div className="text-[11px] leading-snug text-muted-foreground">
+					<div className="text-[0.6875rem] leading-snug text-muted-foreground">
 						Select an entity in the Scene or Hierarchy to edit its components.
 					</div>
 				</div>
@@ -492,7 +492,7 @@ function Inspector({ created, hasLight, warm, bright, intensity }: LightState & 
 										className="size-3 rounded-[3px] border border-separator-strong transition-colors duration-500"
 										style={{ background: warm ? WARM : WHITE }}
 									/>
-									<span className="font-mono text-[11px]">{warm ? WARM : WHITE}</span>
+									<span className="font-mono text-[0.6875rem]">{warm ? WARM : WHITE}</span>
 								</span>
 							</Field>
 							<Field label="Intensity" changed={bright} agent={bright}>
@@ -552,7 +552,7 @@ function Field({
 	return (
 		<div className="relative flex h-6 items-center gap-2 pr-2 pl-3">
 			{changed && <span className="absolute top-1 bottom-1 left-0.5 w-0.5 rounded-full bg-primary" />}
-			<span className="w-[64px] shrink-0 text-foreground/80">{label}</span>
+			<span className="w-[4rem] shrink-0 text-foreground/80">{label}</span>
 			<span
 				className={cn(
 					"flex min-w-0 flex-1 items-center rounded-xs transition-shadow duration-500",
@@ -570,8 +570,8 @@ function Vec3({ values }: { values: [string, string, string] }) {
 		<span className="grid flex-1 grid-cols-3 gap-1">
 			{(["X", "Y", "Z"] as const).map((axis, i) => (
 				<span key={axis} className="flex items-center gap-1 rounded-xs bg-muted px-1 py-0.5">
-					<span className="text-[10px] text-muted-foreground">{axis}</span>
-					<span className="ml-auto font-mono text-[11px] tabular-nums">{values[i]}</span>
+					<span className="text-[0.625rem] text-muted-foreground">{axis}</span>
+					<span className="ml-auto font-mono text-[0.6875rem] tabular-nums">{values[i]}</span>
 				</span>
 			))}
 		</span>
@@ -581,8 +581,8 @@ function Vec3({ values }: { values: [string, string, string] }) {
 function Num({ value, unit }: { value: string; unit: string }) {
 	return (
 		<span className="flex flex-1 items-center rounded-xs bg-muted px-1.5 py-0.5">
-			<span className="font-mono text-[11px] tabular-nums">{value}</span>
-			<span className="ml-auto text-[10.5px] text-muted-foreground">{unit}</span>
+			<span className="font-mono text-[0.6875rem] tabular-nums">{value}</span>
+			<span className="ml-auto text-[0.65625rem] text-muted-foreground">{unit}</span>
 		</span>
 	);
 }
@@ -598,7 +598,7 @@ function Select({ value }: { value: string }) {
 
 function StatusBar({ done }: { done: boolean }) {
 	return (
-		<div className="flex h-6 items-center gap-4 border-t border-separator-strong px-2.5 text-[11px] text-muted-foreground">
+		<div className="flex h-6 items-center gap-4 border-t border-separator-strong px-2.5 text-[0.6875rem] text-muted-foreground">
 			<span className="flex items-center gap-1.5">
 				<span className="size-1.5 rounded-full bg-success" /> Connected
 			</span>

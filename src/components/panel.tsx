@@ -28,7 +28,7 @@ export function Panel({ title, icon: Icon, actions, className, bodyClassName, ch
 				aria-hidden
 				className="pointer-events-none absolute inset-x-8 top-0 z-10 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"
 			/>
-			<div className="flex h-7 shrink-0 items-center gap-1.5 border-b bg-panel-header px-2.5 text-[12px] text-foreground/90">
+			<div className="flex h-7 shrink-0 items-center gap-1.5 border-b bg-panel-header px-2.5 text-[0.75rem] text-foreground/90">
 				{Icon && <Icon className="size-3.5 text-muted-foreground" aria-hidden />}
 				<span className="truncate">{title}</span>
 				<span className="ml-auto flex items-center gap-2 text-muted-foreground">

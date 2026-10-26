@@ -33,9 +33,9 @@ const facetButton = cva(
 				],
 			},
 			size: {
-				sm: "clip-facet-sm h-8 px-3.5 text-[13px] [&_svg]:size-3.5",
-				md: "clip-facet h-10 px-5 text-[13.5px]",
-				lg: "clip-facet h-12 px-6 text-[14.5px]",
+				sm: "clip-facet-sm h-8 px-3.5 text-[0.8125rem] [&_svg]:size-3.5",
+				md: "clip-facet h-10 px-5 text-[0.84375rem]",
+				lg: "clip-facet h-12 px-6 text-[0.90625rem]",
 			},
 		},
 		defaultVariants: { variant: "solid", size: "md" },

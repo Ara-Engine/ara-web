@@ -92,8 +92,8 @@ export function Scripting() {
 		>
 			<div className="grid gap-4 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
 				<div ref={ref} className="relative">
-					<Panel title="Door.cs" icon={FileCode} actions={<span className="text-[11px]">Outpost.Sample</span>}>
-						<pre className="overflow-x-auto py-3 font-mono text-[12px] leading-[1.65] [font-variant-ligatures:none]">
+					<Panel title="Door.cs" icon={FileCode} actions={<span className="text-[0.6875rem]">Outpost.Sample</span>}>
+						<pre className="overflow-x-auto py-3 font-mono text-[0.75rem] leading-[1.65] [font-variant-ligatures:none]">
 							{lines.map((line, i) => (
 								<div
 									// biome-ignore lint/suspicious/noArrayIndexKey: lines are positional
@@ -118,35 +118,35 @@ export function Scripting() {
 					</Panel>
 					<div
 						className={cn(
-							"absolute right-4 bottom-4 flex items-center gap-2.5 rounded-md border border-separator-strong bg-menu-surface px-3 py-2 text-[12.5px] shadow-xl transition-all duration-500",
+							"absolute right-4 bottom-4 flex items-center gap-2.5 rounded-md border border-separator-strong bg-menu-surface px-3 py-2 text-[0.78125rem] shadow-xl transition-all duration-500",
 							step === "reloaded" ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
 						)}
 					>
 						<CircleCheck className="size-4 text-success-foreground" />
 						<span>Reloaded Outpost.Sample</span>
-						<span className="font-mono text-[11.5px] text-muted-foreground">19 ms · state kept</span>
+						<span className="font-mono text-[0.71875rem] text-muted-foreground">19 ms · state kept</span>
 					</div>
 				</div>
 
 				<div className="flex flex-col gap-4">
 					<Panel title="Inspector" icon={SlidersHorizontal}>
-						<div className="px-3 py-2.5 text-[12.5px]">
+						<div className="px-3 py-2.5 text-[0.78125rem]">
 							<div className="mb-2 flex items-center gap-1.5 text-foreground">
 								<DoorOpen className="size-3.5 text-muted-foreground" />
 								Door
-								<span className="ml-auto text-[11px] text-muted-foreground">generated from Door.cs</span>
+								<span className="ml-auto text-[0.6875rem] text-muted-foreground">generated from Door.cs</span>
 							</div>
 							<InspectorField label="Open angle" doc="How far the door opens.">
 								<span className="relative h-1 flex-1 rounded-full bg-raised">
 									<span className="absolute inset-y-0 left-0 w-[61%] rounded-full bg-primary" />
 									<span className="absolute top-1/2 left-[61%] size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-primary bg-foreground" />
 								</span>
-								<span className="w-14 rounded-xs bg-muted px-1.5 py-0.5 text-right font-mono text-[11.5px] tabular-nums">
+								<span className="w-14 rounded-xs bg-muted px-1.5 py-0.5 text-right font-mono text-[0.71875rem] tabular-nums">
 									110 °
 								</span>
 							</InspectorField>
 							<InspectorField label="Is open" doc="Whether the door should be open. Replicated.">
-								<span className="grid size-4 place-items-center rounded-[4px] bg-primary text-[10px] text-primary-foreground">
+								<span className="grid size-4 place-items-center rounded-[4px] bg-primary text-[0.625rem] text-primary-foreground">
 									✓
 								</span>
 							</InspectorField>
@@ -154,13 +154,13 @@ export function Scripting() {
 					</Panel>
 
 					<Panel title="Hot reload" icon={Gauge}>
-						<dl className="divide-y text-[13px]">
+						<dl className="divide-y text-[0.8125rem]">
 							{RELOAD_TIMINGS.map((r) => (
 								<div key={r.label} className="flex items-baseline justify-between px-3.5 py-2.5">
 									<dt className="text-foreground/90">
-										{r.label} <span className="ml-1 text-[11.5px] text-muted-foreground">{r.hint}</span>
+										{r.label} <span className="ml-1 text-[0.71875rem] text-muted-foreground">{r.hint}</span>
 									</dt>
-									<dd className="font-mono text-[13.5px] tabular-nums">{r.value}</dd>
+									<dd className="font-mono text-[0.84375rem] tabular-nums">{r.value}</dd>
 								</div>
 							))}
 						</dl>
@@ -183,7 +183,7 @@ function InspectorField({ label, doc, children }: { label: string; doc: string; 
 				<span className="w-20 shrink-0 text-foreground/85">{label}</span>
 				<span className="flex flex-1 items-center gap-3">{children}</span>
 			</div>
-			<p className="mt-1 text-[11.5px] text-muted-foreground">{doc}</p>
+			<p className="mt-1 text-[0.71875rem] text-muted-foreground">{doc}</p>
 		</div>
 	);
 }
