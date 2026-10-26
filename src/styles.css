@@ -67,6 +67,12 @@
 	--chart-5: #fb7185;
 	--chart-6: #a3e635;
 
+	/* The crystal mark's facets, lit to shaded (mid is the primary blue). */
+	--nuqta-lit: #b4caff;
+	--nuqta-light: #6f99ff;
+	--nuqta-mid: #346bf1;
+	--nuqta-deep: #1a43b8;
+
 	--radius: 10px;
 }
 
@@ -122,6 +128,10 @@
 	--color-chart-4: var(--chart-4);
 	--color-chart-5: var(--chart-5);
 	--color-chart-6: var(--chart-6);
+	--color-nuqta-lit: var(--nuqta-lit);
+	--color-nuqta-light: var(--nuqta-light);
+	--color-nuqta-mid: var(--nuqta-mid);
+	--color-nuqta-deep: var(--nuqta-deep);
 
 	/* The editor's radii: base 10, md 8, sm 6, xs 4. */
 	--radius-xs: 4px;

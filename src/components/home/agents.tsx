@@ -4,6 +4,7 @@ import { Nuqta } from "#/components/brand";
 import { Panel } from "#/components/panel";
 import { Section, SourceLink } from "#/components/section";
 import { evidence } from "#/lib/site";
+import { EditorDemo } from "./editor-demo";
 
 const POINTS = [
 	{
@@ -30,8 +31,11 @@ export function Agents() {
 			id="agents"
 			kicker="AI-native"
 			title="Agents are first-class users, not an add-on."
-			lede="Agent edits apply like a teammate's: live in the editor's activity feed, attributed, and undoable one turn at a time."
+			lede="Agent edits apply like a teammate's: live in the editor's activity feed, attributed, and undoable one turn at a time. Here is one turn."
 		>
+			<div className="mb-16 md:mb-24">
+				<EditorDemo />
+			</div>
 			<div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12">
 				<div className="flex flex-col">
 					<ul className="space-y-7">

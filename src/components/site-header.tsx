@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Download, Github, Search } from "lucide-react";
 import { useState } from "react";
-import { AraWordmark } from "#/components/brand";
+import { AraLogo } from "#/components/brand";
 import { CommandMenu } from "#/components/command-menu";
 import { Button } from "#/components/ui/button";
 import { Kbd, KbdGroup } from "#/components/ui/kbd";
@@ -15,7 +15,7 @@ export function SiteHeader() {
 		<header className="sticky top-0 z-40 border-b bg-chrome/80 backdrop-blur-md">
 			<div className="mx-auto flex h-14 max-w-[1200px] items-center gap-6 px-5 md:px-8">
 				<Link to="/" aria-label="Ara home" className="shrink-0">
-					<AraWordmark className="h-[22px] w-auto" />
+					<AraLogo />
 				</Link>
 				<nav className="hidden items-center gap-1 text-[13.5px] md:flex">
 					{sections

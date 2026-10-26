@@ -2,30 +2,41 @@ import { ArrowUpRight, Download, Github } from "lucide-react";
 import { Nuqta } from "#/components/brand";
 import { Button } from "#/components/ui/button";
 import { ENGINE_VERSION, links } from "#/lib/site";
-import { EditorDemo } from "./editor-demo";
+import { MashrabiyaLight } from "./mashrabiya";
 
+/**
+ * Full-bleed hero: live mashrabiya light behind the headline. It starts under the
+ * translucent header (-mt-14) and fades into the page background at the bottom.
+ */
 export function Hero() {
 	return (
-		<section className="relative overflow-hidden">
-			<div aria-hidden className="bg-viewport-grid absolute inset-x-0 top-0 h-[760px]" />
-			<div className="relative mx-auto max-w-[1200px] px-5 pt-14 md:px-8 md:pt-24">
+		<section className="relative -mt-14 flex min-h-[640px] items-center overflow-hidden bg-background md:h-[92svh] md:max-h-[920px]">
+			<MashrabiyaLight className="absolute inset-0 size-full" />
+			{/* Keep the copy legible where the light pattern reaches it, and blend into the page. */}
+			<div
+				aria-hidden
+				className="absolute inset-0 bg-[linear-gradient(90deg,var(--background)_0%,color-mix(in_srgb,var(--background)_75%,transparent)_55%,color-mix(in_srgb,var(--background)_40%,transparent)_100%)] md:bg-[linear-gradient(90deg,color-mix(in_srgb,var(--background)_70%,transparent)_0%,transparent_55%)]"
+			/>
+			<div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
+
+			<div className="relative mx-auto w-full max-w-[1200px] px-5 pt-28 pb-20 md:px-8">
 				<a
 					href={links.releaseNotes}
 					target="_blank"
 					rel="noreferrer"
-					className="inline-flex animate-rise items-center gap-2 rounded-full border border-separator-strong bg-muted py-1 pr-3 pl-2.5 text-[12.5px] text-muted-foreground transition-colors hover:text-foreground"
+					className="inline-flex animate-rise items-center gap-2 rounded-full whitespace-nowrap border border-white/10 bg-background/50 py-1 pr-3 pl-2.5 text-[12.5px] text-foreground/75 backdrop-blur-md transition-colors hover:text-foreground"
 				>
 					<Nuqta />
 					<span className="font-medium text-foreground">{ENGINE_VERSION}</span>
-					The first public alpha, for Windows
+					First public alpha · Windows
 					<ArrowUpRight className="size-3.5" />
 				</a>
-				<h1 className="mt-7 animate-rise text-[46px] leading-[0.98] font-semibold tracking-[-0.045em] [animation-delay:80ms] sm:text-[64px] lg:text-[80px]">
+				<h1 className="mt-7 animate-rise text-[48px] leading-[0.96] font-semibold tracking-[-0.045em] text-balance [animation-delay:80ms] [text-shadow:0_2px_40px_rgb(0_0_0/0.6)] sm:text-[68px] lg:text-[88px]">
 					An AI-native
 					<br />
 					game engine.
 				</h1>
-				<p className="mt-7 max-w-[600px] animate-rise text-[17px] leading-relaxed text-pretty text-muted-foreground [animation-delay:160ms] md:text-[19px]">
+				<p className="mt-7 max-w-[520px] animate-rise text-[17px] leading-relaxed text-pretty text-foreground/70 [animation-delay:160ms] md:text-[19px]">
 					Unreal-level fidelity with Unity-level ease. Every edit, from you, a C# script or an AI agent, is a typed
 					command you can undo, so agents work in your project like a teammate.
 				</p>
@@ -36,19 +47,21 @@ export function Hero() {
 							Download Ara Hub
 						</a>
 					</Button>
-					<Button asChild size="lg" variant="outline" className="h-11 px-5 text-[14px]">
+					<Button
+						asChild
+						size="lg"
+						variant="outline"
+						className="h-11 border-white/12 bg-white/5 px-5 text-[14px] backdrop-blur-md hover:bg-white/10"
+					>
 						<a href={links.repo} target="_blank" rel="noreferrer">
 							<Github />
 							View on GitHub
 						</a>
 					</Button>
-					<span className="w-full text-[12.5px] text-muted-foreground sm:ml-2 sm:w-auto">
+					<span className="w-full text-[12.5px] text-foreground/55 sm:ml-2 sm:w-auto">
 						Windows 10/11 x64 · Vulkan 1.3 GPU
 					</span>
 				</div>
-			</div>
-			<div className="relative mx-auto mt-16 max-w-[1240px] animate-rise px-3 [animation-delay:360ms] md:mt-20 md:px-8">
-				<EditorDemo />
 			</div>
 		</section>
 	);

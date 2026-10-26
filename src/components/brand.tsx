@@ -1,42 +1,58 @@
-import type { ComponentProps } from "react";
+import { type ComponentProps, useId } from "react";
 import { cn } from "#/lib/utils";
 
-/**
- * The Ara mark: a reed-pen "A" with a rhombic nuqta for a crossbar
- * (engine docs/design/brand.md). Geometry is the 64-unit master grid.
+/*
+ * The Ara mark: the nuqta (the calligrapher's unit of measure) as a crystal in 3/4
+ * view, with a nuqta-shaped window where the facets meet. Facets are separated by
+ * cuts on internal edges only. Geometry: 64-unit grid, from design/logo-nuqta.html.
  */
-const MARK_PATHS = (
-	<>
-		<path d="M32 4 L60 60 H44 L28 28 L12 60 H4 Z" />
-		<path d="M28 44 L34 50 L28 56 L22 50 Z" />
-	</>
-);
+const FACETS = [
+	"30.58 3.37 5.01 28.02 26.01 33.5", // top left, lit
+	"33.06 3.02 28.44 33.52 58.94 27.97", // top right
+	"5.35 30.59 30.44 60.16 25.96 35.97", // bottom left
+	"28.4 35.97 33 60.82 58.78 30.44", // bottom right, shaded
+] as const;
 
-/** The mark alone, in the accent colour. */
-export function AraMark(props: ComponentProps<"svg">) {
-	return (
-		<svg viewBox="0 0 64 64" className="fill-primary" aria-hidden="true" {...props}>
-			{MARK_PATHS}
-		</svg>
-	);
-}
+const WINDOW = "27 26 34 35 27 44 20 35";
 
-/** Mark plus "ra" letterforms, as in the engine's ara-wordmark.svg. */
-export function AraWordmark(props: ComponentProps<"svg">) {
+/** Facet fills, lit to shaded: brand blue on dark, white tints on the blue app tile. */
+const TONES = {
+	color: ["fill-nuqta-lit", "fill-nuqta-light", "fill-nuqta-mid", "fill-nuqta-deep"],
+	white: ["fill-white", "fill-white/90", "fill-white/75", "fill-white/60"],
+} as const;
+
+type CrystalProps = ComponentProps<"svg"> & { tone?: keyof typeof TONES };
+
+/** The crystal mark on its own. */
+export function AraCrystal({ tone = "color", ...props }: CrystalProps) {
+	const mask = useId();
 	return (
-		<svg viewBox="0 0 136 64" role="img" aria-label="Ara" {...props}>
-			<g className="fill-primary">{MARK_PATHS}</g>
-			<g className="fill-foreground">
-				<path d="M66 60 V42 A18 18 0 0 1 90.74 25.31 L87.37 33.66 A9 9 0 0 0 75 42 V60 Z" />
-				<path d="M96 42 A18 18 0 0 1 132 42 A18 18 0 0 1 96 42 Z M105 42 A9 9 0 0 0 123 42 A9 9 0 0 0 105 42 Z M123 24 H132 V60 H123 Z" />
+		<svg viewBox="0 0 64 64" aria-hidden="true" {...props}>
+			<mask id={mask}>
+				<rect width="64" height="64" fill="white" />
+				<polygon points={WINDOW} fill="black" />
+			</mask>
+			<g mask={`url(#${mask})`}>
+				{FACETS.map((points, i) => (
+					<polygon key={points} points={points} className={TONES[tone][i]} />
+				))}
 			</g>
 		</svg>
 	);
 }
 
+/** Crystal plus the "Ara" name, for the header and footer. */
+export function AraLogo({ className }: { className?: string }) {
+	return (
+		<span className={cn("flex items-center gap-2 text-[19px] font-semibold tracking-[-0.04em]", className)}>
+			<AraCrystal className="size-[1.3em]" />
+			Ara
+		</span>
+	);
+}
+
 /**
- * The nuqta on its own: the calligrapher's unit of measure, used as the
- * site's bullet and section marker.
+ * The nuqta on its own, flat: the site's bullet and section marker.
  */
 export function Nuqta({ className }: { className?: string }) {
 	return (

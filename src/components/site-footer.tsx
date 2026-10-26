@@ -1,4 +1,4 @@
-import { AraWordmark } from "#/components/brand";
+import { AraLogo } from "#/components/brand";
 import { ENGINE_VERSION, links } from "#/lib/site";
 
 const COLUMNS = [
@@ -27,7 +27,7 @@ export function SiteFooter() {
 		<footer className="mt-10 border-t">
 			<div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-5 py-12 md:flex-row md:px-8">
 				<div className="max-w-[300px]">
-					<AraWordmark className="h-6 w-auto" />
+					<AraLogo className="text-[22px]" />
 					<p className="mt-4 text-[13.5px] leading-relaxed text-muted-foreground">
 						An AI-native game engine in Rust. AI agents build it; agents and humans make games with it.
 					</p>

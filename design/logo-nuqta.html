@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ara logo, round 4: the nuqta crystal</title>
+<style>
+  body { margin: 0; font: 13px/1.5 var(--font-sans, system-ui, sans-serif); }
+  .sheet { display: grid; gap: 14px; }
+  .card { padding: 16px; border: 1px solid var(--border, #222); border-radius: var(--radius, 10px); background: var(--card, #111); }
+  h3 { margin: 0; font-size: 15px; font-weight: 600; color: var(--foreground, #f5f5f5); }
+  h3 small { margin-left: 8px; font-weight: 400; color: var(--muted-foreground, #888); font-size: 12px; }
+  p { margin: 4px 0 12px; color: var(--muted-foreground, #888); max-width: 620px; }
+  .row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.3fr); gap: 10px; align-items: stretch; }
+  .sw { display: grid; place-items: center; aspect-ratio: 1; border-radius: 10px; }
+  .sw svg { width: 74%; height: 74%; }
+  .ink { background: #0a0a0a; border: 1px solid #1e1e1e; }
+  .paper { background: #f5f5f5; }
+  .tile { background: linear-gradient(135deg, #4a7cf5, #1b4ed8); border-radius: 22%; }
+  .small { display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 10px; border-radius: 10px; background: #0a0a0a; border: 1px solid #1e1e1e; overflow: hidden; }
+  .small .sizes { display: flex; align-items: end; gap: 10px; }
+  .lock { display: flex; align-items: center; gap: 7px; font: 600 19px/1 var(--font-sans, system-ui); letter-spacing: -0.04em; color: #f5f5f5; }
+</style>
+</head>
+<body>
+<div class="sheet" id="sheet"></div>
+<script>
+// The nuqta (the calligrapher's unit of measure) as a crystal in 3/4 view.
+// Facets are separated by Unity-style cuts on internal edges only; the silhouette stays whole.
+
+const T = [32, 2], R = [60, 29], B = [32, 62], L = [4, 29];
+
+/** Offsets each edge of a convex polygon inward by `d[i]` (0 keeps an outer edge in place). */
+function inset(p, d) {
+  const c = p.reduce(([x, y], [a, b]) => [x + a / p.length, y + b / p.length], [0, 0]);
+  const lines = p.map(([x1, y1], i) => {
+    const [x2, y2] = p[(i + 1) % p.length];
+    let nx = y1 - y2, ny = x2 - x1;
+    const len = Math.hypot(nx, ny);
+    nx /= len; ny /= len;
+    if (nx * (c[0] - x1) + ny * (c[1] - y1) < 0) { nx = -nx; ny = -ny; }
+    return { x: x1 + nx * d[i], y: y1 + ny * d[i], dx: x2 - x1, dy: y2 - y1 };
+  });
+  return lines.map((b, i) => {
+    const a = lines[(i - 1 + lines.length) % lines.length];
+    const den = a.dx * b.dy - a.dy * b.dx;
+    const t = ((b.x - a.x) * b.dy - (b.y - a.y) * b.dx) / den;
+    return [a.x + a.dx * t, a.y + a.dy * t];
+  });
+}
+
+const pts = (p) => p.map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join(" ");
+const poly = (p, fill) => `<polygon points="${pts(p)}" fill="${fill}"/>`;
+const lerp = ([ax, ay], [bx, by], t) => [ax + (bx - ax) * t, ay + (by - ay) * t];
+
+/**
+ * A facet: polygon plus which of its edges are internal (cut) edges.
+ * `cuts[i]` is true when edge i (p[i] → p[i+1]) borders another facet.
+ */
+const facet = (p, cuts, tone) => ({ p, cuts, tone });
+const drawFacets = (facets, tones, g) =>
+  facets.map((f) => poly(inset(f.p, f.cuts.map((c) => (c ? g / 2 : 0))), tones[f.tone])).join("");
+
+/** The plain crystal: four facets around a front vertex set left of centre, girdle bent into a V. */
+function crystalFacets(F) {
+  return [
+    facet([T, L, F], [false, true, true], 0),
+    facet([T, F, R], [true, true, false], 1),
+    facet([L, B, F], [false, true, true], 2),
+    facet([F, B, R], [true, false, true], 3),
+  ];
+}
+
+/** The crystal whose lower half splits into the legs of an A (a notch where the bottom point was). */
+function crystalAFacets(F) {
+  const N = [30.5, 44];
+  const Pl = lerp(L, B, 0.79), Pr = lerp(R, B, 0.79);
+  return [
+    facet([T, L, F], [false, true, true], 0),
+    facet([T, F, R], [true, true, false], 1),
+    facet([L, Pl, N, F], [false, false, true, true], 2),
+    facet([F, N, Pr, R], [true, false, false, true], 3),
+  ];
+}
+
+const variants = [
+  {
+    id: "crystal", name: "Crystal", sub: "the nuqta, in 3/4 view",
+    text: "The primitive done properly: a real crystal with a bent girdle and an off-centre front vertex, lit from the top left. Cuts open only the internal edges, so the silhouette reads at 16 px.",
+    draw: (tones, g = 2.4) => drawFacets(crystalFacets([27, 35]), tones, g),
+  },
+  {
+    id: "window", name: "Crystal + window", sub: "a nuqta inside the nuqta",
+    text: "Detail with meaning: a small nuqta-shaped window cut through the front vertex, where every facet meets. Light passes through it, the same way the hero's lattice works.",
+    draw: (tones, g = 2.4) => `<mask id="m-${tones[0].slice(1)}"><rect width="64" height="64" fill="white"/><polygon points="${pts([[27, 26], [34, 35], [27, 44], [20, 35]])}" fill="black"/></mask><g mask="url(#m-${tones[0].slice(1)})">${drawFacets(crystalFacets([27, 35]), tones, g)}</g>`,
+  },
+  {
+    id: "crystal-a", name: "Crystal A", sub: "nuqta above, Alif below",
+    text: "The top pyramid is the nuqta; the lower facets become the legs of the A, with the counter cut where the bottom point was. One crystal that is also the letter.",
+    draw: (tones, g = 2.4) => drawFacets(crystalAFacets([28, 34]), tones, g),
+  },
+  {
+    id: "emblem", name: "Emblem", sub: "the crystal in a seal",
+    text: "Unreal-style: the crystal set in a ring for the app icon, splash and stamps. The bare crystal stays the everyday mark.",
+    draw: (tones, g = 2.4) => {
+      const s = 0.6, o = 32 * (1 - s);
+      const inner = drawFacets(crystalFacets([27, 35]), tones, g / s);
+      return `<circle cx="32" cy="32" r="29.5" fill="none" stroke="${tones[0]}" stroke-width="3"/><g transform="translate(${o} ${o + 0.6}) scale(${s})">${inner}</g>`;
+    },
+  },
+];
+
+// Tones run lit → shaded: top-left, top-right, lower-left, lower-right.
+const BLUE = ["#b4caff", "#6f99ff", "#346bf1", "#1a43b8"];
+const STUDIO = ["#ffffff", "#e3e5ea", "#a3a8b4", "#7d8391"];
+const INK = ["#4a4f5c", "#2c3039", "#1a1d24", "#0a0a0a"];
+const WHITE = ["#ffffff", "#e9eefc", "#c9d6fb", "#a9bff7"];
+
+const svg = (inner, size) => `<svg viewBox="0 0 64 64"${size ? ` width="${size}" height="${size}"` : ""}>${inner}</svg>`;
+
+document.getElementById("sheet").innerHTML = variants.map((v) => `
+  <div class="card">
+    <h3>${v.name}<small>${v.sub}</small></h3>
+    <p>${v.text}</p>
+    <div class="row">
+      <div class="sw ink">${svg(v.draw(BLUE))}</div>
+      <div class="sw ink">${svg(v.draw(STUDIO))}</div>
+      <div class="sw paper">${svg(v.draw(INK))}</div>
+      <div class="sw tile">${svg(v.draw(WHITE))}</div>
+      <div class="small">
+        <div class="sizes">${[16, 20, 24, 32].map((s) => svg(v.draw(BLUE), s)).join("")}</div>
+        <div class="lock">${svg(v.draw(BLUE), 26)}Ara</div>
+        <div class="lock">${svg(v.draw(STUDIO), 26)}Ara</div>
+      </div>
+    </div>
+  </div>`).join("");
+</script>
+</body>
+</html>

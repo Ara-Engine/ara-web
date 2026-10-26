@@ -1,6 +1,6 @@
 import { Download, Github } from "lucide-react";
 import type { ReactNode } from "react";
-import { AraMark } from "#/components/brand";
+import { AraCrystal } from "#/components/brand";
 import { CopyButton } from "#/components/copy-button";
 import { Section } from "#/components/section";
 import { Button } from "#/components/ui/button";
@@ -123,7 +123,7 @@ export function GetStarted() {
 					aria-hidden
 					className="bg-viewport-grid absolute inset-0 [mask-image:radial-gradient(ellipse_60%_80%_at_50%_100%,black,transparent)]"
 				/>
-				<AraMark className="relative mx-auto size-12" />
+				<AraCrystal className="relative mx-auto size-14" />
 				<h2 className="relative mt-6 text-[30px] font-semibold tracking-[-0.03em] md:text-[40px]">
 					Make something with Ara.
 				</h2>

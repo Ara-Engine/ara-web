@@ -18,7 +18,8 @@ pnpm build        # static output, every page prerendered
 
 ```
 src/routes/            pages (file-based routing)
-src/components/home/   home page sections; editor-demo.tsx is the hero's live editor
+src/components/home/   home page sections; mashrabiya.tsx/.frag is the hero's live WebGL light,
+                       editor-demo.tsx the agent-turn demo in the editor
 src/components/ui/     shadcn components, restyled to the editor's tokens
 src/lib/site.ts        release links and the source file behind every published number
 design/                logo and hero explorations (not shipped)

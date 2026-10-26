@@ -27,7 +27,7 @@ import {
 	Undo2,
 } from "lucide-react";
 import { type ReactNode, useEffect, useRef, useState } from "react";
-import { AraMark } from "#/components/brand";
+import { AraCrystal } from "#/components/brand";
 import { useInView, useReducedMotion } from "#/lib/hooks";
 import { cn } from "#/lib/utils";
 
@@ -166,7 +166,7 @@ function TitleBar() {
 	return (
 		<div className="flex h-9 items-center gap-1 border-b border-separator-strong px-2 text-[12.5px]">
 			<span className="grid size-5 place-items-center rounded-[5px] bg-primary">
-				<AraMark className="size-3 fill-primary-foreground" />
+				<AraCrystal tone="white" className="size-3.5" />
 			</span>
 			<nav className="ml-1 hidden items-center md:flex">
 				{["File", "Edit", "View", "Create", "Assets", "Play", "Tools", "Window", "Help"].map((m) => (
@@ -603,7 +603,7 @@ function StatusBar({ done }: { done: boolean }) {
 				<span className="size-1.5 rounded-full bg-success" /> Connected
 			</span>
 			<span className="hidden sm:inline">9 entities · 1 selected</span>
-			<span className={cn("transition-opacity duration-300", done ? "opacity-100" : "opacity-0")}>
+			<span className={cn("hidden transition-opacity duration-300 sm:inline", done ? "opacity-100" : "opacity-0")}>
 				agent:claude · 4 ops · undo per turn
 			</span>
 			<span className="ml-auto hidden xl:inline">W E R tools · F Frame · Ctrl+K Commands</span>
