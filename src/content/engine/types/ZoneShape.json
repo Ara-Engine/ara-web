@@ -1,0 +1,1 @@
+{"name":"ZoneShape","kind":"enum","module":"audio","doc":"Reverb zone volume shape.","fields":[],"variants":[{"name":"box","doc":"Oriented box with <code>halfExtents</code>."},{"name":"sphere","doc":"Sphere with <code>radius</code>."}],"usedBy":{"types":["ReverbZone"],"commands":[]}}

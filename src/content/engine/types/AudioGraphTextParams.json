@@ -1,0 +1,1 @@
+{"name":"AudioGraphTextParams","kind":"params","module":"audio","doc":"Replaces the graph with edited <code>.audiograph</code> text; surviving names keep their IDs.","fields":[{"name":"text","typeHtml":"string","doc":"Complete <code>.audiograph</code> source.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["audiograph.text.apply"]}}

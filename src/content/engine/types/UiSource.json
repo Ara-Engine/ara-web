@@ -1,0 +1,1 @@
+{"name":"UiSource","kind":"record","module":"ui","doc":"Lossless UI source; persistence writes native XML through <code>SourceDocument</code>.","fields":[{"name":"source","typeHtml":"string","doc":"Complete XML, including comments and stable asset identity metadata.","default":"\"\""}],"variants":[],"prefix":"us","usedBy":{"types":[],"commands":[]}}

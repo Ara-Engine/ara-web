@@ -1,0 +1,1 @@
+{"name":"L10nFindMissingParams","kind":"params","module":"l10n","doc":"Source locale for parity checks against the current batch document.","fields":[{"name":"sourceLocale","typeHtml":"string","doc":"Source locale loaded in the document workspace, normally <code>en</code>.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["l10n.find_missing"]}}

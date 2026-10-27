@@ -1,0 +1,1 @@
+{"name":"BehaviorVarParams","kind":"params","module":"ai","doc":"Sets (or clears) a variable&#39;s default.","fields":[{"name":"name","typeHtml":"string","doc":"Variable name.","required":true},{"name":"default","typeHtml":"option&lt;string&gt;","doc":"Default expression; absent clears it.","default":"null"}],"variants":[],"usedBy":{"types":[],"commands":["behavior.var.set"]}}

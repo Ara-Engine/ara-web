@@ -1,0 +1,1 @@
+{"name":"FlipbookFrame","kind":"struct","doc":"One deterministic flipbook frame.","fields":[{"name":"region","typeHtml":"string","doc":"Atlas region name.","default":"\"\""},{"name":"ticks","typeHtml":"u32","doc":"Frame duration in fixed simulation ticks; must be positive.","default":"0"}],"variants":[],"usedBy":{"types":["Flipbook"],"commands":[]}}

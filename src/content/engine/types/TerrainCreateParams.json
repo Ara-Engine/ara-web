@@ -1,0 +1,1 @@
+{"name":"TerrainCreateParams","kind":"params","module":"terrain","doc":"Grid creation parameters for an empty terrain document.","fields":[{"name":"grid","typeHtml":"<a href=\"/docs/reference/types/TerrainHeader\">TerrainHeader</a>","doc":"Terrain grid dimensions and material channels.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["terrain.create"]}}

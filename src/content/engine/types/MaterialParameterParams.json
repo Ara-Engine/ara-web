@@ -1,0 +1,1 @@
+{"name":"MaterialParameterParams","kind":"params","module":"material","doc":"Identifies a material parameter.","fields":[{"name":"node","typeHtml":"string","doc":"Stable parameter ID.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["material.parameter.reset"]}}

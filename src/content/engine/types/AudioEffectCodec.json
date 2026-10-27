@@ -1,0 +1,1 @@
+{"name":"AudioEffectCodec","kind":"enum","module":"asset","doc":"Codec for resident sound effects; streamed audio always uses Opus.","fields":[],"variants":[{"name":"pcm","doc":"Signed 16-bit PCM."},{"name":"adpcm","doc":"IMA ADPCM."}],"usedBy":{"types":["AudioImportSettings"],"commands":[]}}

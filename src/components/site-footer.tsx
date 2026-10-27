@@ -3,6 +3,14 @@ import { ENGINE_VERSION, links } from "#/lib/site";
 
 const COLUMNS = [
 	{
+		title: "Docs",
+		links: [
+			{ label: "Manual", href: "/docs" },
+			{ label: "Scripting API", href: "/docs/scripting" },
+			{ label: "Engine reference", href: "/docs/reference" },
+		],
+	},
+	{
 		title: "Get Ara",
 		links: [
 			{ label: "Download Ara Hub", href: links.hubInstaller },
@@ -35,7 +43,7 @@ export function SiteFooter() {
 						An AI-native game engine in Rust. AI agents build it; agents and humans make games with it.
 					</p>
 				</div>
-				<div className="flex gap-16 md:ml-auto">
+				<div className="flex flex-wrap gap-x-16 gap-y-10 md:ml-auto">
 					{COLUMNS.map((col) => (
 						<div key={col.title}>
 							<h3 className="text-[0.8125rem] font-medium">{col.title}</h3>

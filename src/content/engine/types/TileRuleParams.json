@@ -1,0 +1,1 @@
+{"name":"TileRuleParams","kind":"params","doc":"Applies all terrain rules to a layer in one transaction.","fields":[{"name":"entity","typeHtml":"entity","doc":"Tilemap entity.","required":true},{"name":"layer","typeHtml":"string","doc":"Stable layer ID.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["tilemap.rule.apply"]}}

@@ -1,0 +1,1 @@
+{"name":"MaterialBudgetParams","kind":"params","module":"material","doc":"Sets an explicit material specialization budget.","fields":[{"name":"budget","typeHtml":"u32","doc":"Maximum static combinations.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["material.budget.set"]}}

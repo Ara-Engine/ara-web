@@ -1,0 +1,1 @@
+{"name":"FoliageCreateParams","kind":"params","module":"foliage","doc":"Foliage source terrain.","fields":[{"name":"header","typeHtml":"<a href=\"/docs/reference/types/FoliageHeader\">FoliageHeader</a>","doc":"Source terrain dependency.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["foliage.create"]}}

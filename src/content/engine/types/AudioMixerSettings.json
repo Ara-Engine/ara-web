@@ -1,0 +1,1 @@
+{"name":"AudioMixerSettings","kind":"record","module":"audio","doc":"Mixer-wide settings (one record per mixer document).","fields":[{"name":"initialState","typeHtml":"string","doc":"State applied at startup; empty is the base mix.","default":"\"\""}],"variants":[],"prefix":"m","usedBy":{"types":[],"commands":[]}}

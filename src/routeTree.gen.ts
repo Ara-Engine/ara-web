@@ -10,33 +10,270 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DocsRouteRouteImport } from './routes/docs/route'
+import { Route as DocsIndexRouteImport } from './routes/docs/index'
+import { Route as DocsManualSlugRouteImport } from './routes/docs/manual/$slug'
+import { Route as DocsReferenceIndexRouteImport } from './routes/docs/reference/index'
+import { Route as DocsReferenceComponentsRouteImport } from './routes/docs/reference/components'
+import { Route as DocsReferenceConventionsRouteImport } from './routes/docs/reference/conventions'
+import { Route as DocsReferenceScopesRouteImport } from './routes/docs/reference/scopes'
+import { Route as DocsScriptingIndexRouteImport } from './routes/docs/scripting/index'
+import { Route as DocsScriptingSlugRouteImport } from './routes/docs/scripting/$slug'
+import { Route as DocsReferenceCliIndexRouteImport } from './routes/docs/reference/cli/index'
+import { Route as DocsReferenceCliNameRouteImport } from './routes/docs/reference/cli/$name'
+import { Route as DocsReferenceCommandsIndexRouteImport } from './routes/docs/reference/commands/index'
+import { Route as DocsReferenceCommandsNameRouteImport } from './routes/docs/reference/commands/$name'
+import { Route as DocsReferenceErrorsIndexRouteImport } from './routes/docs/reference/errors/index'
+import { Route as DocsReferenceErrorsCodeRouteImport } from './routes/docs/reference/errors/$code'
+import { Route as DocsReferenceMethodsIndexRouteImport } from './routes/docs/reference/methods/index'
+import { Route as DocsReferenceMethodsNameRouteImport } from './routes/docs/reference/methods/$name'
+import { Route as DocsReferenceTypesIndexRouteImport } from './routes/docs/reference/types/index'
+import { Route as DocsReferenceTypesNameRouteImport } from './routes/docs/reference/types/$name'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocsRouteRoute = DocsRouteRouteImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsIndexRoute = DocsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DocsRouteRoute,
+} as any)
+const DocsManualSlugRoute = DocsManualSlugRouteImport.update({
+  id: '/manual/$slug',
+  path: '/manual/$slug',
+  getParentRoute: () => DocsRouteRoute,
+} as any)
+const DocsReferenceIndexRoute = DocsReferenceIndexRouteImport.update({
+  id: '/reference/',
+  path: '/reference/',
+  getParentRoute: () => DocsRouteRoute,
+} as any)
+const DocsReferenceComponentsRoute = DocsReferenceComponentsRouteImport.update({
+  id: '/reference/components',
+  path: '/reference/components',
+  getParentRoute: () => DocsRouteRoute,
+} as any)
+const DocsReferenceConventionsRoute =
+  DocsReferenceConventionsRouteImport.update({
+    id: '/reference/conventions',
+    path: '/reference/conventions',
+    getParentRoute: () => DocsRouteRoute,
+  } as any)
+const DocsReferenceScopesRoute = DocsReferenceScopesRouteImport.update({
+  id: '/reference/scopes',
+  path: '/reference/scopes',
+  getParentRoute: () => DocsRouteRoute,
+} as any)
+const DocsScriptingIndexRoute = DocsScriptingIndexRouteImport.update({
+  id: '/scripting/',
+  path: '/scripting/',
+  getParentRoute: () => DocsRouteRoute,
+} as any)
+const DocsScriptingSlugRoute = DocsScriptingSlugRouteImport.update({
+  id: '/scripting/$slug',
+  path: '/scripting/$slug',
+  getParentRoute: () => DocsRouteRoute,
+} as any)
+const DocsReferenceCliIndexRoute = DocsReferenceCliIndexRouteImport.update({
+  id: '/reference/cli/',
+  path: '/reference/cli/',
+  getParentRoute: () => DocsRouteRoute,
+} as any)
+const DocsReferenceCliNameRoute = DocsReferenceCliNameRouteImport.update({
+  id: '/reference/cli/$name',
+  path: '/reference/cli/$name',
+  getParentRoute: () => DocsRouteRoute,
+} as any)
+const DocsReferenceCommandsIndexRoute =
+  DocsReferenceCommandsIndexRouteImport.update({
+    id: '/reference/commands/',
+    path: '/reference/commands/',
+    getParentRoute: () => DocsRouteRoute,
+  } as any)
+const DocsReferenceCommandsNameRoute =
+  DocsReferenceCommandsNameRouteImport.update({
+    id: '/reference/commands/$name',
+    path: '/reference/commands/$name',
+    getParentRoute: () => DocsRouteRoute,
+  } as any)
+const DocsReferenceErrorsIndexRoute =
+  DocsReferenceErrorsIndexRouteImport.update({
+    id: '/reference/errors/',
+    path: '/reference/errors/',
+    getParentRoute: () => DocsRouteRoute,
+  } as any)
+const DocsReferenceErrorsCodeRoute = DocsReferenceErrorsCodeRouteImport.update({
+  id: '/reference/errors/$code',
+  path: '/reference/errors/$code',
+  getParentRoute: () => DocsRouteRoute,
+} as any)
+const DocsReferenceMethodsIndexRoute =
+  DocsReferenceMethodsIndexRouteImport.update({
+    id: '/reference/methods/',
+    path: '/reference/methods/',
+    getParentRoute: () => DocsRouteRoute,
+  } as any)
+const DocsReferenceMethodsNameRoute =
+  DocsReferenceMethodsNameRouteImport.update({
+    id: '/reference/methods/$name',
+    path: '/reference/methods/$name',
+    getParentRoute: () => DocsRouteRoute,
+  } as any)
+const DocsReferenceTypesIndexRoute = DocsReferenceTypesIndexRouteImport.update({
+  id: '/reference/types/',
+  path: '/reference/types/',
+  getParentRoute: () => DocsRouteRoute,
+} as any)
+const DocsReferenceTypesNameRoute = DocsReferenceTypesNameRouteImport.update({
+  id: '/reference/types/$name',
+  path: '/reference/types/$name',
+  getParentRoute: () => DocsRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/docs': typeof DocsRouteRouteWithChildren
+  '/docs/': typeof DocsIndexRoute
+  '/docs/manual/$slug': typeof DocsManualSlugRoute
+  '/docs/reference/components': typeof DocsReferenceComponentsRoute
+  '/docs/reference/conventions': typeof DocsReferenceConventionsRoute
+  '/docs/reference/scopes': typeof DocsReferenceScopesRoute
+  '/docs/scripting/$slug': typeof DocsScriptingSlugRoute
+  '/docs/reference/': typeof DocsReferenceIndexRoute
+  '/docs/scripting/': typeof DocsScriptingIndexRoute
+  '/docs/reference/cli/$name': typeof DocsReferenceCliNameRoute
+  '/docs/reference/commands/$name': typeof DocsReferenceCommandsNameRoute
+  '/docs/reference/errors/$code': typeof DocsReferenceErrorsCodeRoute
+  '/docs/reference/methods/$name': typeof DocsReferenceMethodsNameRoute
+  '/docs/reference/types/$name': typeof DocsReferenceTypesNameRoute
+  '/docs/reference/cli/': typeof DocsReferenceCliIndexRoute
+  '/docs/reference/commands/': typeof DocsReferenceCommandsIndexRoute
+  '/docs/reference/errors/': typeof DocsReferenceErrorsIndexRoute
+  '/docs/reference/methods/': typeof DocsReferenceMethodsIndexRoute
+  '/docs/reference/types/': typeof DocsReferenceTypesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/docs': typeof DocsIndexRoute
+  '/docs/manual/$slug': typeof DocsManualSlugRoute
+  '/docs/reference/components': typeof DocsReferenceComponentsRoute
+  '/docs/reference/conventions': typeof DocsReferenceConventionsRoute
+  '/docs/reference/scopes': typeof DocsReferenceScopesRoute
+  '/docs/scripting/$slug': typeof DocsScriptingSlugRoute
+  '/docs/reference': typeof DocsReferenceIndexRoute
+  '/docs/scripting': typeof DocsScriptingIndexRoute
+  '/docs/reference/cli/$name': typeof DocsReferenceCliNameRoute
+  '/docs/reference/commands/$name': typeof DocsReferenceCommandsNameRoute
+  '/docs/reference/errors/$code': typeof DocsReferenceErrorsCodeRoute
+  '/docs/reference/methods/$name': typeof DocsReferenceMethodsNameRoute
+  '/docs/reference/types/$name': typeof DocsReferenceTypesNameRoute
+  '/docs/reference/cli': typeof DocsReferenceCliIndexRoute
+  '/docs/reference/commands': typeof DocsReferenceCommandsIndexRoute
+  '/docs/reference/errors': typeof DocsReferenceErrorsIndexRoute
+  '/docs/reference/methods': typeof DocsReferenceMethodsIndexRoute
+  '/docs/reference/types': typeof DocsReferenceTypesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/docs': typeof DocsRouteRouteWithChildren
+  '/docs/': typeof DocsIndexRoute
+  '/docs/manual/$slug': typeof DocsManualSlugRoute
+  '/docs/reference/components': typeof DocsReferenceComponentsRoute
+  '/docs/reference/conventions': typeof DocsReferenceConventionsRoute
+  '/docs/reference/scopes': typeof DocsReferenceScopesRoute
+  '/docs/scripting/$slug': typeof DocsScriptingSlugRoute
+  '/docs/reference/': typeof DocsReferenceIndexRoute
+  '/docs/scripting/': typeof DocsScriptingIndexRoute
+  '/docs/reference/cli/$name': typeof DocsReferenceCliNameRoute
+  '/docs/reference/commands/$name': typeof DocsReferenceCommandsNameRoute
+  '/docs/reference/errors/$code': typeof DocsReferenceErrorsCodeRoute
+  '/docs/reference/methods/$name': typeof DocsReferenceMethodsNameRoute
+  '/docs/reference/types/$name': typeof DocsReferenceTypesNameRoute
+  '/docs/reference/cli/': typeof DocsReferenceCliIndexRoute
+  '/docs/reference/commands/': typeof DocsReferenceCommandsIndexRoute
+  '/docs/reference/errors/': typeof DocsReferenceErrorsIndexRoute
+  '/docs/reference/methods/': typeof DocsReferenceMethodsIndexRoute
+  '/docs/reference/types/': typeof DocsReferenceTypesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/docs'
+    | '/docs/'
+    | '/docs/manual/$slug'
+    | '/docs/reference/components'
+    | '/docs/reference/conventions'
+    | '/docs/reference/scopes'
+    | '/docs/scripting/$slug'
+    | '/docs/reference/'
+    | '/docs/scripting/'
+    | '/docs/reference/cli/$name'
+    | '/docs/reference/commands/$name'
+    | '/docs/reference/errors/$code'
+    | '/docs/reference/methods/$name'
+    | '/docs/reference/types/$name'
+    | '/docs/reference/cli/'
+    | '/docs/reference/commands/'
+    | '/docs/reference/errors/'
+    | '/docs/reference/methods/'
+    | '/docs/reference/types/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/docs'
+    | '/docs/manual/$slug'
+    | '/docs/reference/components'
+    | '/docs/reference/conventions'
+    | '/docs/reference/scopes'
+    | '/docs/scripting/$slug'
+    | '/docs/reference'
+    | '/docs/scripting'
+    | '/docs/reference/cli/$name'
+    | '/docs/reference/commands/$name'
+    | '/docs/reference/errors/$code'
+    | '/docs/reference/methods/$name'
+    | '/docs/reference/types/$name'
+    | '/docs/reference/cli'
+    | '/docs/reference/commands'
+    | '/docs/reference/errors'
+    | '/docs/reference/methods'
+    | '/docs/reference/types'
+  id:
+    | '__root__'
+    | '/'
+    | '/docs'
+    | '/docs/'
+    | '/docs/manual/$slug'
+    | '/docs/reference/components'
+    | '/docs/reference/conventions'
+    | '/docs/reference/scopes'
+    | '/docs/scripting/$slug'
+    | '/docs/reference/'
+    | '/docs/scripting/'
+    | '/docs/reference/cli/$name'
+    | '/docs/reference/commands/$name'
+    | '/docs/reference/errors/$code'
+    | '/docs/reference/methods/$name'
+    | '/docs/reference/types/$name'
+    | '/docs/reference/cli/'
+    | '/docs/reference/commands/'
+    | '/docs/reference/errors/'
+    | '/docs/reference/methods/'
+    | '/docs/reference/types/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DocsRouteRoute: typeof DocsRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +285,191 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs': {
+      id: '/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof DocsRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/': {
+      id: '/docs/'
+      path: '/'
+      fullPath: '/docs/'
+      preLoaderRoute: typeof DocsIndexRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/manual/$slug': {
+      id: '/docs/manual/$slug'
+      path: '/manual/$slug'
+      fullPath: '/docs/manual/$slug'
+      preLoaderRoute: typeof DocsManualSlugRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/': {
+      id: '/docs/reference/'
+      path: '/reference'
+      fullPath: '/docs/reference/'
+      preLoaderRoute: typeof DocsReferenceIndexRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/components': {
+      id: '/docs/reference/components'
+      path: '/reference/components'
+      fullPath: '/docs/reference/components'
+      preLoaderRoute: typeof DocsReferenceComponentsRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/conventions': {
+      id: '/docs/reference/conventions'
+      path: '/reference/conventions'
+      fullPath: '/docs/reference/conventions'
+      preLoaderRoute: typeof DocsReferenceConventionsRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/scopes': {
+      id: '/docs/reference/scopes'
+      path: '/reference/scopes'
+      fullPath: '/docs/reference/scopes'
+      preLoaderRoute: typeof DocsReferenceScopesRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/scripting/': {
+      id: '/docs/scripting/'
+      path: '/scripting'
+      fullPath: '/docs/scripting/'
+      preLoaderRoute: typeof DocsScriptingIndexRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/scripting/$slug': {
+      id: '/docs/scripting/$slug'
+      path: '/scripting/$slug'
+      fullPath: '/docs/scripting/$slug'
+      preLoaderRoute: typeof DocsScriptingSlugRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/cli/': {
+      id: '/docs/reference/cli/'
+      path: '/reference/cli'
+      fullPath: '/docs/reference/cli/'
+      preLoaderRoute: typeof DocsReferenceCliIndexRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/cli/$name': {
+      id: '/docs/reference/cli/$name'
+      path: '/reference/cli/$name'
+      fullPath: '/docs/reference/cli/$name'
+      preLoaderRoute: typeof DocsReferenceCliNameRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/commands/': {
+      id: '/docs/reference/commands/'
+      path: '/reference/commands'
+      fullPath: '/docs/reference/commands/'
+      preLoaderRoute: typeof DocsReferenceCommandsIndexRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/commands/$name': {
+      id: '/docs/reference/commands/$name'
+      path: '/reference/commands/$name'
+      fullPath: '/docs/reference/commands/$name'
+      preLoaderRoute: typeof DocsReferenceCommandsNameRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/errors/': {
+      id: '/docs/reference/errors/'
+      path: '/reference/errors'
+      fullPath: '/docs/reference/errors/'
+      preLoaderRoute: typeof DocsReferenceErrorsIndexRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/errors/$code': {
+      id: '/docs/reference/errors/$code'
+      path: '/reference/errors/$code'
+      fullPath: '/docs/reference/errors/$code'
+      preLoaderRoute: typeof DocsReferenceErrorsCodeRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/methods/': {
+      id: '/docs/reference/methods/'
+      path: '/reference/methods'
+      fullPath: '/docs/reference/methods/'
+      preLoaderRoute: typeof DocsReferenceMethodsIndexRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/methods/$name': {
+      id: '/docs/reference/methods/$name'
+      path: '/reference/methods/$name'
+      fullPath: '/docs/reference/methods/$name'
+      preLoaderRoute: typeof DocsReferenceMethodsNameRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/types/': {
+      id: '/docs/reference/types/'
+      path: '/reference/types'
+      fullPath: '/docs/reference/types/'
+      preLoaderRoute: typeof DocsReferenceTypesIndexRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
+    '/docs/reference/types/$name': {
+      id: '/docs/reference/types/$name'
+      path: '/reference/types/$name'
+      fullPath: '/docs/reference/types/$name'
+      preLoaderRoute: typeof DocsReferenceTypesNameRouteImport
+      parentRoute: typeof DocsRouteRoute
+    }
   }
 }
 
+interface DocsRouteRouteChildren {
+  DocsIndexRoute: typeof DocsIndexRoute
+  DocsManualSlugRoute: typeof DocsManualSlugRoute
+  DocsReferenceComponentsRoute: typeof DocsReferenceComponentsRoute
+  DocsReferenceConventionsRoute: typeof DocsReferenceConventionsRoute
+  DocsReferenceScopesRoute: typeof DocsReferenceScopesRoute
+  DocsScriptingSlugRoute: typeof DocsScriptingSlugRoute
+  DocsReferenceIndexRoute: typeof DocsReferenceIndexRoute
+  DocsScriptingIndexRoute: typeof DocsScriptingIndexRoute
+  DocsReferenceCliNameRoute: typeof DocsReferenceCliNameRoute
+  DocsReferenceCommandsNameRoute: typeof DocsReferenceCommandsNameRoute
+  DocsReferenceErrorsCodeRoute: typeof DocsReferenceErrorsCodeRoute
+  DocsReferenceMethodsNameRoute: typeof DocsReferenceMethodsNameRoute
+  DocsReferenceTypesNameRoute: typeof DocsReferenceTypesNameRoute
+  DocsReferenceCliIndexRoute: typeof DocsReferenceCliIndexRoute
+  DocsReferenceCommandsIndexRoute: typeof DocsReferenceCommandsIndexRoute
+  DocsReferenceErrorsIndexRoute: typeof DocsReferenceErrorsIndexRoute
+  DocsReferenceMethodsIndexRoute: typeof DocsReferenceMethodsIndexRoute
+  DocsReferenceTypesIndexRoute: typeof DocsReferenceTypesIndexRoute
+}
+
+const DocsRouteRouteChildren: DocsRouteRouteChildren = {
+  DocsIndexRoute: DocsIndexRoute,
+  DocsManualSlugRoute: DocsManualSlugRoute,
+  DocsReferenceComponentsRoute: DocsReferenceComponentsRoute,
+  DocsReferenceConventionsRoute: DocsReferenceConventionsRoute,
+  DocsReferenceScopesRoute: DocsReferenceScopesRoute,
+  DocsScriptingSlugRoute: DocsScriptingSlugRoute,
+  DocsReferenceIndexRoute: DocsReferenceIndexRoute,
+  DocsScriptingIndexRoute: DocsScriptingIndexRoute,
+  DocsReferenceCliNameRoute: DocsReferenceCliNameRoute,
+  DocsReferenceCommandsNameRoute: DocsReferenceCommandsNameRoute,
+  DocsReferenceErrorsCodeRoute: DocsReferenceErrorsCodeRoute,
+  DocsReferenceMethodsNameRoute: DocsReferenceMethodsNameRoute,
+  DocsReferenceTypesNameRoute: DocsReferenceTypesNameRoute,
+  DocsReferenceCliIndexRoute: DocsReferenceCliIndexRoute,
+  DocsReferenceCommandsIndexRoute: DocsReferenceCommandsIndexRoute,
+  DocsReferenceErrorsIndexRoute: DocsReferenceErrorsIndexRoute,
+  DocsReferenceMethodsIndexRoute: DocsReferenceMethodsIndexRoute,
+  DocsReferenceTypesIndexRoute: DocsReferenceTypesIndexRoute,
+}
+
+const DocsRouteRouteWithChildren = DocsRouteRoute._addFileChildren(
+  DocsRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DocsRouteRoute: DocsRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

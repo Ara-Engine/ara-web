@@ -1,0 +1,1 @@
+{"name":"MusicNext","kind":"struct","module":"audio","doc":"A weighted follow-up for horizontal resequencing.","fields":[{"name":"segment","typeHtml":"string","doc":"Segment to continue with.","default":"\"\""},{"name":"weight","typeHtml":"f32","doc":"Relative probability.","default":"1","range":"0 – 1000"}],"variants":[],"usedBy":{"types":["MusicSegment"],"commands":[]}}

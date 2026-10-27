@@ -1,0 +1,1 @@
+{"name":"FoliagePaintParams","kind":"params","module":"foliage","doc":"One manual brush stroke.","fields":[{"name":"stroke","typeHtml":"<a href=\"/docs/reference/types/FoliagePaint\">FoliagePaint</a>","doc":"Whole gesture, with all points in order.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["foliage.paint"]}}

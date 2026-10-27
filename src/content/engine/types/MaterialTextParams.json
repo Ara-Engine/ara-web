@@ -1,0 +1,1 @@
+{"name":"MaterialTextParams","kind":"params","module":"material","doc":"Replaces the text view, retaining layout for surviving semantic IDs.","fields":[{"name":"text","typeHtml":"string","doc":"Complete bounded material DSL.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["material.text.apply"]}}

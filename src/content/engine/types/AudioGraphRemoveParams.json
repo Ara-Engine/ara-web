@@ -1,0 +1,1 @@
+{"name":"AudioGraphRemoveParams","kind":"params","module":"audio","doc":"Removes a node or parameter and every reference to it.","fields":[{"name":"name","typeHtml":"string","doc":"Name to remove.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["audiograph.node.remove"]}}

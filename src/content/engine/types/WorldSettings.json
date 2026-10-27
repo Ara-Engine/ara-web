@@ -1,0 +1,1 @@
+{"name":"WorldSettings","kind":"record","module":"world","doc":"Root world settings, kept in the manifest&#39;s single <code>w_</code> record.","fields":[{"name":"cellSize","typeHtml":"f32","doc":"Grid cell width and depth.","default":"0","unit":"m"}],"variants":[],"prefix":"w","usedBy":{"types":[],"commands":[]}}

@@ -404,3 +404,249 @@ body::after {
 		0 var(--inner)
 	);
 }
+
+/* ---------- Docs ---------- */
+
+/* Code colours (Shiki writes these variables; see scripts/markdown.ts). Same palette as
+   the home page's C# snippet. */
+:root {
+	--code-fg: rgb(245 245 245 / 0.9);
+	--code-comment: var(--muted-foreground);
+	--code-keyword: var(--chart-4);
+	--code-string: var(--chart-3);
+	--code-number: var(--chart-3);
+	--code-type: var(--chart-2);
+	--code-function: var(--foreground);
+	--code-property: rgb(245 245 245 / 0.75);
+}
+
+/* A code block: the highlighted <pre>, framed like a panel; `.code-label` names it. */
+.code-block {
+	position: relative;
+	border: 1px solid rgb(255 255 255 / 0.1);
+	background: var(--code-background);
+	font-size: 0.8125rem;
+}
+.code-block pre {
+	overflow-x: auto;
+	padding: 0.9rem 1.1rem;
+	font-family: var(--font-mono);
+	line-height: 1.7;
+	font-variant-ligatures: none;
+	background: transparent !important;
+}
+.code-block .code-label {
+	border-bottom: 1px solid rgb(255 255 255 / 0.08);
+	padding: 0.45rem 1.1rem;
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--muted-foreground);
+}
+
+/* A note, warning or gap: a lit rule on the left, the kind in mono caps. */
+.callout {
+	border-left: 1px solid rgb(255 255 255 / 0.7);
+	background: rgb(255 255 255 / 0.03);
+	padding: 0.9rem 1.2rem;
+	font-size: 0.9375rem;
+	line-height: 1.7;
+	color: rgb(245 245 245 / 0.8);
+}
+.callout > p:first-child > strong:first-child {
+	margin-right: 0.6rem;
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	font-weight: 500;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--foreground);
+}
+.callout[data-kind="warning"] {
+	border-left-color: var(--warning-foreground);
+}
+.callout[data-kind="warning"] > p:first-child > strong:first-child {
+	color: var(--warning-foreground);
+}
+.callout[data-kind="gap"] {
+	border-left-style: dashed;
+}
+.callout a {
+	color: var(--foreground);
+	text-decoration: underline;
+	text-decoration-color: rgb(255 255 255 / 0.3);
+	text-underline-offset: 3px;
+}
+.callout p + p {
+	margin-top: 0.6rem;
+}
+
+/* Inline docs (a field's description): code and links only. */
+.prose-inline code,
+.prose-docs :not(pre) > code {
+	border: 1px solid rgb(255 255 255 / 0.08);
+	background: rgb(255 255 255 / 0.05);
+	padding: 0.05em 0.35em;
+	font-family: var(--font-mono);
+	font-size: 0.86em;
+	color: var(--foreground);
+}
+.prose-inline a,
+.prose-docs a {
+	color: var(--foreground);
+	text-decoration: underline;
+	text-decoration-color: rgb(255 255 255 / 0.28);
+	text-underline-offset: 3px;
+	transition: text-decoration-color 150ms;
+}
+.prose-inline a:hover,
+.prose-docs a:hover {
+	text-decoration-color: var(--foreground);
+}
+
+/* Rendered Markdown: the manual and the engine's generated pages. */
+.prose-docs {
+	max-width: 46rem;
+	font-size: 1rem;
+	line-height: 1.75;
+	color: rgb(245 245 245 / 0.8);
+}
+.prose-docs > * + * {
+	margin-top: 1.15rem;
+}
+.prose-docs h2,
+.prose-docs h3 {
+	position: relative;
+	scroll-margin-top: 6rem;
+	color: var(--foreground);
+	letter-spacing: -0.025em;
+}
+.prose-docs h2 {
+	margin-top: 3.5rem;
+	border-top: 1px solid rgb(255 255 255 / 0.1);
+	padding-top: 2rem;
+	font-size: 1.5rem;
+	font-weight: 600;
+	line-height: 1.25;
+}
+.prose-docs > h2:first-child {
+	margin-top: 0;
+	border-top: 0;
+	padding-top: 0;
+}
+.prose-docs h3 {
+	margin-top: 2.25rem;
+	font-size: 1.125rem;
+	font-weight: 600;
+}
+.prose-docs h2 + *,
+.prose-docs h3 + * {
+	margin-top: 0.75rem;
+}
+.prose-docs .anchor {
+	position: absolute;
+	left: -1.1em;
+	color: var(--muted-foreground);
+	text-decoration: none;
+	opacity: 0;
+	transition: opacity 150ms;
+}
+.prose-docs h2:hover .anchor,
+.prose-docs h3:hover .anchor {
+	opacity: 1;
+}
+.prose-docs strong {
+	font-weight: 600;
+	color: var(--foreground);
+}
+.prose-docs ul,
+.prose-docs ol {
+	padding-left: 1.3rem;
+}
+.prose-docs ul {
+	list-style: none;
+}
+.prose-docs ul > li {
+	position: relative;
+}
+/* Bullets are nuqtas. */
+.prose-docs ul > li::before {
+	content: "";
+	position: absolute;
+	top: 0.72em;
+	left: -1.05rem;
+	width: 5px;
+	height: 5px;
+	rotate: 45deg;
+	background: rgb(255 255 255 / 0.55);
+}
+.prose-docs ol {
+	list-style: decimal;
+}
+.prose-docs ol > li::marker {
+	font-family: var(--font-mono);
+	font-size: 0.85em;
+	color: var(--muted-foreground);
+}
+.prose-docs li + li {
+	margin-top: 0.4rem;
+}
+.prose-docs li > ul,
+.prose-docs li > ol {
+	margin-top: 0.4rem;
+}
+.prose-docs blockquote {
+	border-left: 1px solid rgb(255 255 255 / 0.25);
+	padding-left: 1rem;
+	color: rgb(245 245 245 / 0.65);
+}
+.prose-docs .table-wrap {
+	overflow-x: auto;
+}
+.prose-docs table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.875rem;
+	line-height: 1.55;
+}
+.prose-docs th {
+	border-bottom: 1px solid rgb(255 255 255 / 0.2);
+	padding: 0.5rem 1rem 0.5rem 0;
+	text-align: left;
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	font-weight: 500;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--muted-foreground);
+}
+.prose-docs td {
+	border-bottom: 1px solid rgb(255 255 255 / 0.08);
+	padding: 0.6rem 1rem 0.6rem 0;
+	vertical-align: top;
+}
+.prose-docs .code-block {
+	margin-top: 1.25rem;
+}
+.prose-docs hr {
+	border-color: rgb(255 255 255 / 0.1);
+}
+
+/* Variants: a lead paragraph under a page title, and compact docs inside lists. */
+.prose-lead {
+	font-size: inherit;
+	line-height: inherit;
+	color: inherit;
+}
+.prose-compact {
+	font-size: 0.9375rem;
+	line-height: 1.6;
+}
+.prose-compact > * + * {
+	margin-top: 0.5rem;
+}
+/* A table's first column names things (flags, fields): keep each name on one line. */
+.prose-docs td:first-child code {
+	white-space: nowrap;
+}

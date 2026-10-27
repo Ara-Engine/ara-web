@@ -1,0 +1,1 @@
+{"name":"VfxTextParams","kind":"params","module":"vfx","doc":"Complete ID-free source edit, suitable for agents or a text editor.","fields":[{"name":"source","typeHtml":"string","doc":"Canonical ID-free effect JSON.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["vfx.text.apply"]}}

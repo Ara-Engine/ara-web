@@ -1,0 +1,1 @@
+{"name":"AudioGraphRenameParams","kind":"params","module":"audio","doc":"Renames a parameter or node, keeping its identity, wiring and canvas position.","fields":[{"name":"from","typeHtml":"string","doc":"Current name.","required":true},{"name":"to","typeHtml":"string","doc":"New unique name.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["audiograph.rename"]}}

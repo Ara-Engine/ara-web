@@ -1,0 +1,1 @@
+{"name":"BehaviorStateRemoveParams","kind":"params","module":"ai","doc":"Removes a state, its children and transitions that target them.","fields":[{"name":"name","typeHtml":"string","doc":"State name.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["behavior.state.remove"]}}

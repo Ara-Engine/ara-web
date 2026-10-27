@@ -1,0 +1,1 @@
+{"name":"EntityDeleteParams","kind":"params","doc":"Parameters of <code>entity.delete</code>.","fields":[{"name":"entities","typeHtml":"list&lt;entity&gt;","doc":"Entities to delete, with everything below them. Entities inside a prefab instance are removed from that instance instead.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["entity.delete"]}}

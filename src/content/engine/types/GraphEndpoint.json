@@ -1,0 +1,1 @@
+{"name":"GraphEndpoint","kind":"struct","module":"graph","doc":"An addressed socket; port identity is scoped to the node.","fields":[{"name":"node","typeHtml":"string","doc":"Stable node record ID.","default":"\"\""},{"name":"port","typeHtml":"string","doc":"Persistent socket key.","default":"\"\""}],"variants":[],"usedBy":{"types":["GraphEdge"],"commands":[]}}

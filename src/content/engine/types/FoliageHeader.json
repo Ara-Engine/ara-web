@@ -1,0 +1,1 @@
+{"name":"FoliageHeader","kind":"record","module":"foliage","doc":"Terrain dependency for a foliage document.","fields":[{"name":"terrain","typeHtml":"asset","doc":"Canonical terrain asset reference.","default":"null"}],"variants":[],"prefix":"f","usedBy":{"types":["FoliageCreateParams"],"commands":["foliage.create"]}}

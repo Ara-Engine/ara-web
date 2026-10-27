@@ -1,7 +1,9 @@
+import { useRouter } from "@tanstack/react-router";
 import type { LucideIcon } from "lucide-react";
 import {
 	ArrowUpRight,
 	BookOpen,
+	BookText,
 	Download,
 	FileText,
 	Github,
@@ -10,7 +12,7 @@ import {
 	Milestone,
 	TriangleAlert,
 } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
 	CommandDialog,
 	CommandEmpty,
@@ -20,6 +22,7 @@ import {
 	CommandList,
 	CommandShortcut,
 } from "#/components/ui/command";
+import type { searchGroups as SearchGroups } from "#/lib/docs-search";
 import { links, sections } from "#/lib/site";
 
 type LinkCommand = { label: string; href: string; icon: LucideIcon };
@@ -42,10 +45,19 @@ const ENGINE: LinkCommand[] = [
 ];
 
 /**
- * The site's command palette, like the editor's "Search or run a command…".
- * Ctrl/⌘+K toggles it; `open` is owned by the header so its button can open it too.
+ * The site's command palette, like the editor's "Search or run a command…": site
+ * sections and links, and, once you type, every docs page (loaded the first time the
+ * palette opens). Ctrl/⌘+K toggles it; `open` is owned by the header so its button can
+ * open it too.
  */
 export function CommandMenu({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
+	const router = useRouter();
+	const [query, setQuery] = useState("");
+	const [docs, setDocs] = useState<typeof SearchGroups>();
+	useEffect(() => {
+		if (open && !docs) import("#/lib/docs-search").then((m) => setDocs(m.searchGroups));
+	}, [open, docs]);
+
 	useEffect(() => {
 		const onKey = (e: KeyboardEvent) => {
 			if (e.key.toLowerCase() === "k" && (e.metaKey || e.ctrlKey)) {
@@ -62,8 +74,11 @@ export function CommandMenu({ open, onOpenChange }: { open: boolean; onOpenChang
 		action();
 	};
 
+	// On the home page, scroll to the section; elsewhere (the docs), go to it.
 	const goTo = (id: string) => {
-		document.getElementById(id)?.scrollIntoView();
+		const section = document.getElementById(id);
+		if (!section) return window.location.assign(`/#${id}`);
+		section.scrollIntoView();
 		history.replaceState(null, "", `#${id}`);
 	};
 
@@ -78,9 +93,9 @@ export function CommandMenu({ open, onOpenChange }: { open: boolean; onOpenChang
 			showCloseButton={false}
 			className="top-[22%] translate-y-0 sm:max-w-[35rem]"
 		>
-			<CommandInput placeholder="Search or run a command…" />
+			<CommandInput placeholder="Search the docs or run a command…" value={query} onValueChange={setQuery} />
 			<CommandList className="max-h-[22.5rem]">
-				<CommandEmpty>No matching command.</CommandEmpty>
+				<CommandEmpty>Nothing matches.</CommandEmpty>
 				<CommandGroup heading="Go to">
 					{sections.map((s) => (
 						<CommandItem key={s.id} value={`go to ${s.label}`} onSelect={() => run(() => goTo(s.id))}>
@@ -88,6 +103,10 @@ export function CommandMenu({ open, onOpenChange }: { open: boolean; onOpenChang
 							{s.label}
 						</CommandItem>
 					))}
+					<CommandItem value="go to documentation docs" onSelect={() => run(() => router.navigate({ to: "/docs" }))}>
+						<BookText />
+						Documentation
+					</CommandItem>
 				</CommandGroup>
 				{[
 					{ heading: "Get Ara", items: GET_ARA },
@@ -105,6 +124,23 @@ export function CommandMenu({ open, onOpenChange }: { open: boolean; onOpenChang
 						))}
 					</CommandGroup>
 				))}
+				{query.trim().length > 1 &&
+					docs?.map((group) => (
+						<CommandGroup key={group.heading} heading={group.heading}>
+							{group.items.map((item) => (
+								<CommandItem
+									key={item.href}
+									value={`${group.heading} ${item.label}`}
+									keywords={item.keywords}
+									onSelect={() => run(() => router.navigate({ to: item.href }))}
+								>
+									<BookText />
+									<span className="truncate">{item.label}</span>
+									<CommandShortcut className="font-mono text-[0.6875rem] tracking-normal">{item.hint}</CommandShortcut>
+								</CommandItem>
+							))}
+						</CommandGroup>
+					))}
 			</CommandList>
 		</CommandDialog>
 	);

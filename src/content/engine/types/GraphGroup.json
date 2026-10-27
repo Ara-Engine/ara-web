@@ -1,0 +1,1 @@
+{"name":"GraphGroup","kind":"struct","module":"graph","doc":"A visual group; membership never changes execution.","fields":[{"name":"label","typeHtml":"string","doc":"Canvas title.","default":"\"\""},{"name":"nodes","typeHtml":"list&lt;string&gt;","doc":"Stable node IDs in the group.","default":"[]"}],"variants":[],"usedBy":{"types":["GraphEditor"],"commands":[]}}

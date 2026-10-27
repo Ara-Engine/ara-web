@@ -1,0 +1,1 @@
+{"name":"VfxParameterParams","kind":"params","module":"vfx","doc":"Typed default parameter mutation.","fields":[{"name":"key","typeHtml":"string","doc":"Full namespaced parameter address.","required":true},{"name":"value","typeHtml":"json","doc":"Typed value object, e.g. {type:float,value:3}.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["vfx.parameter.set"]}}

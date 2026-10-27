@@ -1,0 +1,1 @@
+{"name":"MaterialGraphParams","kind":"params","module":"material","doc":"Applies an edited graph projection as the same material AST.","fields":[{"name":"json","typeHtml":"string","doc":"Canonical graph JSON produced by ara-json.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["material.graph.apply"]}}

@@ -1,0 +1,1 @@
+{"name":"MaterialInstanceClearParams","kind":"params","module":"material","doc":"Removes a saved override, restoring the definition default.","fields":[{"name":"node","typeHtml":"string","doc":"Stable definition parameter ID.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["material.instance.clear"]}}

@@ -1,0 +1,1 @@
+{"name":"ProjectSettings","kind":"record","module":"core","doc":"Project marker represented as a record so project changes share history and undo.","fields":[{"name":"settings","typeHtml":"json","doc":"Project settings, including fields owned by plugins and future engine versions.","default":"null"}],"variants":[],"prefix":"p","usedBy":{"types":[],"commands":[]}}

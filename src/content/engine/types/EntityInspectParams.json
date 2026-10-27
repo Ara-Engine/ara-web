@@ -1,0 +1,1 @@
+{"name":"EntityInspectParams","kind":"params","doc":"Parameters of <code>entity.inspect</code>.","fields":[{"name":"entity","typeHtml":"entity","doc":"The entity to inspect; may be inside a prefab instance.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["entity.inspect"]}}

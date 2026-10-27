@@ -23,11 +23,12 @@ function useScrolled(offset = 8) {
 
 /**
  * Sticky top bar styled as the editor's menu bar, with the command palette.
- * Transparent over the hero; takes the chrome surface once the page scrolls.
+ * Transparent over the hero; takes the chrome surface once the page scrolls, or
+ * always when `solid` (the docs).
  */
-export function SiteHeader() {
+export function SiteHeader({ solid = false }: { solid?: boolean }) {
 	const [paletteOpen, setPaletteOpen] = useState(false);
-	const scrolled = useScrolled();
+	const scrolled = useScrolled() || solid;
 
 	return (
 		<header
@@ -36,7 +37,9 @@ export function SiteHeader() {
 				scrolled ? "border-border bg-chrome/80 backdrop-blur-md" : "border-transparent bg-transparent",
 			)}
 		>
-			<div className="mx-auto flex h-14 max-w-content items-center gap-6 px-5 md:px-8">
+			<div
+				className={cn("mx-auto flex h-14 items-center gap-6 px-5 md:px-8", solid ? "max-w-[96rem]" : "max-w-content")}
+			>
 				<Link to="/" aria-label="Ara home" className="shrink-0">
 					<AraLogo landing />
 				</Link>
@@ -46,12 +49,19 @@ export function SiteHeader() {
 						.map((s) => (
 							<a
 								key={s.id}
-								href={`#${s.id}`}
+								href={`/#${s.id}`}
 								className="rounded-sm px-2.5 py-1 text-muted-foreground transition-colors hover:bg-hover-surface hover:text-foreground"
 							>
 								{s.label}
 							</a>
 						))}
+					<Link
+						to="/docs"
+						className="rounded-sm px-2.5 py-1 text-muted-foreground transition-colors hover:bg-hover-surface hover:text-foreground"
+						activeProps={{ className: "text-foreground" }}
+					>
+						Docs
+					</Link>
 				</nav>
 				<div className="ml-auto flex items-center gap-2">
 					<button

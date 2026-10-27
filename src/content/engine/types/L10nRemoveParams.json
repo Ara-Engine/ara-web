@@ -1,0 +1,1 @@
+{"name":"L10nRemoveParams","kind":"params","module":"l10n","doc":"Record addressed removal of an obsolete localization message.","fields":[{"name":"id","typeHtml":"string","doc":"Stable message record ID, starting with <code>m_</code>.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["l10n.remove"]}}

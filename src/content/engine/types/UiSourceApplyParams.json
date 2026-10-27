@@ -1,0 +1,1 @@
+{"name":"UiSourceApplyParams","kind":"params","module":"ui","doc":"Replaces a UI document&#39;s native markup through revision-checked source ops.","fields":[{"name":"source","typeHtml":"string","doc":"Complete native UI XML. Existing identity metadata may be retained or omitted.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["ui.source.apply"]}}

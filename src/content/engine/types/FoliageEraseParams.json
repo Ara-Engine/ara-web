@@ -1,0 +1,1 @@
+{"name":"FoliageEraseParams","kind":"params","module":"foliage","doc":"Stable record deletion for erasing manual strokes/rules/zones.","fields":[{"name":"id","typeHtml":"string","doc":"Existing paint, exclusion or unused rule record ID.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["foliage.erase"]}}

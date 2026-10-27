@@ -1,0 +1,1 @@
+{"name":"ProjectSetMainParams","kind":"params","doc":"Parameters of <code>project.setMain</code>.","fields":[{"name":"scene","typeHtml":"asset&lt;scene&gt;","doc":"Existing scene path or asset reference to open when the project starts.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["project.setMain"]}}

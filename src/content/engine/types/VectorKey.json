@@ -1,0 +1,1 @@
+{"name":"VectorKey","kind":"struct","module":"animation","doc":"A vector key at an exact integer clip time.","fields":[{"name":"tick","typeHtml":"u32","doc":"Clip time in ticks.","default":"0"},{"name":"value","typeHtml":"vec3","doc":"Translation in meters or dimensionless scale.","default":"[0,0,0]"}],"variants":[],"usedBy":{"types":["JointTrack"],"commands":[]}}

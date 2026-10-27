@@ -1,0 +1,1 @@
+{"name":"MaterialOutputParams","kind":"params","module":"material","doc":"Identifies a domain output field.","fields":[{"name":"field","typeHtml":"string","doc":"Domain field name.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["material.output.default"]}}

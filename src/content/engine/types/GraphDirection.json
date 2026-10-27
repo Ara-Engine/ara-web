@@ -1,0 +1,1 @@
+{"name":"GraphDirection","kind":"enum","module":"graph","doc":"Direction relative to the owning node.","fields":[],"variants":[{"name":"input","doc":"Receives at most one connection."},{"name":"output","doc":"Can feed any number of inputs."}],"usedBy":{"types":["GraphPort"],"commands":[]}}

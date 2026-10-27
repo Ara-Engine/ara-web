@@ -1,0 +1,1 @@
+{"name":"MaterialLiteralParams","kind":"params","module":"material","doc":"Replaces an expression with a typed constant.","fields":[{"name":"node","typeHtml":"string","doc":"Stable expression ID.","required":true},{"name":"values","typeHtml":"list&lt;f64&gt;","doc":"New literal lanes.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["material.node.literal"]}}

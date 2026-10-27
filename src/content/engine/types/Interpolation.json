@@ -1,0 +1,1 @@
+{"name":"Interpolation","kind":"enum","module":"animation","doc":"Interpolation between consecutive keys.","fields":[],"variants":[{"name":"linear","doc":"Linear vectors and shortest-path normalized linear quaternions."},{"name":"step","doc":"Hold the preceding key until the next key&#39;s exact timestamp."}],"usedBy":{"types":["Curve","JointTrack"],"commands":[]}}

@@ -1,0 +1,1 @@
+{"name":"ComponentRemoveParams","kind":"params","doc":"Parameters of <code>component.remove</code>.","fields":[{"name":"entity","typeHtml":"entity","doc":"Target entity; may be inside a prefab instance.","required":true},{"name":"component","typeHtml":"string","doc":"Component type name.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["component.remove"]}}

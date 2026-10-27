@@ -1,0 +1,1 @@
+{"name":"BehaviorTextParams","kind":"params","module":"ai","doc":"Replaces the behaviour with DSL text, keeping IDs of surviving names.","fields":[{"name":"text","typeHtml":"string","doc":"Complete behaviour text.","required":true}],"variants":[],"usedBy":{"types":[],"commands":["behavior.text.apply"]}}

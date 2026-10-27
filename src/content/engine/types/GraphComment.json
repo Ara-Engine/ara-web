@@ -1,0 +1,1 @@
+{"name":"GraphComment","kind":"struct","module":"graph","doc":"A graph comment, stored only in the editor section.","fields":[{"name":"text","typeHtml":"string","doc":"Human-readable annotation.","default":"\"\""},{"name":"position","typeHtml":"vec2","doc":"Canvas position.","default":"[0,0]"}],"variants":[],"usedBy":{"types":["GraphEditor"],"commands":[]}}

@@ -1,0 +1,1 @@
+{"name":"ScalarKey","kind":"struct","module":"animation","doc":"A scalar key for a property curve.","fields":[{"name":"tick","typeHtml":"u32","doc":"Clip time in ticks.","default":"0"},{"name":"value","typeHtml":"f32","doc":"Finite property value in the addressed field&#39;s units.","default":"0"}],"variants":[],"usedBy":{"types":["Curve"],"commands":[]}}

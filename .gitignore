@@ -11,3 +11,7 @@ dist-ssr
 .vinxi
 __unconfig*
 todos.json
+
+# tools/csharp-api build output
+tools/csharp-api/bin
+tools/csharp-api/obj
