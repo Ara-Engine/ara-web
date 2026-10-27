@@ -58,7 +58,7 @@ ara schema Light
 
 | Area | Components |
 |---|---|
-| Core and rendering | [Transform](/docs/reference/types/Transform), [MeshRenderer](/docs/reference/types/MeshRenderer), [Camera](/docs/reference/types/Camera), [Light](/docs/reference/types/Light), [Environment](/docs/reference/types/Environment), [SkyAtmosphere](/docs/reference/types/SkyAtmosphere), [HeightFog](/docs/reference/types/HeightFog), [PostProcess](/docs/reference/types/PostProcess) |
+| Core and rendering | [Transform](/docs/reference/types/Transform), [MeshRenderer](/docs/reference/types/MeshRenderer), [Camera](/docs/reference/types/Camera), [Light](/docs/reference/types/Light), [Environment](/docs/reference/types/Environment), [SkyAtmosphere](/docs/reference/types/SkyAtmosphere), [HeightFog](/docs/reference/types/HeightFog), [PostProcessVolume](/docs/reference/types/PostProcessVolume) |
 | Physics | [RigidBody](/docs/reference/types/RigidBody), [Collider](/docs/reference/types/Collider), [Joint](/docs/reference/types/Joint), [CharacterController](/docs/reference/types/CharacterController), [Vehicle](/docs/reference/types/Vehicle) |
 | Audio | [AudioSource](/docs/reference/types/AudioSource), [AudioListener](/docs/reference/types/AudioListener), [MusicSource](/docs/reference/types/MusicSource), [ReverbZone](/docs/reference/types/ReverbZone) |
 | Navigation and AI | [NavAgent](/docs/reference/types/NavAgent), [NavMeshSurface](/docs/reference/types/NavMeshSurface), [Brain](/docs/reference/types/Brain), [Perceiver](/docs/reference/types/Perceiver) |
