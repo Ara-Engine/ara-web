@@ -13,7 +13,7 @@ const PRESETS = [
 	{ name: "Epic", budget: 10 },
 ] as const;
 
-/** GPU p50 per scene, in preset order: the 0.0.1-alpha formal reading. */
+/** GPU p50 per scene, in preset order: the formal D26 reading in the 0.0.1-alpha release notes. */
 const D26 = [
 	{ scene: "Outpost", p50: [1.52, 3.04, 3.81, 5.39] },
 	{ scene: "Hangar", p50: [1.26, 1.88, 3.14, 3.96] },

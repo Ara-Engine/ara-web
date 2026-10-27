@@ -1,5 +1,25 @@
 /** The engine release this page describes. Bump with each engine release. */
-export const ENGINE_VERSION = "0.0.1-alpha";
+export const ENGINE_VERSION = "0.0.2-alpha.3";
+
+/** Where the site is deployed; link previews need absolute URLs. */
+export const SITE_URL = "https://ara.snowydev.xyz";
+
+/** The link-preview cards in public/og/, made by design/og/og.mjs. */
+const SHARE_IMAGES = {
+	ara: "Ara: an AI-native game engine. Light through a mashrabiya lattice.",
+	docs: "Ara docs: the manual, the C# scripting API and the engine reference.",
+} as const;
+
+/** A page's Open Graph and Twitter tags. Each route's tags override its parents'. */
+export const shareMeta = (title: string, description: string, image: keyof typeof SHARE_IMAGES = "ara") => [
+	{ property: "og:title", content: title },
+	{ property: "og:description", content: description },
+	{ property: "og:image", content: `${SITE_URL}/og/${image}.jpg` },
+	{ property: "og:image:alt", content: SHARE_IMAGES[image] },
+	{ name: "twitter:title", content: title },
+	{ name: "twitter:description", content: description },
+	{ name: "twitter:image", content: `${SITE_URL}/og/${image}.jpg` },
+];
 
 const REPO = "https://github.com/Ara-Engine/ara";
 

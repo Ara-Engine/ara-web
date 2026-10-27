@@ -54,7 +54,7 @@ ara schema Light
 | `outerAngle` | `f32` | `30` | deg | Spot outer cone half-angle. |
 ```
 
-`ara schema` with no arguments lists every component in your engine version. In 0.0.1-alpha they include:
+`ara schema` with no arguments lists every component in your engine version. In 0.0.2-alpha.3 they include:
 
 | Area | Components |
 |---|---|

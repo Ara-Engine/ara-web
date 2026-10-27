@@ -119,7 +119,7 @@ Play needs the x64 .NET 10 SDK on your machine. If the project has modules but t
 
 ## Set up your IDE
 
-The generated `<Module>.csproj` gives your IDE completion and navigation. As generated, it references only `Ara.Runtime.dll`, so the IDE reports error CS9248 on every `[Property]` and doesn't run the Ara analyzers. To fix both, add the engine's generator and analyzers and allow unsafe code. They are installed beside the engine, under `dotnet\artifacts\bin\` in the engine's install folder (for example `%LOCALAPPDATA%\Ara\Engines\0.0.1-alpha`):
+**Create > C# Behaviour** in the editor writes a `<Module>.csproj` beside a new module for IDE completion and navigation. It references `Ara.Runtime.dll`, runs the Ara source generator and allows unsafe code, so `[Property]` compiles in the IDE. It doesn't add the Ara analyzers, so the IDE won't show the ARA diagnostics the compile server reports. Add them, or write the whole file yourself for a module made outside the editor. Everything is installed beside the engine, under `dotnet\artifacts\bin\` in the engine's install folder (for example `%LOCALAPPDATA%\Ara\Engines\0.0.2-alpha.3`):
 
 ```text
 <PropertyGroup>

@@ -156,4 +156,4 @@ Ara keeps Unity's concepts but renames what behaves differently. The analyzer re
 
 `[Range]` and `[FormerlySerializedAs]` keep their Unity meaning.
 
-> **Gap:** Scripts can reach only one engine component today: [`Transform`](/docs/reference/types/Transform). `Get<Light>()`, `Get<MeshRenderer>()` and other engine components don't exist in C# yet. Scripts can read and write their own components and `Transform`.
+Every engine component has a C# type, so `Get<Light>()`, `Get<RigidBody>()` and the rest work like `Get<Transform>()`. See [Components and resources](/docs/manual/components-and-resources#engine-components).

@@ -160,4 +160,15 @@ The engine's own components are generated into the `Ara` namespace. Use them lik
 | `Rotation` | `Vector3`, degrees | Rotation relative to the parent, as XYZ Euler angles. |
 | `Scale` | `Vector3` | Scale relative to the parent; `(1, 1, 1)` is unscaled. |
 
-> **Gap:** `Transform` is the only engine component scripts can use today (`EngineComponents.Names` lists the bound ones). Lights, renderers, physics bodies, audio sources and the rest exist in scenes but have no C# type yet, so `Get<Light>()` doesn't compile.
+Every other engine component works the same way: lights, renderers, physics bodies, audio sources, navigation, 2D and the rest (`EngineComponents.Names` lists them). Fields keep their schema names in PascalCase, so `Light.intensity` is `Intensity`:
+
+```csharp
+/// <summary>Flicker a lamp using fixed tick time, without wall-clock randomness.</summary>
+public static void UseLight(Entity entity, in Tick tick)
+{
+    ref var component = ref World.Get<Light>(entity);
+    component.Intensity = tick.Frame % 4 == 0 ? 450f : 500f;
+}
+```
+
+Each component's [reference page](/docs/reference/components) lists its fields, and a C# example like this one.

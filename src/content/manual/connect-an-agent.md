@@ -26,7 +26,7 @@ ara hub install-mcp --client claude
 {
   "mcpServers": {
     "ara": {
-      "command": "C:\\Users\\you\\AppData\\Local\\Ara\\Engines\\0.0.1-alpha\\ara.exe",
+      "command": "C:\\Users\\you\\AppData\\Local\\Ara\\Engines\\0.0.2-alpha.3\\ara.exe",
       "args": [
         "mcp"
       ]
@@ -41,7 +41,7 @@ ara hub install-mcp --client codex
 
 ```toml
 [mcp_servers.ara]
-command = "C:\\Users\\you\\AppData\\Local\\Ara\\Engines\\0.0.1-alpha\\ara.exe"
+command = "C:\\Users\\you\\AppData\\Local\\Ara\\Engines\\0.0.2-alpha.3\\ara.exe"
 args = ["mcp"]
 ```
 
@@ -50,7 +50,7 @@ The output contains the absolute path of the `ara.exe` you ran, so the agent doe
 For Claude Code, one way is its own command, using the path from the output above:
 
 ```powershell
-claude mcp add --scope user ara -- "C:\Users\you\AppData\Local\Ara\Engines\0.0.1-alpha\ara.exe" mcp
+claude mcp add --scope user ara -- "C:\Users\you\AppData\Local\Ara\Engines\0.0.2-alpha.3\ara.exe" mcp
 ```
 
 For Codex, add the TOML block to its `config.toml`.

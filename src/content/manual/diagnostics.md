@@ -152,7 +152,7 @@ ara do property.set --args '{"entity":"e_a2ww","path":"Transform.scale","value":
 
 A check marked `?` needs the running renderer, so `ara why` never claims it as a cause.
 
-> **Gap:** In 0.0.1-alpha the visibility check looks for a `MeshRenderer.mesh` field, but [MeshRenderer](/docs/reference/types/MeshRenderer) draws from `shape` and `model`. So it reports [ARA3305](/docs/reference/errors/ARA3305) "No mesh to draw" even for a `MeshRenderer` drawing its default box, as in cause 2 above, and it doesn't report an unresolved `MeshRenderer.model` reference. Ignore ARA3305 when `MeshRenderer.shape` or `model` is set, and run `ara check` to catch broken model references.
+> **Gap:** In 0.0.2-alpha.3 the visibility check looks for a `MeshRenderer.mesh` field, but [MeshRenderer](/docs/reference/types/MeshRenderer) draws from `shape` and `model`. So it reports [ARA3305](/docs/reference/errors/ARA3305) "No mesh to draw" even for a `MeshRenderer` drawing its default box, as in cause 2 above, and it doesn't report an unresolved `MeshRenderer.model` reference. Ignore ARA3305 when `MeshRenderer.shape` or `model` is set, and run `ara check` to catch broken model references.
 
 ### What you can ask
 

@@ -10,6 +10,7 @@ import type {
 	SchemaKind,
 	TypePage,
 } from "#/lib/docs-data";
+import { shareMeta } from "#/lib/site";
 
 /*
  * Loading the docs' content. The engine reference (src/content/engine, from
@@ -68,10 +69,19 @@ export const loadCli = (name: string) => load(engine.cli, `/src/content/engine/c
 export const loadCsharp = (slug: string) => load(engine.csharp, `/src/content/engine/csharp/${slug}.json`);
 export const loadEnginePage = (name: string) => load(engine.pages, `/src/content/engine/pages/${name}.json`);
 
-/** A docs page's <head>: "Light · Ara docs" and its description. */
-export const docsHead = (title: string, description?: string) => ({
-	meta: [{ title: `${title} · Ara docs` }, ...(description ? [{ name: "description", content: description }] : [])],
-});
+const DOCS_DESCRIPTION = "The Ara manual, the C# scripting API and the engine reference.";
+
+/** A docs page's <head>: "Light · Ara docs", its description and the docs' link preview. */
+export function docsHead(title: string, summary?: string) {
+	const description = summary || DOCS_DESCRIPTION;
+	return {
+		meta: [
+			{ title: `${title} · Ara docs` },
+			{ name: "description", content: description },
+			...shareMeta(`${title} · Ara docs`, description, "docs"),
+		],
+	};
+}
 
 /** How each schema kind is named in headings and lists. */
 export const SCHEMA_KINDS: Record<SchemaKind, { label: string; plural: string }> = {

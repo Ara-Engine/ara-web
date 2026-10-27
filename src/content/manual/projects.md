@@ -37,7 +37,7 @@ A new project's marker looks like this:
 {
   "name": "MyGame",
   "main": "levels/main.scene",
-  "engineVersion": "0.0.1-alpha"
+  "engineVersion": "0.0.2-alpha.3"
 }
 ```
 

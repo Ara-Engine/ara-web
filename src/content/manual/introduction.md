@@ -1,6 +1,6 @@
 ---
 title: Introduction
-description: What Ara is, what the 0.0.1-alpha release includes, and how this manual is organized.
+description: What Ara is, what the current 0.0.2-alpha.3 preview includes, and how this manual is organized.
 section: Start
 order: 1
 ---
@@ -17,9 +17,9 @@ Ara is a game engine written in Rust, with a native editor, C# 14 / .NET 10 game
 
 **The engine explains itself.** Diagnostics carry stable codes such as [ARA1302](/docs/reference/errors/ARA1302). Ask `ara why name:Crate not visible` and the engine answers with ranked causes, the evidence for each and fixes you can run as they are. See [Diagnostics](/docs/manual/diagnostics).
 
-## What's in 0.0.1-alpha
+## What's in 0.0.2-alpha.3
 
-This is the first public alpha, for testers and agents. It includes:
+Ara is in public alpha, for testers and agents, and this manual describes the 0.0.2-alpha.3 preview. It includes:
 
 - **Ara Hub**, which installs engine versions side by side, creates projects from templates, opens them in the editor or headless, and gives you the setup for your agents.
 - **The editor**, with hierarchy, inspector, assets and console panels, tool panels for agents, materials, VFX, animation and profiling, detachable windows, and Play in a separate, crash-isolated player process.
@@ -28,7 +28,7 @@ This is the first public alpha, for testers and agents. It includes:
 - **C# gameplay** with live code reload, and standalone Windows exports with NativeAOT. See the [Scripting overview](/docs/manual/scripting-overview).
 - **Engine systems**: Jolt physics, spatial audio, navigation and crowds, animation with IK and motion matching, GPU VFX, terrain and foliage, world streaming, 2D, localization and saves.
 
-> **Gap:** Ara 0.0.1-alpha runs on Windows 10/11 x64 only. macOS is not shipped in this release, and other platforms and GPU vendors have not been validated by the installed-build QA.
+> **Gap:** Ara 0.0.2-alpha.3 runs on Windows 10/11 x64 only. macOS is not shipped in this release, and other platforms and GPU vendors have not been validated by the installed-build QA.
 
 > **Gap:** This is an early alpha, not a production engine. Known problems in this build include editor drag latency above the 16.7 ms target, slow first imports (about 2.3 minutes for the Outpost sample's 115 imports in the team's test run), a slow first Build, and installers without Authenticode signing. [Install](/docs/manual/install) covers the signing warning.
 
@@ -43,5 +43,5 @@ This is the first public alpha, for testers and agents. It includes:
 ## Conventions in this manual
 
 - Commands are shown as you would type them in PowerShell. `ara` accepts JSON arguments with or without quotes, so they work in other shells too.
-- Output blocks come from a real 0.0.1-alpha install. IDs such as `e_qg8h` and `tx_n4r61zfz` are minted per project, so yours will differ.
+- Output blocks come from real installs of the alpha. IDs such as `e_qg8h` and `tx_n4r61zfz` are minted per project, so yours will differ.
 - Units follow the engine: meters, seconds, kilograms and degrees, with Y up.

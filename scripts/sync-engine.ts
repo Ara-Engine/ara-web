@@ -5,8 +5,9 @@
 //
 // It runs the engine's own exports inside a clean `ara init` project (so no game's types
 // leak in): `ara schema` (reflection.json), `ara docs --llms` (protocol methods,
-// diagnostic codes, conventions), every `ara <command> --help`, and the C# API of
-// Ara.Runtime (tools/csharp-api, needs the .NET SDK). The output is committed, so the
+// diagnostic codes, conventions), every `ara <command> --help`, the C# API of
+// Ara.Runtime (tools/csharp-api, needs the .NET SDK) and the components' C# examples
+// from the engine's docs.json. The output is committed, so the
 // site builds without the engine installed. Rerun after each engine release.
 
 import { execFileSync } from "node:child_process";
@@ -89,6 +90,17 @@ type Reflection = {
 	commands: Record<string, Command>;
 };
 const reflection: Reflection = JSON.parse(readFileSync(join(work, "schema", "reflection.json"), "utf8"));
+
+/**
+ * The engine's structured reference (`docs.json`, format `ara.docs/1`), shipped beside
+ * ara.exe since 0.0.2. Only its compiled C# examples are used: components' examples use
+ * the gameplay API. Commands' examples use Ara.Agent (`ara_run`), so they're left out.
+ */
+type Structured = { types: Record<string, { csharpExamples?: { code: string }[] }> };
+const structuredPath = join(engine.root, "docs.json");
+const structured: Structured = existsSync(structuredPath)
+	? JSON.parse(readFileSync(structuredPath, "utf8"))
+	: { types: {} };
 
 // ---------- Helpers ----------
 
@@ -247,8 +259,8 @@ function componentUsage(name: string, t: SchemaType): TypePage["usage"] {
 			"json",
 		),
 	});
-	if (scriptable.has(name))
-		usage.push({ label: "From C#", html: highlight(`ref var ${name.toLowerCase()} = ref Get<${name}>();`, "csharp") });
+	const example = structured.types[name]?.csharpExamples?.[0]?.code;
+	if (scriptable.has(name) && example) usage.push({ label: "From C#", html: highlight(example, "csharp") });
 	return usage;
 }
 

@@ -1,6 +1,7 @@
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { TooltipProvider } from "#/components/ui/tooltip";
+import { shareMeta } from "#/lib/site";
 import appCss from "../styles.css?url";
 
 const TITLE = "Ara: an AI-native game engine";
@@ -16,10 +17,11 @@ export const Route = createRootRoute({
 			{ name: "description", content: DESCRIPTION },
 			{ name: "theme-color", content: "#0a0a0a" },
 			{ property: "og:type", content: "website" },
-			{ property: "og:title", content: TITLE },
-			{ property: "og:description", content: DESCRIPTION },
-			{ property: "og:image", content: "/media/sponza.jpg" },
+			{ property: "og:site_name", content: "Ara" },
+			{ property: "og:image:width", content: "1200" },
+			{ property: "og:image:height", content: "630" },
 			{ name: "twitter:card", content: "summary_large_image" },
+			...shareMeta(TITLE, DESCRIPTION),
 		],
 		links: [
 			{ rel: "stylesheet", href: appCss },

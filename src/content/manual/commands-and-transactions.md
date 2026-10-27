@@ -9,7 +9,7 @@ Every change to an Ara project is a **command**: a named, typed operation such a
 
 ## The command registry
 
-The registry in 0.0.1-alpha has 90 commands. They cover:
+The registry in 0.0.2-alpha.3 has 91 commands. They cover:
 
 - entities, components and prefabs: `entity.*`, `component.*`, `property.set`, `transform.*`, `prefab.*`;
 - documents and the project: `doc.create`, `doc.delete`, `project.setMain`;

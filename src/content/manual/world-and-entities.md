@@ -138,4 +138,4 @@ public static partial class Collect
 
 Entities spawned from C# get stable IDs right after they appear, so replays and snapshots name them the same way every time. Spawns from systems and behaviours are named `e_cs<tick>x<n>`; spawns from commands are named `e_cs<tick>c<n>`, after the tick that records the command. You can use these IDs in tools such as `ara_play`.
 
-> **Gap:** C# has no API to find entities by name, to list them, or to read and change the hierarchy (parents and children). To work with many entities, write a system; to work with a specific one, store its `Entity` handle in a component or property, or pass it to a command. Scripts can also reach only the [`Transform`](/docs/reference/types/Transform) engine component; see [Components and resources](/docs/manual/components-and-resources#engine-components).
+> **Gap:** C# has no API to find entities by name, to list them, or to read and change the hierarchy (parents and children). To work with many entities, write a system; to work with a specific one, store its `Entity` handle in a component or property, or pass it to a command.
