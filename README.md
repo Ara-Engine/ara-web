@@ -45,7 +45,8 @@ src/lib/site.ts        release links and the source file behind every published 
 src/lib/docs*.ts       docs data: types, loaders, search
 scripts/               sync-engine.ts and the build-time Markdown renderer (Shiki)
 tools/csharp-api/      dumps Ara.Runtime's C# API to JSON
-design/                logo and hero explorations (not shipped)
+design/                logo and hero explorations; icons/ (app icons) and og/ (the link-preview
+                       cards in public/og/: node design/og/og.mjs) are generators
 ```
 
 Every number on the home page links to the engine file it was measured in (`evidence` in `src/lib/site.ts`). Update those with each engine release.
