@@ -5,7 +5,7 @@ import { docsHead, loadCommand } from "#/lib/docs";
 
 export const Route = createFileRoute("/docs/reference/commands/$name")({
 	loader: ({ params }) => loadCommand(params.name),
-	head: ({ loaderData }) => docsHead(loaderData?.name ?? "Command", loaderData?.summary.replace(/<[^>]+>/g, "")),
+	head: ({ loaderData }) => docsHead(loaderData?.name ?? "Command", loaderData?.summary),
 	component: CommandPageView,
 });
 

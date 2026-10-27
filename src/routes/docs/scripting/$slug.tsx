@@ -6,8 +6,7 @@ import type { CsharpMember } from "#/lib/docs-data";
 
 export const Route = createFileRoute("/docs/scripting/$slug")({
 	loader: ({ params }) => loadCsharp(params.slug),
-	head: ({ loaderData }) =>
-		docsHead(loaderData?.name ?? "Scripting API", loaderData?.summary?.replace(/<[^>]+>/g, "").trim()),
+	head: ({ loaderData }) => docsHead(loaderData?.name ?? "Scripting API", loaderData?.summary),
 	component: CsharpTypePage,
 });
 

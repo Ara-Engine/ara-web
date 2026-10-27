@@ -5,8 +5,7 @@ import { docsHead, loadCli } from "#/lib/docs";
 
 export const Route = createFileRoute("/docs/reference/cli/$name")({
 	loader: ({ params }) => loadCli(params.name),
-	head: ({ loaderData }) =>
-		docsHead(loaderData ? `ara ${loaderData.name}` : "CLI", loaderData?.summary.replace(/<[^>]+>/g, "")),
+	head: ({ loaderData }) => docsHead(loaderData ? `ara ${loaderData.name}` : "CLI", loaderData?.summary),
 	component: CliPageView,
 });
 

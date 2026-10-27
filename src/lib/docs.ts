@@ -71,9 +71,18 @@ export const loadEnginePage = (name: string) => load(engine.pages, `/src/content
 
 const DOCS_DESCRIPTION = "The Ara manual, the C# scripting API and the engine reference.";
 
-/** A docs page's <head>: "Light · Ara docs", its description and the docs' link preview. */
+const ENTITIES: Record<string, string> = { "&amp;": "&", "&lt;": "<", "&gt;": ">", "&quot;": '"', "&#39;": "'" };
+
+/**
+ * A docs page's <head>: "Light · Ara docs", its description and the docs' link preview.
+ * `summary` may be rendered HTML; it's reduced to plain text (React escapes it again).
+ */
 export function docsHead(title: string, summary?: string) {
-	const description = summary || DOCS_DESCRIPTION;
+	const text = summary
+		?.replace(/<[^>]+>/g, "")
+		.replace(/&(?:amp|lt|gt|quot|#39);/g, (e) => ENTITIES[e])
+		.trim();
+	const description = text || DOCS_DESCRIPTION;
 	return {
 		meta: [
 			{ title: `${title} · Ara docs` },

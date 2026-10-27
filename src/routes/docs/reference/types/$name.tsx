@@ -5,7 +5,7 @@ import { docsHead, docsIndex, loadType, SCHEMA_KINDS } from "#/lib/docs";
 
 export const Route = createFileRoute("/docs/reference/types/$name")({
 	loader: ({ params }) => loadType(params.name),
-	head: ({ loaderData }) => docsHead(loaderData?.name ?? "Type", loaderData?.doc.replace(/<[^>]+>/g, "")),
+	head: ({ loaderData }) => docsHead(loaderData?.name ?? "Type", loaderData?.doc),
 	component: TypePageView,
 });
 
